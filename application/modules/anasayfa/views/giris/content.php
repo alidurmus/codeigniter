@@ -1,3 +1,33 @@
-<ul>
-    <li class="list">Kalite Komtrol</li>
-</ul>
+
+
+
+
+<div class="container-fluid">
+
+<div class="jumbotron text-center">
+  <h1>TEMPAR Kontrol Sistemi</h1>
+  <p></p> 
+</div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      
+    </div>
+    <div class="col-sm-4">
+ 
+      <ul>
+        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/yonetim/">Yönetm Komtrol</a></li>
+        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/arge/">ARGE Komtrol</a></li>
+        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/planlama/">Planlama Komtrol</a></li>
+        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/kalite/">Kalite Kontrol</a></li>
+    </ul>
+    </div>
+    <div class="col-sm-4">
+     
+    </div>
+  </div>
+</div>
+    
+</div>
+

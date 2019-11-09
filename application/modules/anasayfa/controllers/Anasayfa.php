@@ -26,6 +26,51 @@ class Anasayfa extends MY_Controller
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
+
+    public function kalite(){
+
+        $viewData = new stdClass();
+       
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "kalite";
+        //$viewData->items = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+    public function malzeme(){
+
+        $viewData = new stdClass();
+       
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "malzeme";
+        //$viewData->items = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/malzemesec", $viewData);
+    }
+
+    public function girdikontrol(){
+        $data = array();
+        $this->load->model('Arayuz_model');
+
+        $data['formlar'] = $this->Arayuz_model->girdiFormlar();        
+
+        $this->load->view('arayuz/listele/girdi', $data);
+
+
+        // $viewData = new stdClass();
+       
+        // /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        // $viewData->viewFolder = $this->viewFolder;
+        // $viewData->subViewFolder = "girdikontrol";
+        // //$viewData->items = $items;
+
+        // $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+
     public function new_form(){
 
         $viewData = new stdClass();

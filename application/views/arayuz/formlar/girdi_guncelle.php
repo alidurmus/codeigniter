@@ -22,156 +22,140 @@
 <body>
   <div class="container">
         <div class="row">
-            <div class="col-md-12">
-        
+            <div class="col-md-12">    
             <?php echo validation_errors(); ?>
-
             <?php echo form_open('arayuz/girdi'); ?>
-
             <table class="table table-striped table-sm"> 
-                            <tbody>
-                                <tr>
-                                    <td colspan="10">GİRDİ  KONTROL FORMU</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">Malzeme  Adı:</td>
-                                    <td colspan="2">
-                                        <div class="form-group"> 
-                                            <select id="formInput43" name="malzeme" class="form-control"> 
-                                                <option>1</option>                                                 
-                                                <option>2</option>                                                 
-                                                <option>3</option>                                                 
-                                            </select>                                             
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td colspan="2">Kontrol No</td>
-                                    <td colspan="2">
+                <tbody>
+                    <tr>
+                        <td colspan="11">GİRDİ  KONTROL FORMU</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Malzeme  Adı:</td>
+                        <td colspan="2">
+                            <div class="form-group"> 
+                                <select id="formInput43" name="malzeme" class="form-control input-sm"> 
+                                    <option>1</option>                                                 
+                                    <option>2</option>                                                 
+                                    <option>3</option>                                                 
+                                </select>                                             
+                            </div>
+                        </td>
+                        <td></td>
+                        <td colspan="2">Kontrol No</td>
+                        <td colspan="2">
+                            <div class="input-group"> 
+                                <input type="text" name="kontrol_no" class="form-control input-sm" value="<?php echo $form[0]->kontrol_no; ?>" placeholder="0000"> 
+                            </div>
+                        </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                        <td colspan="2">Parti Nr:	</td>
+                        <td colspan="2">
+                            <div class="input-group"> 
+                                    <input type="text" class="form-control input-sm"  name="parti_no" value="<?php echo $form[0]->parti_no; ?>" placeholder="Username"> 
+                            </div>
+                        </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Tedarikçi Adı:	</td>
+                        <td colspan="2">
+                            <div class="form-group"> 
+                                <select id="formInput43"  name="tedarikci" class="form-control input-sm"> 
+                                    <option>1</option>                                                 
+                                    <option>2</option>                                                 
+                                    <option>3</option>                                                 
+                                </select>                                             
+                            </div>
+                        </td>
+                        <td>-</td>
+                        <td colspan="2">İrsaliye No</td>
+                        <td colspan="2">
+                            <div class="input-group"> 
+                                    <input type="text" class="form-control input-sm"  name="irsaliye" value="<?php echo $form[0]->irsaliye; ?>" placeholder="Username"> 
+                            </div>
+                        </td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>                                 
+                    <tr>
+                        <td colspan="6"> Metrik Kontroller </td>
+                        <td colspan="5">Görsel Kontroller</td>
+                    </tr>                                 
+                    <tr>
+                    <td>Ölçüm Adı</td>
+                        <td>Ölçü (mm)</td>
+                        <td>Tolerans	</td>
+                        <td>Alt Limit	</td>
+                        <td>Üst Üst Limit	</td>
+                        <td>Ölçüm</td>
+                        <td>Sonuç</td>
+                        <td>Kontrol Noktası</td>
+                        <td>Uygun</td>
+                        <td>Şartlı Kabul	</td>
+                        <td>Uygun değil</td>
+                    </tr> 
+                    <?php foreach($json->{'olcum'} as $row => $d) {?>
+                        <tr> 
+                        <?php foreach($d as $key => $val) {?>
+                            <?php // echo $row . ' - ' .$key . ': ' . $val; ?>                                      
+                            <?php if($key == "gorsel"){ ?>                                            
+                            <td>
+                                <div class="input-group"> 
+                                    <input type="radio" value="<?php echo $val; ?>" <?php echo ($val == '1') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="Username"> 
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group"> 
+                                    <input type="radio" value="<?php echo $val; ?>" <?php echo ($val == '2') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="Username"> 
+                                </div>
+                            </td> 
+                            <td>
+                                <div class="input-group"> 
+                                    <input type="radio" value="<?php echo $val; ?>" <?php echo ($val == '3') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="Username"> 
+                                </div>
+                            </td>
+                            <?php }else { ?>
+                                <td>
                                         <div class="input-group"> 
-                                            <input type="text" name="kontrol_no" class="form-control" value="<?php echo $form[0]->kontrol_no; ?>" placeholder="Username"> 
+                                                <input type="text" class="form-control input-sm" value="<?php echo $val; ?>" name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="Username"> 
                                         </div>
                                     </td>
-                                    <td> </td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                    <td colspan="2">Parti Nr:	</td>
-                                    <td colspan="2">
-                                        <div class="input-group"> 
-                                            <input type="text" class="form-control"  name="parti_no" value="<?php echo $form[0]->parti_no; ?>" placeholder="Username"> 
-                                        </div>
-                                    </td>
-                                    <td> </td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">Tedarikçi Adı:	</td>
-                                    <td colspan="2">
-                                        <div class="form-group"> 
-                                            <select id="formInput43"  name="tedarikci" class="form-control"> 
-                                                <option>1</option>                                                 
-                                                <option>2</option>                                                 
-                                                <option>3</option>                                                 
-                                            </select>                                             
-                                        </div>
-                                    </td>
-                                    <td>-</td>
-                                    <td colspan="2">İrsaliye No</td>
-                                    <td colspan="2">
-                                        <div class="input-group"> 
-                                            <input type="text" class="form-control"  name="irsaliye" value="<?php echo $form[0]->irsaliye; ?>" placeholder="Username"> 
-                                        </div>
-                                    </td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>                                 
-                                <tr>
-                                    <td colspan="6"> Metrik Kontroller </td>
-                                    <td colspan="5">Görsel Kontroller</td>
-                                </tr>                                 
-                                <tr>
-                                <td>Ölçüm Adı</td>
-                                    <td>Ölçü (mm)</td>
-                                    <td>Tolerans	</td>
-                                    <td>Alt Limit	</td>
-                                    <td>Üst Üst Limit	</td>
-                                    <td>Ölçüm</td>
-                                    <td>Sonuç</td>
-                                    <td>Kontrol Noktası</td>
-                                    <td>Uygun</td>
-                                    <td>Şartlı Kabul	</td>
-                                    <td>Uygun değil</td>
-                                </tr>                                 
-                                
-                                <?php foreach($json->{'olcum'} as $row => $d) {?>
-                                    <tr> 
-                                    <?php foreach($d as $key => $val) {?>
-                                        <?php // echo $row . ' - ' .$key . ': ' . $val; ?>
-                                      
-                                        <?php if($key == "gorsel"){ ?>
-                                            
-                                        <td>
-                                            <div class="input-group"> 
-                                                <input type="radio" value="<?php echo $val; ?>" <?php echo ($val == '1') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="Username"> 
-                                            </div>
-                                        </td>
-
-                                            
-                                        <td>
-                                            <div class="input-group"> 
-                                                <input type="radio" value="<?php echo $val; ?>" <?php echo ($val == '2') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="Username"> 
-                                            </div>
-                                        </td>
-                                       
-                                        <td>
-                                            <div class="input-group"> 
-                                                <input type="radio" value="<?php echo $val; ?>" <?php echo ($val == '3') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="Username"> 
-                                            </div>
-                                        </td>
-                                        
-                                        
-                                        <?php }else { ?>
-                                            <td>
-                                                    <div class="input-group"> 
-                                                        <input type="text" class="form-control" value="<?php echo $val; ?>" name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="Username"> 
-                                                    </div>
-                                                </td>
-                                        <?php } ?>
-                                        
-       
-                                    <?php } ?>
-
-                                </tr> 
-                                     
-                                <?php } ?>
-                                
-                                <tr>
-                                    <td>
-                                        <td colspan="2">Tarih:</td>
-                                        <td colspan="2">
-                                            <input type="date" name="tarih" class="form-control"/>
-                                        </td>
-                                        <td colspan="2">Kullanıcı:</td>
-                                        <td colspan="2">
-                                            <div class="input-group"> 
-                                                <input type="text" name="kullanici" class="form-control" placeholder="Username"> 
-                                            </div>
-                                        </td>
-                                        <td colspan="2">Sonuç:</td>
-                                        <td colspan="2">
-                                            <div class="input-group"> 
-                                                <input type="text" name="sonuc" class="form-control" placeholder="Username"> 
-                                            </div>
-                                        </td>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>         
+                            <?php } ?>
+                        <?php } ?>
+                    </tr> 
+                            
+                    <?php } ?>
+                    
+                    <tr>                                  
+                        <td>Tarih:</td>
+                        <td colspan="2">
+                            <input type="date" name="tarih" class="form-control input-sm"  value="<?php echo $form[0]->tarih; ?>"/>
+                        </td>
+                        <td colspan="2">Kullanıcı:</td>
+                        <td colspan="2">
+                            <div class="input-group"> 
+                                <input type="text" name="kullanici" class="form-control input-sm" placeholder="Username"  value="<?php echo $form[0]->kullanici; ?>"> 
+                            </div>
+                        </td>
+                        <td colspan="2">Sonuç:</td>
+                        <td colspan="3">
+                            <div class="input-group"> 
+                                <input type="text" name="sonuc" class="form-control input-sm" placeholder="sonuc"  value="<?php echo $form[0]->sonuc; ?>"> 
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>         
             <?php echo form_submit('mysubmit', 'Submit Post!'); ?>
            <?php echo form_close(); ?>			
 			</div>

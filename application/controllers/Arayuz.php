@@ -13,10 +13,8 @@ class Arayuz extends MY_Controller
     {
         $data = array();
 
-
         $this->load->view('arayuz/formlar/girdi', $data);
     }
-    
 
     public function girdi()
     {
