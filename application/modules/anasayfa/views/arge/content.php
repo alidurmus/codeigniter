@@ -1,7 +1,3 @@
-
-
-
-
 <div class="container-fluid">
 
 <div class="jumbotron text-center">
@@ -17,7 +13,7 @@
     <div class="col-sm-4">
  
       <ul>       
-        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/girdikontrol">Girdi Kontrol</a></li>
+        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/arge">Arge</a></li>
         <li class="list-group-item "><a href="">Proses Kontrol</a></li>
         <li class="list-group-item "><a href="">Final Kontrol</a></li>
     </ul>
