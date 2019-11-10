@@ -1,48 +1,18 @@
 
-
-
-
-<div class="container-fluid">
-
-<div class="jumbotron text-center">
-  <h1>Girdi Kontrol</h1>
-  <p></p> 
-</div>
-  
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      
-    </div>
-    <div class="col-sm-4">
- 
-      <ul>       
-        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/girdikonrol">Girdi Kontrol</a></li>
-        <li class="list-group-item "><a href="">Proses Kontrol</a></li>
-        <li class="list-group-item "><a href="">Final Kontrol</a></li>
-    </ul>
-    </div>
-    <div class="col-sm-4">
-     
-    </div>
-  </div>
-</div>
     
-</div>
-
-<div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-md-12 text-right">
                 <hr>
-                    <div class="col-md-4 text-left">
-                    <a href="<?php echo base_url(); ?>anasayfa/kalite" class="btn btn-success">Yeni Ekle</a>
-
-                    </div>
-                    <div class="col-md-4 ">
-                    </div>
-                    <div class="col-md-4 text-right">
-                    <a href="<?php echo base_url(); ?>arayuz/girdi" class="btn btn-success">Yeni Ekle</a>
-
+                <div class="row">
+                        <div class="col-md-4 text-left">
+                            <a href="<?php echo base_url("anasayfa/kalite"); ?>" class="btn btn-primary"><-- Kalite</a>
+                            </div>
+                            <div class="col-md-4 ">
+                            </div>
+                            <div class="col-md-4 text-right">
+                            <a href="<?php echo base_url("anasayfa/malzeme"); ?>" class="btn btn-success">Yeni Ekle --></a>
+                        </div>
                     </div>
                 <hr>
             </div>
@@ -58,23 +28,22 @@
                         <th>İşlem</th>
                     </thead>
                     <tbody class="sortable" data-url="<?php echo base_url("girdikontrol/rankSetter"); ?>">
-                    <?php foreach($formlar as $form) { ?>
+                    <?php foreach($items as $item) { ?>
                         <tr>
-                            <td><?php echo $form->malzeme_adi; ?></td>
-                            <td><?php echo $form->td_adi; ?></td>
-                            <td><?php echo $form->kontrol_no; ?></td>
-                            <td><?php echo $form->parti_no; ?></td>
-                            <td><?php echo $form->irsaliye; ?></td>
-                            <td><?php echo $form->tarih; ?></td>
+                            <td><?php echo $item->malzeme_adi; ?></td>
+                            <td><?php echo $item->td_adi; ?></td>
+                            <td><?php echo $item->kontrol_no; ?></td>
+                            <td><?php echo $item->parti_no; ?></td>
+                            <td><?php echo $item->irsaliye; ?></td>
+                            <td><?php echo $item->tarih; ?></td>
                             <td>
-                                <a href="<?php echo base_url("arayuz/girdi_guncelle"); ?>?form_id=<?php echo $form->id;?>" class="btn btn-info">Düzenle</a>
+                                <a href="<?php echo base_url("anasayfa/girdikontrol_duzenle"); ?>/<?php echo $item->id;?>" class="btn btn-info">Düzenle</a>
                                 <button
-                                            data-url="<?php echo base_url("girdikontrol/delete/$item->id"); ?>"
+                                            data-url="<?php echo base_url("anasayfa/girdikontrol_sil/$item->id"); ?>"
                                             class="btn btn-sm btn-danger btn-outline remove-btn">
                                             <i class="fa fa-trash"></i> Sil
                                         </button>
-                             
-                                <a href="#" class="btn btn-danger">Sil</a>
+                               
                             </td>
                         </tr>
                         <?php } ?>
@@ -90,4 +59,5 @@
             $('#dataTable').DataTable();
         });
     </script>
+
 

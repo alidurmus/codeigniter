@@ -15,6 +15,8 @@ class Anasayfa extends MY_Controller
         }
 
         $this->load->model("girdikontrol/girdi_kontrol_model");
+        $this->load->model("proseskontrol/proses_kontrol_model");
+        $this->load->model("finalkontrol/final_kontrol_model");
         $this->load->model("tedarikciler/tedarikciler_model");
         $this->load->model("malzemeler/malzemeler_model");
         $this->load->model("malzemeler/malzeme_olcum_model");
@@ -105,7 +107,7 @@ class Anasayfa extends MY_Controller
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
-        $viewData->subViewFolder = "girdikontrol_liste";
+        $viewData->subViewFolder = "girdikontrol";
         $viewData->items = $items;
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -278,8 +280,8 @@ class Anasayfa extends MY_Controller
        $malzeme = $this->malzemeler_model->get(
         array(
             "id"    => $item->malzeme,
-        )
-    );  
+            )
+        );  
        $viewData->malzeme= $malzeme;
         
        $viewData->user = get_active_user();
@@ -417,6 +419,652 @@ class Anasayfa extends MY_Controller
         }
 
     }
+
+    public function proseskontrol(){
+
+        $viewData = new stdClass();
+        /** Tablodan Verilerin Getirilmesi.. */
+        $items = $this->proses_kontrol_model->listele();
+       
+
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "proseskontrol";
+        $viewData->items = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+    public function proseskontrol_ekle(){
+
+        $viewData = new stdClass();
+
+        $viewData->tedarikciler = $this->tedarikciler_model->get_all();      
+        $viewData->kullanicilar = $this->kullanicilar_model->get_all();
+
+        // formdan gelen bilgilere göre olcum tablosunu getir
+        $malzeme_id = $this->input->post("malzeme");       
+
+        $malzeme_olcum = $this->malzeme_olcum_model->get(
+            array(
+                "malzeme"    => $malzeme_id,
+            )
+        );      
+       // ölçüm tablosu json açılarak veri olarak al
+       $viewData->json = json_decode($malzeme_olcum->olcum);
+
+
+       // seçilen malzemenin bilgilerini getir
+       $malzeme = $this->malzemeler_model->get(
+        array(
+            "id"    => $malzeme_id,
+        )); 
+
+       $viewData->malzeme= $malzeme;
+        
+       $viewData->user = get_active_user();
+
+        
+       
+       //die();
+        // var_dump($viewData->json);
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "proseskontrol_ekle";
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+    public function proseskontrol_kaydet(){
+
+        $this->load->library("form_validation");
+
+        // Kurallar yazilir..
+
+        $parti_no = $this->input->post("parti_no");
+        $tedarikci = $this->input->post("tedarikci");
+        $malzeme = $this->input->post("malzeme");
+        $irsaliye = $this->input->post("irsaliye");
+        $tarih = $this->input->post("tarih");
+        $aciklama = $this->input->post("aciklama");   
+        $kullanici = $this->input->post("kullanici");            
+        $olcum = json_encode($this->input->post("form"));       
+         
+
+        $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
+        $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");   
+       
+        $this->form_validation->set_message(
+            array(
+                "required"  => "<b>{field}</b> alanı doldurulmalıdır"
+            )
+        );
+
+       // Form Validation Calistirilir..
+       $validate = $this->form_validation->run();
+
+       if($validate){          
+
+            $data2 = array(
+                "process_isim"  => "proseskontrol",
+                "parti_no"      => $parti_no,
+                "lot_no"        => "",
+                "kutu_no"       => "",                
+                "tarih"         => date("Y-m-d H:i:s")
+            );
+
+            // kontrol numarası alma işlemi
+            $insert2 = $this->kontrol_no_model->add($data2);
+            $get_kontrol_id = get_kontrol_id($data2);
+
+
+    
+        
+        // aktif kullanıcı bilgilerini al
+        $user = get_active_user(); 
+            
+        $data = array(
+            "parti_no"      => $this->input->post("parti_no"),
+            "tedarikci"     => $this->input->post("tedarikci"),
+            "malzeme"       => $this->input->post("malzeme"),
+            "irsaliye"      => $this->input->post("irsaliye"),
+            "aciklama"      => $this->input->post("aciklama"),  
+            "kullanici"      => $this->input->post("kullanici"), 
+            "kontrol_no"    => $get_kontrol_id,  
+            "tarih"         => $this->input->post("tarih"),
+            "olcum"         => $olcum
+        );
+        
+        $insert3 = $this->proses_kontrol_model->add($data);
+        
+            // TODO: Alert sistemi eklenecek...
+            if($insert3){
+
+                $alert = array(
+                    "title" => "İşlem Başarılı",
+                    "text" => "Kayıt başarılı bir şekilde eklendi",
+                    "type"  => "success"
+                );
+
+                } else {
+
+                    $alert = array(
+                        "title" => "İşlem Başarısız",
+                        "text" => "Kayıt Ekleme sırasında bir problem oluştu",
+                        "type"  => "error"
+                    );
+                }
+        
+            // İşlemin Sonucunu Session'a yazma işlemi...
+            $this->session->set_flashdata("alert", $alert);
+            
+            redirect(base_url("anasayfa/proseskontrol"));
+
+            } else {
+
+            $viewData = new stdClass();
+
+            /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+            $viewData->viewFolder = $this->viewFolder;
+            $viewData->subViewFolder = "anasayfa/proseskontrol_ekle";
+            $viewData->form_error = true;
+            $viewData->parti_no = $parti_no;
+            $viewData->tedarikci = $tedarikci;
+            $viewData->malzeme = $malzeme;
+            $viewData->irsaliye = $irsaliye;
+            $viewData->kullanici = $kullanici;
+    
+            $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+        }
+
+    }
+
+    public function proseskontrol_duzenle($id){
+        $viewData = new stdClass();
+        /** Tablodan Verilerin Getirilmesi.. */
+        $item = $this->proses_kontrol_model->get(
+            array(
+                "id"    => $id,
+            )
+        );
+
+
+        $viewData->tedarikciler = $this->tedarikciler_model->get_all(
+            array(
+                "isActive"  => 1
+            )
+        );
+          
+       // ölçüm tablosu json açılarak veri olarak al
+       $viewData->json = json_decode($item->olcum);
+
+       // seçilen malzemenin bilgilerini getir
+       $malzeme = $this->malzemeler_model->get(
+        array(
+            "id"    => $item->malzeme,
+            )
+        );  
+       $viewData->malzeme= $malzeme;
+        
+       $viewData->user = get_active_user();
+
+       //die();
+        // var_dump($viewData->json);
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "proseskontrol_duzenle";
+        $viewData->item = $item;
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+   
+    }
+
+    public function proseskontrol_sil($id){
+
+        $delete = $this->proses_kontrol_model->delete(
+            array(
+                "id"    => $id
+            )
+        );
+
+        // TODO Alert Sistemi Eklenecek...
+        if($delete){
+
+            $alert = array(
+                "title" => "İşlem Başarılı",
+                "text" => "Kayıt başarılı bir şekilde silindi",
+                "type"  => "success"
+            );
+
+        } else {
+
+            $alert = array(
+                "title" => "İşlem Başarılı",
+                "text" => "Kayıt silme sırasında bir problem oluştu",
+                "type"  => "error"
+            );
+
+
+        }
+
+        $this->session->set_flashdata("alert", $alert);
+        redirect(base_url("anasayfa/proseskontrol"));
+    }
+
+    public function proseskontrol_guncelle($id){
+        $this->load->library("form_validation");
+
+        // Kurallar yazilir..
+
+        $parti_no = $this->input->post("parti_no");
+        $tedarikci = $this->input->post("tedarikci");
+        $malzeme = $this->input->post("malzeme");
+        $irsaliye = $this->input->post("irsaliye");
+        $tarih = $this->input->post("tarih");
+        $aciklama = $this->input->post("aciklama");   
+        $kullanici = $this->input->post("kullanici");            
+        $olcum = json_encode($this->input->post("form"));       
+         
+
+        $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
+        $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");   
+       
+        $this->form_validation->set_message(
+            array(
+                "required"  => "<b>{field}</b> alanı doldurulmalıdır"
+            )
+        );
+
+       // Form Validation Calistirilir..
+       $validate = $this->form_validation->run();
+
+       if($validate){        
+        
+        // aktif kullanıcı bilgilerini al
+        $user = get_active_user(); 
+            
+        $data = array(
+            "parti_no"      => $this->input->post("parti_no"),
+            "tedarikci"     => $this->input->post("tedarikci"),
+            "malzeme"       => $this->input->post("malzeme"),
+            "irsaliye"      => $this->input->post("irsaliye"),
+            "aciklama"      => $this->input->post("aciklama"),  
+            "kullanici"      => $user->id,  
+            "tarih"         => $this->input->post("tarih"),
+            "olcum"         => $olcum
+        );
+        $update = $this->proses_kontrol_model->update(array("id" => $id), $data);
+            // TODO: Alert sistemi eklenecek...
+            if($update){
+
+                $alert = array(
+                    "title" => "İşlem Başarılı",
+                    "text" => "Kayıt başarılı bir şekilde güncellendi",
+                    "type"  => "success"
+                );
+
+                } else {
+
+                    $alert = array(
+                        "title" => "İşlem Başarısız",
+                        "text" => "Kayıt güncellendi sırasında bir problem oluştu",
+                        "type"  => "error"
+                    );
+                }
+        
+            // İşlemin Sonucunu Session'a yazma işlemi...
+            $this->session->set_flashdata("alert", $alert);
+            
+            redirect(base_url("anasayfa/proseskontrol"));
+
+            } else {
+
+            $viewData = new stdClass();
+
+            /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+            $viewData->viewFolder = $this->viewFolder;
+            $viewData->subViewFolder = "anasayfa/proseskontrol_duzenle";
+            $viewData->form_error = true;
+            $viewData->parti_no = $parti_no;
+            $viewData->tedarikci = $tedarikci;
+            $viewData->malzeme = $malzeme;
+            $viewData->irsaliye = $irsaliye;
+            $viewData->kullanici = $kullanici;
+    
+             /** Tablodan Verilerin Getirilmesi.. */
+             $viewData->item = $this->proses_kontrol_model->get(
+                array(
+                    "id"    => $id,
+                )
+            );
+
+            $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+        }
+
+    }
+
+
+ public function finalkontrol(){
+
+        $viewData = new stdClass();
+        /** Tablodan Verilerin Getirilmesi.. */
+        $items = $this->final_kontrol_model->listele();
+       
+
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "finalkontrol";
+        $viewData->items = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+    public function finalkontrol_ekle(){
+
+        $viewData = new stdClass();
+
+        $viewData->tedarikciler = $this->tedarikciler_model->get_all();      
+        $viewData->kullanicilar = $this->kullanicilar_model->get_all();
+
+        // formdan gelen bilgilere göre olcum tablosunu getir
+        $malzeme_id = $this->input->post("malzeme");       
+
+        $malzeme_olcum = $this->malzeme_olcum_model->get(
+            array(
+                "malzeme"    => $malzeme_id,
+            )
+        );      
+       // ölçüm tablosu json açılarak veri olarak al
+       $viewData->json = json_decode($malzeme_olcum->olcum);
+
+
+       // seçilen malzemenin bilgilerini getir
+       $malzeme = $this->malzemeler_model->get(
+        array(
+            "id"    => $malzeme_id,
+        )); 
+
+       $viewData->malzeme= $malzeme;
+        
+       $viewData->user = get_active_user();
+
+        
+       
+       //die();
+        // var_dump($viewData->json);
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "finalkontrol_ekle";
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+    public function finalkontrol_kaydet(){
+
+        $this->load->library("form_validation");
+
+        // Kurallar yazilir..
+
+        $parti_no = $this->input->post("parti_no");
+        $tedarikci = $this->input->post("tedarikci");
+        $malzeme = $this->input->post("malzeme");
+        $irsaliye = $this->input->post("irsaliye");
+        $tarih = $this->input->post("tarih");
+        $aciklama = $this->input->post("aciklama");   
+        $kullanici = $this->input->post("kullanici");            
+        $olcum = json_encode($this->input->post("form"));       
+         
+
+        $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
+        $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");   
+       
+        $this->form_validation->set_message(
+            array(
+                "required"  => "<b>{field}</b> alanı doldurulmalıdır"
+            )
+        );
+
+       // Form Validation Calistirilir..
+       $validate = $this->form_validation->run();
+
+       if($validate){          
+
+            $data2 = array(
+                "process_isim"  => "finalkontrol",
+                "parti_no"      => $parti_no,
+                "lot_no"        => "",
+                "kutu_no"       => "",                
+                "tarih"         => date("Y-m-d H:i:s")
+            );
+
+            // kontrol numarası alma işlemi
+            $insert2 = $this->kontrol_no_model->add($data2);
+            $get_kontrol_id = get_kontrol_id($data2);
+
+
+    
+        
+        // aktif kullanıcı bilgilerini al
+        $user = get_active_user(); 
+            
+        $data = array(
+            "parti_no"      => $this->input->post("parti_no"),
+            "tedarikci"     => $this->input->post("tedarikci"),
+            "malzeme"       => $this->input->post("malzeme"),
+            "irsaliye"      => $this->input->post("irsaliye"),
+            "aciklama"      => $this->input->post("aciklama"),  
+            "kullanici"      => $this->input->post("kullanici"), 
+            "kontrol_no"    => $get_kontrol_id,  
+            "tarih"         => $this->input->post("tarih"),
+            "olcum"         => $olcum
+        );
+        
+        $insert3 = $this->final_kontrol_model->add($data);
+        
+            // TODO: Alert sistemi eklenecek...
+            if($insert3){
+
+                $alert = array(
+                    "title" => "İşlem Başarılı",
+                    "text" => "Kayıt başarılı bir şekilde eklendi",
+                    "type"  => "success"
+                );
+
+                } else {
+
+                    $alert = array(
+                        "title" => "İşlem Başarısız",
+                        "text" => "Kayıt Ekleme sırasında bir problem oluştu",
+                        "type"  => "error"
+                    );
+                }
+        
+            // İşlemin Sonucunu Session'a yazma işlemi...
+            $this->session->set_flashdata("alert", $alert);
+            
+            redirect(base_url("anasayfa/finalkontrol"));
+
+            } else {
+
+            $viewData = new stdClass();
+
+            /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+            $viewData->viewFolder = $this->viewFolder;
+            $viewData->subViewFolder = "anasayfa/finalkontrol_ekle";
+            $viewData->form_error = true;
+            $viewData->parti_no = $parti_no;
+            $viewData->tedarikci = $tedarikci;
+            $viewData->malzeme = $malzeme;
+            $viewData->irsaliye = $irsaliye;
+            $viewData->kullanici = $kullanici;
+    
+            $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+        }
+
+    }
+
+    public function finalkontrol_duzenle($id){
+        $viewData = new stdClass();
+        /** Tablodan Verilerin Getirilmesi.. */
+        $item = $this->final_kontrol_model->get(
+            array(
+                "id"    => $id,
+            )
+        );
+
+
+        $viewData->tedarikciler = $this->tedarikciler_model->get_all(
+            array(
+                "isActive"  => 1
+            )
+        );
+          
+       // ölçüm tablosu json açılarak veri olarak al
+       $viewData->json = json_decode($item->olcum);
+
+       // seçilen malzemenin bilgilerini getir
+       $malzeme = $this->malzemeler_model->get(
+        array(
+            "id"    => $item->malzeme,
+            )
+        );  
+       $viewData->malzeme= $malzeme;
+        
+       $viewData->user = get_active_user();
+
+       //die();
+        // var_dump($viewData->json);
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "finalkontrol_duzenle";
+        $viewData->item = $item;
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+   
+    }
+
+    public function finalkontrol_sil($id){
+
+        $delete = $this->final_kontrol_model->delete(
+            array(
+                "id"    => $id
+            )
+        );
+
+        // TODO Alert Sistemi Eklenecek...
+        if($delete){
+
+            $alert = array(
+                "title" => "İşlem Başarılı",
+                "text" => "Kayıt başarılı bir şekilde silindi",
+                "type"  => "success"
+            );
+
+        } else {
+
+            $alert = array(
+                "title" => "İşlem Başarılı",
+                "text" => "Kayıt silme sırasında bir problem oluştu",
+                "type"  => "error"
+            );
+
+
+        }
+
+        $this->session->set_flashdata("alert", $alert);
+        redirect(base_url("anasayfa/finalkontrol"));
+    }
+
+    public function finalkontrol_guncelle($id){
+        $this->load->library("form_validation");
+
+        // Kurallar yazilir..
+
+        $parti_no = $this->input->post("parti_no");
+        $tedarikci = $this->input->post("tedarikci");
+        $malzeme = $this->input->post("malzeme");
+        $irsaliye = $this->input->post("irsaliye");
+        $tarih = $this->input->post("tarih");
+        $aciklama = $this->input->post("aciklama");   
+        $kullanici = $this->input->post("kullanici");            
+        $olcum = json_encode($this->input->post("form"));       
+         
+
+        $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
+        $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");   
+       
+        $this->form_validation->set_message(
+            array(
+                "required"  => "<b>{field}</b> alanı doldurulmalıdır"
+            )
+        );
+
+       // Form Validation Calistirilir..
+       $validate = $this->form_validation->run();
+
+       if($validate){        
+        
+        // aktif kullanıcı bilgilerini al
+        $user = get_active_user(); 
+            
+        $data = array(
+            "parti_no"      => $this->input->post("parti_no"),
+            "tedarikci"     => $this->input->post("tedarikci"),
+            "malzeme"       => $this->input->post("malzeme"),
+            "irsaliye"      => $this->input->post("irsaliye"),
+            "aciklama"      => $this->input->post("aciklama"),  
+            "kullanici"      => $user->id,  
+            "tarih"         => $this->input->post("tarih"),
+            "olcum"         => $olcum
+        );
+        $update = $this->final_kontrol_model->update(array("id" => $id), $data);
+            // TODO: Alert sistemi eklenecek...
+            if($update){
+
+                $alert = array(
+                    "title" => "İşlem Başarılı",
+                    "text" => "Kayıt başarılı bir şekilde güncellendi",
+                    "type"  => "success"
+                );
+
+                } else {
+
+                    $alert = array(
+                        "title" => "İşlem Başarısız",
+                        "text" => "Kayıt güncellendi sırasında bir problem oluştu",
+                        "type"  => "error"
+                    );
+                }
+        
+            // İşlemin Sonucunu Session'a yazma işlemi...
+            $this->session->set_flashdata("alert", $alert);
+            
+            redirect(base_url("anasayfa/finalkontrol"));
+
+            } else {
+
+            $viewData = new stdClass();
+
+            /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+            $viewData->viewFolder = $this->viewFolder;
+            $viewData->subViewFolder = "anasayfa/finalkontrol_duzenle";
+            $viewData->form_error = true;
+            $viewData->parti_no = $parti_no;
+            $viewData->tedarikci = $tedarikci;
+            $viewData->malzeme = $malzeme;
+            $viewData->irsaliye = $irsaliye;
+            $viewData->kullanici = $kullanici;
+    
+             /** Tablodan Verilerin Getirilmesi.. */
+             $viewData->item = $this->final_kontrol_model->get(
+                array(
+                    "id"    => $id,
+                )
+            );
+
+            $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+        }
+
+    }
+
 
 
     public function new_form(){

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 08 Kas 2019, 15:45:13
--- Sunucu sürümü: 10.1.31-MariaDB
--- PHP Sürümü: 5.6.34
+-- Üretim Zamanı: 10 Kas 2019, 16:31:25
+-- Sunucu sürümü: 10.4.8-MariaDB
+-- PHP Sürümü: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -54,7 +54,7 @@ CREATE TABLE `courses` (
   `id` int(11) UNSIGNED NOT NULL,
   `url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `description` text COLLATE utf8_turkish_ci,
+  `description` text COLLATE utf8_turkish_ci DEFAULT NULL,
   `img_url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `event_date` datetime DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
@@ -152,7 +152,7 @@ CREATE TABLE `final_kontrol` (
   `id` int(11) NOT NULL,
   `urun_adi` int(11) NOT NULL,
   `lot` varchar(15) NOT NULL,
-  `tarih` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tarih` datetime NOT NULL DEFAULT current_timestamp(),
   `barkod` int(11) NOT NULL,
   `kontrol_no` int(11) NOT NULL,
   `kontrol_eden` int(11) NOT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE `final_olcum` (
   `deger` varchar(15) NOT NULL,
   `tolerans` varchar(15) NOT NULL,
   `final_id` int(11) NOT NULL,
-  `tarih` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tarih` datetime NOT NULL DEFAULT current_timestamp(),
   `aciklama` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -256,7 +256,7 @@ CREATE TABLE `girdi_kontrol` (
   `malzeme` int(11) NOT NULL,
   `tedarikci` int(11) NOT NULL,
   `irsaliye` varchar(15) NOT NULL,
-  `tarih` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tarih` datetime NOT NULL,
   `parti_no` varchar(15) NOT NULL,
   `kontrol_no` int(11) NOT NULL,
   `aciklama` text NOT NULL,
@@ -270,7 +270,7 @@ CREATE TABLE `girdi_kontrol` (
 --
 
 INSERT INTO `girdi_kontrol` (`id`, `malzeme`, `tedarikci`, `irsaliye`, `tarih`, `parti_no`, `kontrol_no`, `aciklama`, `kullanici`, `sonuc`, `olcum`) VALUES
-(34, 2, 2, '1', '1989-11-23 00:00:00', '1', 1, '', 1, '1', '{\"olcum\":{\"k1\":{\"adi\":\"Nihil hic eligendi o\",\"olcu\":\"96\",\"tolerans\":\"18\",\"alt_limit\":\"100\",\"ust_limit\":\"47\",\"olcum\":\"80\",\"sonuc\":\"Earum elit quia ips\",\"kontrol_noktasi\":\"Fugiat alias sequi \",\"gorsel\":\"3\"},\"k2\":{\"adi\":\"Ipsum vel rem nulla \",\"olcu\":\"22\",\"tolerans\":\"57\",\"alt_limit\":\"66\",\"ust_limit\":\"24\",\"olcum\":\"54\",\"sonuc\":\"Consequat Et incidu\",\"kontrol_noktasi\":\"Aut est ea iusto exc\",\"gorsel\":\"1\"},\"k3\":{\"adi\":\"Consequatur minima o\",\"olcu\":\"28\",\"tolerans\":\"99\",\"alt_limit\":\"27\",\"ust_limit\":\"10\",\"olcum\":\"81\",\"sonuc\":\"Debitis qui commodo \",\"kontrol_noktasi\":\"Temporibus dolor acc\",\"gorsel\":\"2\"},\"k4\":{\"adi\":\"Ducimus alias quide\",\"olcu\":\"34\",\"tolerans\":\"16\",\"alt_limit\":\"81\",\"ust_limit\":\"84\",\"olcum\":\"29\",\"sonuc\":\"Magni ut autem enim \",\"kontrol_noktasi\":\"Deleniti aspernatur \",\"gorsel\":\"3\"},\"k5\":{\"adi\":\"Facere quis eligendi\",\"olcu\":\"61\",\"tolerans\":\"1\",\"alt_limit\":\"76\",\"ust_limit\":\"79\",\"olcum\":\"85\",\"sonuc\":\"Accusantium qui fugi\",\"kontrol_noktasi\":\"Ut sint qui nesciunt\",\"gorsel\":\"3\"},\"k6\":{\"adi\":\"Rerum temporibus cup\",\"olcu\":\"59\",\"tolerans\":\"29\",\"alt_limit\":\"89\",\"ust_limit\":\"12\",\"olcum\":\"21\",\"sonuc\":\"Natus voluptatem nem\",\"kontrol_noktasi\":\"Autem aut pariatur \",\"gorsel\":\"3\"},\"k7\":{\"adi\":\"Fuga Minus labore o\",\"olcu\":\"68\",\"tolerans\":\"40\",\"alt_limit\":\"70\",\"ust_limit\":\"59\",\"olcum\":\"75\",\"sonuc\":\"Quo soluta minus ut \",\"kontrol_noktasi\":\"Facilis deleniti ame\",\"gorsel\":\"2\"},\"k8\":{\"adi\":\"Ipsam do magnam even\",\"olcu\":\"38\",\"tolerans\":\"12\",\"alt_limit\":\"84\",\"ust_limit\":\"27\",\"olcum\":\"86\",\"sonuc\":\"Neque est doloribus\",\"kontrol_noktasi\":\"Cum irure ratione mi\",\"gorsel\":\"3\"},\"k9\":{\"adi\":\"Consequatur fugiat \",\"olcu\":\"71\",\"tolerans\":\"89\",\"alt_limit\":\"1\",\"ust_limit\":\"2\",\"olcum\":\"8\",\"sonuc\":\"Dolor officia amet \",\"kontrol_noktasi\":\"Quos id et laborum\",\"gorsel\":\"2\"},\"k10\":{\"adi\":\"Corporis est consequ\",\"olcu\":\"8\",\"tolerans\":\"64\",\"alt_limit\":\"53\",\"ust_limit\":\"26\",\"olcum\":\"57\",\"sonuc\":\"Aliquid unde minim u\",\"kontrol_noktasi\":\"Et eu quia voluptas \",\"gorsel\":\"1\"},\"k11\":{\"adi\":\"A iure quas deserunt\",\"olcu\":\"2\",\"tolerans\":\"68\",\"alt_limit\":\"31\",\"ust_limit\":\"74\",\"olcum\":\"95\",\"sonuc\":\"Ad aliquam officiis \",\"kontrol_noktasi\":\"Nisi ipsum architect\",\"gorsel\":\"1\"},\"k12\":{\"adi\":\"Laborum a sequi veri\",\"olcu\":\"29\",\"tolerans\":\"14\",\"alt_limit\":\"94\",\"ust_limit\":\"94\",\"olcum\":\"52\",\"sonuc\":\"Voluptatum dolores s\",\"kontrol_noktasi\":\"Ut officia eligendi \",\"gorsel\":\"3\"},\"k13\":{\"adi\":\"Dolores do ratione c\",\"olcu\":\"69\",\"tolerans\":\"47\",\"alt_limit\":\"67\",\"ust_limit\":\"62\",\"olcum\":\"24\",\"sonuc\":\"Et omnis facilis pra\",\"kontrol_noktasi\":\"Magna quod quis sunt\",\"gorsel\":\"1\"},\"k14\":{\"adi\":\"Dicta earum sunt et \",\"olcu\":\"32\",\"tolerans\":\"74\",\"alt_limit\":\"17\",\"ust_limit\":\"81\",\"olcum\":\"42\",\"sonuc\":\"Excepteur autem nemo\",\"kontrol_noktasi\":\"Ad voluptas harum et\",\"gorsel\":\"3\"},\"k15\":{\"adi\":\"Id eligendi volupta\",\"olcu\":\"83\",\"tolerans\":\"91\",\"alt_limit\":\"28\",\"ust_limit\":\"6\",\"olcum\":\"53\",\"sonuc\":\"Ex deleniti sint ex \",\"kontrol_noktasi\":\"Excepteur esse volu\",\"gorsel\":\"2\"},\"k16\":{\"adi\":\"Tempor laudantium t\",\"olcu\":\"23\",\"tolerans\":\"43\",\"alt_limit\":\"61\",\"ust_limit\":\"92\",\"olcum\":\"25\",\"sonuc\":\"Dolores iusto est om\",\"kontrol_noktasi\":\"Fugiat voluptates no\",\"gorsel\":\"3\"}}}');
+(40, 2, 1, '2', '2019-11-10 12:30:44', '2222', 78, 'saaaaaaaaaa', 1, '', '{\"olcum\":{\"k1\":{\"adi\":\"Nihil hic eligendi o\",\"olcu\":\"96\",\"tolerans\":\"18\",\"alt_limit\":\"100\",\"ust_limit\":\"47\",\"olcum\":\"80\",\"sonuc\":\"Earum elit quia ips\",\"kontrol_noktasi\":\"Fugiat alias sequi \",\"gorsel\":\"3\"},\"k2\":{\"adi\":\"Ipsum vel rem nulla \",\"olcu\":\"22\",\"tolerans\":\"57\",\"alt_limit\":\"66\",\"ust_limit\":\"24\",\"olcum\":\"54\",\"sonuc\":\"Consequat Et incidu\",\"kontrol_noktasi\":\"Aut est ea iusto exc\",\"gorsel\":\"1\"},\"k3\":{\"adi\":\"Consequatur minima o\",\"olcu\":\"28\",\"tolerans\":\"99\",\"alt_limit\":\"27\",\"ust_limit\":\"10\",\"olcum\":\"81\",\"sonuc\":\"Debitis qui commodo \",\"kontrol_noktasi\":\"Temporibus dolor acc\",\"gorsel\":\"2\"},\"k4\":{\"adi\":\"Ducimus alias quide\",\"olcu\":\"34\",\"tolerans\":\"16\",\"alt_limit\":\"81\",\"ust_limit\":\"84\",\"olcum\":\"29\",\"sonuc\":\"Magni ut autem enim \",\"kontrol_noktasi\":\"Deleniti aspernatur \",\"gorsel\":\"3\"},\"k5\":{\"adi\":\"Facere quis eligendi\",\"olcu\":\"61\",\"tolerans\":\"1\",\"alt_limit\":\"76\",\"ust_limit\":\"79\",\"olcum\":\"85\",\"sonuc\":\"Accusantium qui fugi\",\"kontrol_noktasi\":\"Ut sint qui nesciunt\",\"gorsel\":\"3\"},\"k6\":{\"adi\":\"Rerum temporibus cup\",\"olcu\":\"59\",\"tolerans\":\"29\",\"alt_limit\":\"89\",\"ust_limit\":\"12\",\"olcum\":\"21\",\"sonuc\":\"Natus voluptatem nem\",\"kontrol_noktasi\":\"Autem aut pariatur \",\"gorsel\":\"3\"},\"k7\":{\"adi\":\"Fuga Minus labore o\",\"olcu\":\"68\",\"tolerans\":\"40\",\"alt_limit\":\"70\",\"ust_limit\":\"59\",\"olcum\":\"75\",\"sonuc\":\"Quo soluta minus ut \",\"kontrol_noktasi\":\"Facilis deleniti ame\",\"gorsel\":\"2\"},\"k8\":{\"adi\":\"Ipsam do magnam even\",\"olcu\":\"38\",\"tolerans\":\"12\",\"alt_limit\":\"84\",\"ust_limit\":\"27\",\"olcum\":\"86\",\"sonuc\":\"Neque est doloribus\",\"kontrol_noktasi\":\"Cum irure ratione mi\",\"gorsel\":\"3\"},\"k9\":{\"adi\":\"Consequatur fugiat \",\"olcu\":\"71\",\"tolerans\":\"89\",\"alt_limit\":\"1\",\"ust_limit\":\"2\",\"olcum\":\"8\",\"sonuc\":\"Dolor officia amet \",\"kontrol_noktasi\":\"Quos id et laborum\",\"gorsel\":\"2\"},\"k10\":{\"adi\":\"Corporis est consequ\",\"olcu\":\"8\",\"tolerans\":\"64\",\"alt_limit\":\"53\",\"ust_limit\":\"26\",\"olcum\":\"57\",\"sonuc\":\"Aliquid unde minim u\",\"kontrol_noktasi\":\"Et eu quia voluptas \",\"gorsel\":\"1\"},\"k11\":{\"adi\":\"A iure quas deserunt\",\"olcu\":\"2\",\"tolerans\":\"68\",\"alt_limit\":\"31\",\"ust_limit\":\"74\",\"olcum\":\"95\",\"sonuc\":\"Ad aliquam officiis \",\"kontrol_noktasi\":\"Nisi ipsum architect\",\"gorsel\":\"1\"},\"k12\":{\"adi\":\"Laborum a sequi veri\",\"olcu\":\"29\",\"tolerans\":\"14\",\"alt_limit\":\"94\",\"ust_limit\":\"94\",\"olcum\":\"52\",\"sonuc\":\"Voluptatum dolores s\",\"kontrol_noktasi\":\"Ut officia eligendi \",\"gorsel\":\"3\"},\"k13\":{\"adi\":\"Dolores do ratione c\",\"olcu\":\"69\",\"tolerans\":\"47\",\"alt_limit\":\"67\",\"ust_limit\":\"62\",\"olcum\":\"24\",\"sonuc\":\"Et omnis facilis pra\",\"kontrol_noktasi\":\"Magna quod quis sunt\",\"gorsel\":\"1\"},\"k14\":{\"adi\":\"Dicta earum sunt et \",\"olcu\":\"32\",\"tolerans\":\"74\",\"alt_limit\":\"17\",\"ust_limit\":\"81\",\"olcum\":\"42\",\"sonuc\":\"Excepteur autem nemo\",\"kontrol_noktasi\":\"Ad voluptas harum et\",\"gorsel\":\"3\"},\"k15\":{\"adi\":\"Id eligendi volupta\",\"olcu\":\"83\",\"tolerans\":\"91\",\"alt_limit\":\"28\",\"ust_limit\":\"6\",\"olcum\":\"53\",\"sonuc\":\"Ex deleniti sint ex \",\"kontrol_noktasi\":\"Excepteur esse volu\",\"gorsel\":\"2\"},\"k16\":{\"adi\":\"Tempor laudantium t\",\"olcu\":\"23\",\"tolerans\":\"43\",\"alt_limit\":\"61\",\"ust_limit\":\"92\",\"olcum\":\"25\",\"sonuc\":\"Dolores iusto est om\",\"kontrol_noktasi\":\"Fugiat voluptates no\",\"gorsel\":\"3\"}}}');
 
 -- --------------------------------------------------------
 
@@ -362,7 +362,7 @@ CREATE TABLE `is_emri` (
   `siparis_no` int(11) NOT NULL,
   `uretim_tarihi` date NOT NULL,
   `sevk_tarihi` date NOT NULL,
-  `tarih` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `tarih` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -384,7 +384,7 @@ CREATE TABLE `kontrol_no` (
   `parti_no` int(11) NOT NULL,
   `lot_no` int(11) NOT NULL,
   `kutu_no` int(11) NOT NULL,
-  `tarih` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `tarih` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -392,36 +392,12 @@ CREATE TABLE `kontrol_no` (
 --
 
 INSERT INTO `kontrol_no` (`id`, `process_isim`, `parti_no`, `lot_no`, `kutu_no`, `tarih`) VALUES
-(1, 'Girdi Kontrol', 0, 0, 0, '0000-00-00 00:00:00'),
-(2, 'Process', 0, 0, 0, '0000-00-00 00:00:00'),
-(3, 'Final', 0, 0, 0, '0000-00-00 00:00:00'),
-(5, 'Girdi Kontrol', 0, 0, 0, '0000-00-00 00:00:00'),
-(6, 'Girdi Kontrol', 0, 0, 0, '0000-00-00 00:00:00'),
-(7, 'Girdi', 0, 0, 0, '0000-00-00 00:00:00'),
-(8, 'Girdi', 0, 0, 0, '0000-00-00 00:00:00'),
-(9, 'Girdi', 1, 0, 0, '2019-10-26 16:41:15'),
-(10, 'Process', 321321, 123123, 0, '2019-10-26 16:43:24'),
-(11, 'Final', 0, 1111, 0, '2019-10-26 16:44:56'),
-(12, 'Final', 0, 333, 11111, '2019-10-26 16:47:35'),
-(13, 'Girdi', 1, 0, 0, '2019-10-26 17:54:11'),
-(14, 'girdikontrol', 55555, 0, 0, '2019-11-05 19:02:01'),
-(15, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:17:01'),
-(16, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:18:59'),
-(17, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:18:59'),
-(18, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:24:26'),
-(19, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:24:26'),
-(20, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:32:48'),
-(21, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:32:48'),
-(22, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:33:46'),
-(23, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:33:46'),
-(24, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:35:36'),
-(25, 'girdikontrol', 11111, 0, 0, '2019-11-05 19:35:36'),
-(26, 'girdikontrol', 11111, 0, 0, '2019-11-05 20:04:54'),
-(27, 'girdikontrol', 11111, 0, 0, '2019-11-05 20:04:54'),
-(28, 'girdikontrol', 6666, 0, 0, '2019-11-05 20:06:10'),
-(29, 'girdikontrol', 6666, 0, 0, '2019-11-05 20:06:10'),
-(30, 'girdikontrol', 7777, 0, 0, '2019-11-05 20:06:47'),
-(31, 'girdikontrol', 7777, 0, 0, '2019-11-05 20:06:47');
+(75, 'girdikontrol', 11111, 0, 0, '2019-11-10 11:55:34'),
+(76, 'girdikontrol', 11111, 0, 0, '2019-11-10 11:55:34'),
+(77, 'girdikontrol', 2222, 0, 0, '2019-11-10 12:30:53'),
+(78, 'girdikontrol', 2222, 0, 0, '2019-11-10 12:30:53'),
+(79, 'girdikontrol', 55555, 0, 0, '2019-11-10 12:36:00'),
+(80, 'girdikontrol', 55555, 0, 0, '2019-11-10 12:36:00');
 
 -- --------------------------------------------------------
 
@@ -472,6 +448,30 @@ INSERT INTO `malzemeler` (`id`, `adi`, `kodu`, `firma`, `isActive`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `malzeme_olcum`
+--
+
+CREATE TABLE `malzeme_olcum` (
+  `id` int(11) NOT NULL,
+  `malzeme` int(11) NOT NULL,
+  `tedarikci` int(11) NOT NULL,
+  `tarih` datetime NOT NULL DEFAULT current_timestamp(),
+  `aciklama` text NOT NULL,
+  `olcum` text NOT NULL,
+  `isActive` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Tablo döküm verisi `malzeme_olcum`
+--
+
+INSERT INTO `malzeme_olcum` (`id`, `malzeme`, `tedarikci`, `tarih`, `aciklama`, `olcum`, `isActive`) VALUES
+(34, 2, 2, '1989-11-23 00:00:00', '', '{\"olcum\":{\"k1\":{\"adi\":\"Nihil hic eligendi o\",\"olcu\":\"96\",\"tolerans\":\"18\",\"alt_limit\":\"100\",\"ust_limit\":\"47\",\"olcum\":\"80\",\"sonuc\":\"Earum elit quia ips\",\"kontrol_noktasi\":\"Fugiat alias sequi \",\"gorsel\":\"3\"},\"k2\":{\"adi\":\"Ipsum vel rem nulla \",\"olcu\":\"22\",\"tolerans\":\"57\",\"alt_limit\":\"66\",\"ust_limit\":\"24\",\"olcum\":\"54\",\"sonuc\":\"Consequat Et incidu\",\"kontrol_noktasi\":\"Aut est ea iusto exc\",\"gorsel\":\"1\"},\"k3\":{\"adi\":\"Consequatur minima o\",\"olcu\":\"28\",\"tolerans\":\"99\",\"alt_limit\":\"27\",\"ust_limit\":\"10\",\"olcum\":\"81\",\"sonuc\":\"Debitis qui commodo \",\"kontrol_noktasi\":\"Temporibus dolor acc\",\"gorsel\":\"2\"},\"k4\":{\"adi\":\"Ducimus alias quide\",\"olcu\":\"34\",\"tolerans\":\"16\",\"alt_limit\":\"81\",\"ust_limit\":\"84\",\"olcum\":\"29\",\"sonuc\":\"Magni ut autem enim \",\"kontrol_noktasi\":\"Deleniti aspernatur \",\"gorsel\":\"3\"},\"k5\":{\"adi\":\"Facere quis eligendi\",\"olcu\":\"61\",\"tolerans\":\"1\",\"alt_limit\":\"76\",\"ust_limit\":\"79\",\"olcum\":\"85\",\"sonuc\":\"Accusantium qui fugi\",\"kontrol_noktasi\":\"Ut sint qui nesciunt\",\"gorsel\":\"3\"},\"k6\":{\"adi\":\"Rerum temporibus cup\",\"olcu\":\"59\",\"tolerans\":\"29\",\"alt_limit\":\"89\",\"ust_limit\":\"12\",\"olcum\":\"21\",\"sonuc\":\"Natus voluptatem nem\",\"kontrol_noktasi\":\"Autem aut pariatur \",\"gorsel\":\"3\"},\"k7\":{\"adi\":\"Fuga Minus labore o\",\"olcu\":\"68\",\"tolerans\":\"40\",\"alt_limit\":\"70\",\"ust_limit\":\"59\",\"olcum\":\"75\",\"sonuc\":\"Quo soluta minus ut \",\"kontrol_noktasi\":\"Facilis deleniti ame\",\"gorsel\":\"2\"},\"k8\":{\"adi\":\"Ipsam do magnam even\",\"olcu\":\"38\",\"tolerans\":\"12\",\"alt_limit\":\"84\",\"ust_limit\":\"27\",\"olcum\":\"86\",\"sonuc\":\"Neque est doloribus\",\"kontrol_noktasi\":\"Cum irure ratione mi\",\"gorsel\":\"3\"},\"k9\":{\"adi\":\"Consequatur fugiat \",\"olcu\":\"71\",\"tolerans\":\"89\",\"alt_limit\":\"1\",\"ust_limit\":\"2\",\"olcum\":\"8\",\"sonuc\":\"Dolor officia amet \",\"kontrol_noktasi\":\"Quos id et laborum\",\"gorsel\":\"2\"},\"k10\":{\"adi\":\"Corporis est consequ\",\"olcu\":\"8\",\"tolerans\":\"64\",\"alt_limit\":\"53\",\"ust_limit\":\"26\",\"olcum\":\"57\",\"sonuc\":\"Aliquid unde minim u\",\"kontrol_noktasi\":\"Et eu quia voluptas \",\"gorsel\":\"1\"},\"k11\":{\"adi\":\"A iure quas deserunt\",\"olcu\":\"2\",\"tolerans\":\"68\",\"alt_limit\":\"31\",\"ust_limit\":\"74\",\"olcum\":\"95\",\"sonuc\":\"Ad aliquam officiis \",\"kontrol_noktasi\":\"Nisi ipsum architect\",\"gorsel\":\"1\"},\"k12\":{\"adi\":\"Laborum a sequi veri\",\"olcu\":\"29\",\"tolerans\":\"14\",\"alt_limit\":\"94\",\"ust_limit\":\"94\",\"olcum\":\"52\",\"sonuc\":\"Voluptatum dolores s\",\"kontrol_noktasi\":\"Ut officia eligendi \",\"gorsel\":\"3\"},\"k13\":{\"adi\":\"Dolores do ratione c\",\"olcu\":\"69\",\"tolerans\":\"47\",\"alt_limit\":\"67\",\"ust_limit\":\"62\",\"olcum\":\"24\",\"sonuc\":\"Et omnis facilis pra\",\"kontrol_noktasi\":\"Magna quod quis sunt\",\"gorsel\":\"1\"},\"k14\":{\"adi\":\"Dicta earum sunt et \",\"olcu\":\"32\",\"tolerans\":\"74\",\"alt_limit\":\"17\",\"ust_limit\":\"81\",\"olcum\":\"42\",\"sonuc\":\"Excepteur autem nemo\",\"kontrol_noktasi\":\"Ad voluptas harum et\",\"gorsel\":\"3\"},\"k15\":{\"adi\":\"Id eligendi volupta\",\"olcu\":\"83\",\"tolerans\":\"91\",\"alt_limit\":\"28\",\"ust_limit\":\"6\",\"olcum\":\"53\",\"sonuc\":\"Ex deleniti sint ex \",\"kontrol_noktasi\":\"Excepteur esse volu\",\"gorsel\":\"2\"},\"k16\":{\"adi\":\"Tempor laudantium t\",\"olcu\":\"23\",\"tolerans\":\"43\",\"alt_limit\":\"61\",\"ust_limit\":\"92\",\"olcum\":\"25\",\"sonuc\":\"Dolores iusto est om\",\"kontrol_noktasi\":\"Fugiat voluptates no\",\"gorsel\":\"3\"}}}', 1),
+(35, 1, 1, '2019-11-08 00:00:00', '', '{\"olcum\":{\"k1\":{\"adi\":\"K1\",\"olcu\":\"96\",\"tolerans\":\"18\",\"alt_limit\":\"100\",\"ust_limit\":\"47\",\"olcum\":\"80\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G1\",\"gorsel\":\"3\"},\"k2\":{\"adi\":\"K2\",\"olcu\":\"22\",\"tolerans\":\"57\",\"alt_limit\":\"66\",\"ust_limit\":\"24\",\"olcum\":\"54\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G2\",\"gorsel\":\"1\"},\"k3\":{\"adi\":\"K3\",\"olcu\":\"28\",\"tolerans\":\"99\",\"alt_limit\":\"27\",\"ust_limit\":\"10\",\"olcum\":\"81\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G3\",\"gorsel\":\"2\"},\"k4\":{\"adi\":\"K4\",\"olcu\":\"34\",\"tolerans\":\"16\",\"alt_limit\":\"81\",\"ust_limit\":\"84\",\"olcum\":\"29\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G4\",\"gorsel\":\"3\"},\"k5\":{\"adi\":\"K5\",\"olcu\":\"61\",\"tolerans\":\"1\",\"alt_limit\":\"76\",\"ust_limit\":\"79\",\"olcum\":\"85\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G5\",\"gorsel\":\"3\"},\"k6\":{\"adi\":\"K6\",\"olcu\":\"59\",\"tolerans\":\"29\",\"alt_limit\":\"89\",\"ust_limit\":\"12\",\"olcum\":\"21\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G6\",\"gorsel\":\"3\"},\"k7\":{\"adi\":\"K7\",\"olcu\":\"68\",\"tolerans\":\"40\",\"alt_limit\":\"70\",\"ust_limit\":\"59\",\"olcum\":\"75\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G7\",\"gorsel\":\"2\"},\"k8\":{\"adi\":\"K8\",\"olcu\":\"38\",\"tolerans\":\"12\",\"alt_limit\":\"84\",\"ust_limit\":\"27\",\"olcum\":\"86\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G8\",\"gorsel\":\"3\"},\"k9\":{\"adi\":\"K9\",\"olcu\":\"71\",\"tolerans\":\"89\",\"alt_limit\":\"1\",\"ust_limit\":\"2\",\"olcum\":\"8\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G9\",\"gorsel\":\"2\"},\"k10\":{\"adi\":\"K10\",\"olcu\":\"8\",\"tolerans\":\"64\",\"alt_limit\":\"53\",\"ust_limit\":\"26\",\"olcum\":\"57\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G10\",\"gorsel\":\"1\"},\"k11\":{\"adi\":\"K11\",\"olcu\":\"2\",\"tolerans\":\"68\",\"alt_limit\":\"31\",\"ust_limit\":\"74\",\"olcum\":\"95\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G11\",\"gorsel\":\"1\"},\"k12\":{\"adi\":\"K12\",\"olcu\":\"29\",\"tolerans\":\"14\",\"alt_limit\":\"94\",\"ust_limit\":\"94\",\"olcum\":\"52\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G12\",\"gorsel\":\"3\"},\"k13\":{\"adi\":\"K13\",\"olcu\":\"69\",\"tolerans\":\"47\",\"alt_limit\":\"67\",\"ust_limit\":\"62\",\"olcum\":\"24\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G13\",\"gorsel\":\"1\"},\"k14\":{\"adi\":\"K14\",\"olcu\":\"32\",\"tolerans\":\"74\",\"alt_limit\":\"17\",\"ust_limit\":\"81\",\"olcum\":\"42\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G14\",\"gorsel\":\"3\"},\"k15\":{\"adi\":\"K15\",\"olcu\":\"83\",\"tolerans\":\"91\",\"alt_limit\":\"28\",\"ust_limit\":\"6\",\"olcum\":\"53\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G15\",\"gorsel\":\"2\"},\"k16\":{\"adi\":\"K16\",\"olcu\":\"23\",\"tolerans\":\"43\",\"alt_limit\":\"61\",\"ust_limit\":\"92\",\"olcum\":\"25\",\"sonuc\":\"GE\\u00c7T\\u0130\",\"kontrol_noktasi\":\"G16\",\"gorsel\":\"3\"}}}', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `members`
 --
 
@@ -513,7 +513,7 @@ CREATE TABLE `news` (
   `id` int(11) UNSIGNED NOT NULL,
   `url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `description` text COLLATE utf8_turkish_ci,
+  `description` text COLLATE utf8_turkish_ci DEFAULT NULL,
   `news_type` varchar(10) COLLATE utf8_turkish_ci DEFAULT NULL,
   `img_url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `video_url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
@@ -547,7 +547,7 @@ CREATE TABLE `olcu_kontrol` (
   `final_id` int(11) NOT NULL,
   `girdi_id` int(11) NOT NULL,
   `proses_id` int(11) NOT NULL,
-  `tarih` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tarih` datetime NOT NULL DEFAULT current_timestamp(),
   `aciklama` text NOT NULL,
   `urun_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -568,7 +568,7 @@ INSERT INTO `olcu_kontrol` (`id`, `adi`, `olcu`, `deger`, `tolerans`, `final_id`
 CREATE TABLE `popups` (
   `id` int(11) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `description` text COLLATE utf8_turkish_ci,
+  `description` text COLLATE utf8_turkish_ci DEFAULT NULL,
   `page` varchar(50) COLLATE utf8_turkish_ci DEFAULT NULL,
   `isActive` tinyint(4) DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL
@@ -584,7 +584,7 @@ CREATE TABLE `portfolios` (
   `id` int(11) UNSIGNED NOT NULL,
   `url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `description` text COLLATE utf8_turkish_ci,
+  `description` text COLLATE utf8_turkish_ci DEFAULT NULL,
   `finishedAt` datetime DEFAULT NULL,
   `client` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
@@ -658,7 +658,7 @@ CREATE TABLE `products` (
   `id` int(11) UNSIGNED NOT NULL,
   `url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `description` text COLLATE utf8_turkish_ci,
+  `description` text COLLATE utf8_turkish_ci DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
   `isActive` tinyint(4) DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL
@@ -740,7 +740,7 @@ INSERT INTO `proses_gorsel` (`id`, `form_id`, `adi`, `uygun`, `sartli`, `kaldi`)
 
 CREATE TABLE `proses_kontrol` (
   `id` int(11) NOT NULL,
-  `tarih` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tarih` datetime NOT NULL DEFAULT current_timestamp(),
   `kontrol_eden` int(11) NOT NULL,
   `malzeme` int(11) NOT NULL,
   `urun` int(11) NOT NULL,
@@ -771,7 +771,7 @@ CREATE TABLE `proses_olcum` (
   `deger` varchar(15) NOT NULL,
   `tolerans` varchar(15) NOT NULL,
   `process_id` int(11) NOT NULL,
-  `tarih` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tarih` datetime NOT NULL DEFAULT current_timestamp(),
   `aciklama` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -792,7 +792,7 @@ CREATE TABLE `references` (
   `id` int(11) UNSIGNED NOT NULL,
   `url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `description` text COLLATE utf8_turkish_ci,
+  `description` text COLLATE utf8_turkish_ci DEFAULT NULL,
   `img_url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
   `isActive` tinyint(4) DEFAULT NULL,
@@ -838,7 +838,7 @@ CREATE TABLE `services` (
   `id` int(11) UNSIGNED NOT NULL,
   `url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `description` text COLLATE utf8_turkish_ci,
+  `description` text COLLATE utf8_turkish_ci DEFAULT NULL,
   `img_url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
   `isActive` tinyint(4) DEFAULT NULL,
@@ -862,10 +862,10 @@ CREATE TABLE `settings` (
   `id` int(11) UNSIGNED NOT NULL,
   `company_name` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `slogan` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `address` text COLLATE utf8_turkish_ci,
-  `about_us` longtext COLLATE utf8_turkish_ci,
-  `mission` longtext COLLATE utf8_turkish_ci,
-  `vision` longtext COLLATE utf8_turkish_ci,
+  `address` text COLLATE utf8_turkish_ci DEFAULT NULL,
+  `about_us` longtext COLLATE utf8_turkish_ci DEFAULT NULL,
+  `mission` longtext COLLATE utf8_turkish_ci DEFAULT NULL,
+  `vision` longtext COLLATE utf8_turkish_ci DEFAULT NULL,
   `logo` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `mobile_logo` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `favicon` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
@@ -882,7 +882,7 @@ CREATE TABLE `settings` (
   `long` varchar(20) COLLATE utf8_turkish_ci DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
-  `homepage_references_description` text COLLATE utf8_turkish_ci
+  `homepage_references_description` text COLLATE utf8_turkish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
@@ -946,7 +946,7 @@ CREATE TABLE `testimonials` (
   `full_name` varchar(50) COLLATE utf8_turkish_ci DEFAULT NULL,
   `company` varchar(50) COLLATE utf8_turkish_ci DEFAULT NULL,
   `img_url` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `rank` tinyint(4) DEFAULT '-99',
+  `rank` tinyint(4) DEFAULT -99,
   `isActive` tinyint(4) DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
@@ -956,7 +956,7 @@ CREATE TABLE `testimonials` (
 --
 
 INSERT INTO `testimonials` (`id`, `title`, `description`, `full_name`, `company`, `img_url`, `rank`, `isActive`, `createdAt`) VALUES
-(1, 'Muazzam', 'Gerçekten mükemmel iş çıkartmışsınız', 'Gökhan Kandemir', 'VideoSınıf', '10531396-10152394756859998-380871812882375062-o.jpg', -99, 1, '2018-05-08 22:08:58');
+(1, 'Muazzam', 'Gerçekten mükemmel iş çıkartmışsınız', 'misafir', 'VideoSınıf', '10531396-10152394756859998-380871812882375062-o.jpg', -99, 1, '2018-05-08 22:08:58');
 
 -- --------------------------------------------------------
 
@@ -1015,7 +1015,7 @@ INSERT INTO `users` (`id`, `user_name`, `full_name`, `email`, `password`, `isAct
 CREATE TABLE `user_roles` (
   `id` int(11) UNSIGNED NOT NULL,
   `title` varchar(50) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `permissions` text COLLATE utf8_turkish_ci,
+  `permissions` text COLLATE utf8_turkish_ci DEFAULT NULL,
   `isActive` tinyint(4) DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
@@ -1025,8 +1025,11 @@ CREATE TABLE `user_roles` (
 --
 
 INSERT INTO `user_roles` (`id`, `title`, `permissions`, `isActive`, `createdAt`) VALUES
-(1, 'Admin', '{\"arge\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"brands\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"courses\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"dashboard\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"emailsettings\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"etiketler\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"finalkontrol\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"galleries\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"girdikontrol\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"kalite\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"kontrol_no\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"kullanicilar\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"malzemeler\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"musteriler\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"news\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"planlama\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"popups\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"portfolio\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"portfolio_categories\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"products\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"proseskontrol\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"references\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"services\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"settings\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"slides\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"tedarikciler\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"testimonials\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"urunler\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"userop\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"users\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"user_roles\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"welcome\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"}}', 1, '2018-07-04 00:16:24'),
-(2, 'Kullanıcı', '{\"dashboard\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"girdikontrol\":{\"read\":\"on\",\"write\":\"on\"},\"kalite\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"userop\":{\"read\":\"on\"},\"users\":{\"read\":\"on\"}}', 1, '2018-07-04 00:16:29');
+(1, 'Admin', '{\"anasayfa\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"arge\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"brands\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"courses\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"dashboard\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"deneme\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"emailsettings\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"errors\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"etiketler\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"file\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"finalkontrol\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"galleries\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"girdikontrol\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"gorselkontrol\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"image\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"includes\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"kalite\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"kontrol_no\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"kullanicilar\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"malzemeler\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"musteriler\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"news\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"olcukontrol\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"planlama\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"popups\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"portfolio\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"portfolio_categories\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"products\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"proses\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"proseskontrol\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"references\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"rol\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"services\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"settings\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"signin\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"site\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"slides\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"tedarikciler\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"testimonials\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"urunler\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"userop\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"users\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"user_roles\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"video\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"welcome\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"}}', 1, '2018-07-04 00:16:24'),
+(2, 'Kalite', '{\"anasayfa\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"dashboard\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"girdikontrol\":{\"read\":\"on\",\"write\":\"on\"},\"kalite\":{\"read\":\"on\",\"write\":\"on\",\"update\":\"on\",\"delete\":\"on\"},\"userop\":{\"read\":\"on\"},\"users\":{\"read\":\"on\"}}', 1, '2018-07-04 00:16:29'),
+(3, 'Yönetim', NULL, 1, '2019-11-10 16:31:01'),
+(4, 'Planlama', NULL, 1, '2019-11-10 16:31:08'),
+(5, 'Arge', NULL, 1, '2019-11-10 16:31:15');
 
 -- --------------------------------------------------------
 
@@ -1155,6 +1158,12 @@ ALTER TABLE `kullanicilar`
 -- Tablo için indeksler `malzemeler`
 --
 ALTER TABLE `malzemeler`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Tablo için indeksler `malzeme_olcum`
+--
+ALTER TABLE `malzeme_olcum`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1363,7 +1372,7 @@ ALTER TABLE `girdi_gorsel`
 -- Tablo için AUTO_INCREMENT değeri `girdi_kontrol`
 --
 ALTER TABLE `girdi_kontrol`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `girdi_olcum`
@@ -1393,7 +1402,7 @@ ALTER TABLE `is_emri`
 -- Tablo için AUTO_INCREMENT değeri `kontrol_no`
 --
 ALTER TABLE `kontrol_no`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kullanicilar`
@@ -1406,6 +1415,12 @@ ALTER TABLE `kullanicilar`
 --
 ALTER TABLE `malzemeler`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `malzeme_olcum`
+--
+ALTER TABLE `malzeme_olcum`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `members`
@@ -1543,7 +1558,7 @@ ALTER TABLE `users`
 -- Tablo için AUTO_INCREMENT değeri `user_roles`
 --
 ALTER TABLE `user_roles`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `videos`

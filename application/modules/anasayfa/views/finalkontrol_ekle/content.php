@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-md-12">
         <h4 class="m-b-lg">
-            Proses Kontrol Formu Ekle
+            Final Kontrol Formu Ekle
         </h4>
     </div><!-- END column -->
     <div class="col-md-12">
-        <form action="<?php echo base_url("anasayfa/proseskontrol_guncelle/$item->id"); ?>" method="post" enctype="multipart/form-data">
+        <form action="<?php echo base_url("anasayfa/finalkontrol_kaydet"); ?>" method="post" enctype="multipart/form-data">
             <table class="table table-striped table-sm"> 
                 <tbody>                    
                     <tr>
@@ -19,7 +19,7 @@
                         <td colspan="2">Parti Nr:</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                            <input  type="text" class="form-control input-sm"  name="parti_no"  value="<?php echo "$item->parti_no " ?>" placeholder="0000">                             </div>
+                            <input  type="text" class="form-control input-sm"  name="parti_no"  placeholder="0000">                             </div>
                         </td>
                         <td> </td>
                         <td> </td>
@@ -39,7 +39,7 @@
                         <td colspan="2">İrsaliye No</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                                <input  type="text" class="form-control input-sm"  name="irsaliye" value="<?php echo "$item->irsaliye " ?>" placeholder="0000"> 
+                                    <input  type="text" class="form-control input-sm"  name="irsaliye" value="<?php echo ""; ?>" placeholder="0000"> 
                             </div>
                         </td>
                         <td></td>
@@ -60,7 +60,7 @@
                         <td>Kontrol Noktası</td>
                         <td>Uygun</td>
                         <td>Şartlı Kabul	</td>
-                        <td>Uygun Değil</td>
+                        <td>Uygun değil</td>
                     </tr> 
                     <?php foreach($json->{'olcum'} as $row => $d) {?>
                         <tr> 
@@ -97,20 +97,19 @@
                         <td colspan="2">Açıklama:</td>
                         <td colspan="9">
                             <div class="form-group">
-                                <textarea class="form-control" name="aciklama" rows="2" id="comment"><?php echo "$item->aciklama " ?></textarea>
+                                <textarea class="form-control" name="aciklama" rows="2" id="comment"></textarea>
                             
                         </td>
                     </tr>
                     <tr>                                  
                         <td>Tarih:</td>
                         <td colspan="2">
-                        <?php echo "$item->tarih " ?>
+                            <?php echo date("Y-m-d H:i:s"); ?>
                         </td>
                         <td colspan="1">Sonuç:</td>
                         <td colspan="2">
                             <div class="input-group"> 
                                 <select class="form-control news_type_select" name="sonuc"> 
-
                                     <option value="1">Geçti</option>
                                     <option value="2">Şartlı Geçti</option>
                                     <option value="3">Kaldı</option>                                                                
@@ -128,7 +127,7 @@
             <input  type="hidden" name="tarih" class="form-control input-sm"   value="<?php echo date("Y-m-d H:i:s"); ?>"/>
             <input   type="hidden" name="kullanici" class="form-control input-sm"  value="<?php echo $user->id ?>" />
             <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
-            <a href="<?php echo base_url("anasayfa/proseskontrol"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
+            <a href="<?php echo base_url("anasayfa/finalkontrol"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
         </form>            
     </div><!-- END column -->
 </div>

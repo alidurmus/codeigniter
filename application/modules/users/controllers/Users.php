@@ -158,7 +158,8 @@ class Users extends MY_Controller
 
         $viewData->user_roles = $this->user_role_model->get_all(
             array(
-                "isActive"  => 1
+                "isActive"  => 1,
+                "id"        => $item->user_role_id
             )
         );
         

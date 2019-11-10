@@ -33,25 +33,44 @@ class Userop extends MY_Controller {
 
     public function do_login(){
 
-        $user = get_active_user();
 
-        var_dump($user);
-        die();
+  
+
+         /*
+            #1	Admin
+            #2	Kalite		  
+            #3	Yönetim	
+            #4	Planlama  
+            #5	Arge
+        */
 
 
-        if($user){
 
-            if($user->user_role_id == 1){
+        if(get_active_user()){
 
+            if(get_active_user()->user_role_id == 1){//admin
 
+                redirect(base_url("dashboard"));
             } 
-            if($user->user_role_id == 2){
-
+            if(get_active_user()->user_role_id == 2){// kalite
+                redirect(base_url("anasayfa/kalite"));
 
             }
+            if(get_active_user()->user_role_id == 3){// yonetim
+                redirect(base_url("anasayfa/yonetim"));
 
+            }
+            if(get_active_user()->user_role_id == 4){// planlama
+
+                redirect(base_url("anasayfa/planlama"));
+            }
+            if(get_active_user()->user_role_id == 5){// arge
+
+                redirect(base_url("anasayfa/arge"));
+
+            }
             
-            redirect(base_url("anasayfa"));
+           
         }
 
         $this->load->library("form_validation");
@@ -108,7 +127,32 @@ class Userop extends MY_Controller {
                 $this->session->set_flashdata("alert", $alert);
 
 
-                redirect(base_url("anasayfa"));
+                if(get_active_user()){
+
+                    if(get_active_user()->user_role_id == 1){//admin
+
+                        redirect(base_url("dashboard"));
+                    } 
+                    if(get_active_user()->user_role_id == 2){// kalite
+                        redirect(base_url("anasayfa/kalite"));
+
+                    }
+                    if(get_active_user()->user_role_id == 3){// yonetim
+                        redirect(base_url("anasayfa/yonetim"));
+
+                    }
+                    if(get_active_user()->user_role_id == 4){// planlama
+
+                        redirect(base_url("anasayfa/planlama"));
+                    }
+                    if(get_active_user()->user_role_id == 5){// arge
+
+                        redirect(base_url("anasayfa/arge"));
+
+                    }
+                    
+                
+                }
 
             } else {
 

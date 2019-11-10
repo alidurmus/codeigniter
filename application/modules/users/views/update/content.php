@@ -34,17 +34,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Kullanıcı Rolü</label>
-                        <select name="user_role_id" class="form-control">
-                            <?php foreach($user_roles as $user_role) { ?>
-                                <option <?php echo ($user_role->id == $item->user_role_id) ? "selected" : ""; ?> value="<?php echo $user_role->id; ?>">
-                                    <?php echo $user_role->title; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                        <?php if(isset($form_error)){ ?>
-                            <small class="pull-right input-form-error"> <?php echo form_error("user_role_id"); ?></small>
-                        <?php } ?>
+                        <label>Kullanıcı Rolü : </label>
+                       <?php echo $user_roles[0]->title;   ?>
+                        <input type="hidden" name="user_role_id" value="<?php echo $item->user_role_id; ?>">
+                       
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Güncelle</button>
