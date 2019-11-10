@@ -23,9 +23,10 @@ class MY_Model extends CI_Model {
     }
 
     public function add($data = array())
-    {
+    {     
+        /// TODO: yetkiler kontrol edilecek
         if(isAllowedWriteModule()){
-            return $this->db->insert($this->tableName, $data);
+           return $this->db->insert($this->tableName, $data);
         }
     }
 

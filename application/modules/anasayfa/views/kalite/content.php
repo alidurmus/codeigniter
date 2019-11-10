@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
 <div class="jumbotron text-center">
-  <h1>Malzeme  </h1>
+  <h1>Kalite  </h1>
   <p></p> 
 </div>
   

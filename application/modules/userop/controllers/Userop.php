@@ -18,7 +18,7 @@ class Userop extends MY_Controller {
 
 
         if(get_active_user()){
-            redirect(base_url());
+            redirect(base_url("anasayfa"));
         }
 
         $viewData = new stdClass();
@@ -35,7 +35,7 @@ class Userop extends MY_Controller {
 
 
         if(get_active_user()){
-            redirect(base_url());
+            redirect(base_url("anasayfa"));
         }
 
         $this->load->library("form_validation");
@@ -92,7 +92,7 @@ class Userop extends MY_Controller {
                 $this->session->set_flashdata("alert", $alert);
 
 
-                redirect(base_url());
+                redirect(base_url("anasayfa"));
 
             } else {
 

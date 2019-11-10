@@ -39,9 +39,7 @@ class Arayuz extends MY_Controller
         $data = array();
         $this->load->model('Arayuz_model');
 
-        $data['formlar'] = $this->Arayuz_model->girdiFormlar();
-
-        
+        $data['formlar'] = $this->Arayuz_model->girdiFormlar();       
 
         $this->load->view('arayuz/listele/girdi', $data);
     }
@@ -54,26 +52,19 @@ class Arayuz extends MY_Controller
 
         $data['form'] = $this->Arayuz_model->girdiForm($this->input->get('form_id'));
 
-        $data['json'] = json_decode($data['form'][0]->olcum);
-
-       
-        
+        $data['json'] = json_decode($data['form'][0]->olcum);     
         $this->load->view('arayuz/formlar/girdi_guncelle', $data);
     }
 
     public function process()
     {
         $data = array();
-
-
         $this->load->view('arayuz/formlar/process', $data);
     }
 
     public function finalform()
     {
         $data = array();
-
-
         $this->load->view('arayuz/formlar/final', $data);
     }
 }
