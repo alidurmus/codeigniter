@@ -10,7 +10,7 @@ class Final_kontrol_model extends MY_Model
     }
     
     public function listele(){
-        $query = $this->db->query('SELECT fk.*, ml.adi as malzeme_adi, td.adi as td_adi FROM final_kontrol fk INNER JOIN malzemeler ml ON ml.id = fk.malzeme INNER JOIN tedarikciler td ON td.id = fk.tedarikci');
+        $query = $this->db->query('SELECT fk.*, ml.adi as urun_adi, td.adi as td_adi FROM final_kontrol fk INNER JOIN urunler ml ON ml.id = fk.urun INNER JOIN tedarikciler td ON td.id = fk.tedarikci');
 
         return $query->result();
 

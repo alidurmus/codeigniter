@@ -11,7 +11,7 @@
                             <div class="col-md-4 ">
                             </div>
                             <div class="col-md-4 text-right">
-                                <a href="<?php echo base_url("anasayfa/malzeme"); ?>" class="btn btn-success">Yeni Ekle --></a>
+                                <a href="<?php echo base_url("anasayfa/urun"); ?>" class="btn btn-success">Yeni Ekle --></a>
                         </div>
                     </div>
                 <hr>
@@ -19,7 +19,7 @@
             <div class="col-md-12">
                 <table id="dataTable" class="table table-hover table-striped table-bordered content-container">
                     <thead>
-                        <th>Malzeme</th>
+                        <th>urun</th>
                         <th>Tedarikçi</th>
                         <th>Kontrol No</th>
                         <th>Parti_no</th>
@@ -30,7 +30,7 @@
                     <tbody class="sortable" data-url="<?php echo base_url("proseskontrol/rankSetter"); ?>">
                     <?php foreach($items as $item) { ?>
                         <tr>
-                            <td><?php echo $item->malzeme_adi; ?></td>
+                            <td><?php echo $item->urun_adi; ?></td>
                             <td><?php echo $item->td_adi; ?></td>
                             <td><?php echo $item->kontrol_no; ?></td>
                             <td><?php echo $item->parti_no; ?></td>

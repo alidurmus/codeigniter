@@ -20,6 +20,8 @@ class Anasayfa extends MY_Controller
         $this->load->model("tedarikciler/tedarikciler_model");
         $this->load->model("malzemeler/malzemeler_model");
         $this->load->model("malzemeler/malzeme_olcum_model");
+        $this->load->model("urunler/urunler_model");
+        $this->load->model("urunler/urun_olcum_model");
         $this->load->model("kontrol_no/kontrol_no_model");
         $this->load->model("kullanicilar/kullanicilar_model");        
     }
@@ -95,7 +97,21 @@ class Anasayfa extends MY_Controller
         $viewData->subViewFolder = "malzeme";
         //$viewData->items = $items;
 
-        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/malzemesec", $viewData);
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+    public function urun(){
+
+        $viewData = new stdClass();
+       
+        $viewData->urunler = $this->urunler_model->get_all();
+
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "urun";
+        //$viewData->items = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
     public function girdikontrol(){
@@ -443,24 +459,24 @@ class Anasayfa extends MY_Controller
         $viewData->kullanicilar = $this->kullanicilar_model->get_all();
 
         // formdan gelen bilgilere göre olcum tablosunu getir
-        $malzeme_id = $this->input->post("malzeme");       
+        $urun_id = $this->input->post("urun");       
 
-        $malzeme_olcum = $this->malzeme_olcum_model->get(
+        $urun_olcum = $this->urun_olcum_model->get(
             array(
-                "malzeme"    => $malzeme_id,
+                "urun"    => $urun_id,
             )
         );      
        // ölçüm tablosu json açılarak veri olarak al
-       $viewData->json = json_decode($malzeme_olcum->olcum);
+       $viewData->json = json_decode($urun_olcum->olcum);
 
 
-       // seçilen malzemenin bilgilerini getir
-       $malzeme = $this->malzemeler_model->get(
+       // seçilen urunnin bilgilerini getir
+       $urun = $this->urunler_model->get(
         array(
-            "id"    => $malzeme_id,
+            "id"    => $urun_id,
         )); 
 
-       $viewData->malzeme= $malzeme;
+       $viewData->urun= $urun;
         
        $viewData->user = get_active_user();
 
@@ -483,7 +499,7 @@ class Anasayfa extends MY_Controller
 
         $parti_no = $this->input->post("parti_no");
         $tedarikci = $this->input->post("tedarikci");
-        $malzeme = $this->input->post("malzeme");
+        $urun = $this->input->post("urun");
         $irsaliye = $this->input->post("irsaliye");
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
@@ -526,7 +542,7 @@ class Anasayfa extends MY_Controller
         $data = array(
             "parti_no"      => $this->input->post("parti_no"),
             "tedarikci"     => $this->input->post("tedarikci"),
-            "malzeme"       => $this->input->post("malzeme"),
+            "urun"       => $this->input->post("urun"),
             "irsaliye"      => $this->input->post("irsaliye"),
             "aciklama"      => $this->input->post("aciklama"),  
             "kullanici"      => $this->input->post("kullanici"), 
@@ -570,7 +586,7 @@ class Anasayfa extends MY_Controller
             $viewData->form_error = true;
             $viewData->parti_no = $parti_no;
             $viewData->tedarikci = $tedarikci;
-            $viewData->malzeme = $malzeme;
+            $viewData->urun = $urun;
             $viewData->irsaliye = $irsaliye;
             $viewData->kullanici = $kullanici;
     
@@ -598,13 +614,13 @@ class Anasayfa extends MY_Controller
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($item->olcum);
 
-       // seçilen malzemenin bilgilerini getir
-       $malzeme = $this->malzemeler_model->get(
+       // seçilen urunnin bilgilerini getir
+       $urun = $this->urunler_model->get(
         array(
-            "id"    => $item->malzeme,
+            "id"    => $item->urun,
             )
         );  
-       $viewData->malzeme= $malzeme;
+       $viewData->urun= $urun;
         
        $viewData->user = get_active_user();
 
@@ -657,7 +673,7 @@ class Anasayfa extends MY_Controller
 
         $parti_no = $this->input->post("parti_no");
         $tedarikci = $this->input->post("tedarikci");
-        $malzeme = $this->input->post("malzeme");
+        $urun = $this->input->post("urun");
         $irsaliye = $this->input->post("irsaliye");
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
@@ -685,7 +701,7 @@ class Anasayfa extends MY_Controller
         $data = array(
             "parti_no"      => $this->input->post("parti_no"),
             "tedarikci"     => $this->input->post("tedarikci"),
-            "malzeme"       => $this->input->post("malzeme"),
+            "urun"       => $this->input->post("urun"),
             "irsaliye"      => $this->input->post("irsaliye"),
             "aciklama"      => $this->input->post("aciklama"),  
             "kullanici"      => $user->id,  
@@ -726,7 +742,7 @@ class Anasayfa extends MY_Controller
             $viewData->form_error = true;
             $viewData->parti_no = $parti_no;
             $viewData->tedarikci = $tedarikci;
-            $viewData->malzeme = $malzeme;
+            $viewData->urun = $urun;
             $viewData->irsaliye = $irsaliye;
             $viewData->kullanici = $kullanici;
     
@@ -766,24 +782,24 @@ class Anasayfa extends MY_Controller
         $viewData->kullanicilar = $this->kullanicilar_model->get_all();
 
         // formdan gelen bilgilere göre olcum tablosunu getir
-        $malzeme_id = $this->input->post("malzeme");       
+        $urun_id = $this->input->post("urun");       
 
-        $malzeme_olcum = $this->malzeme_olcum_model->get(
+        $urun_olcum = $this->urun_olcum_model->get(
             array(
-                "malzeme"    => $malzeme_id,
+                "urun"    => $urun_id,
             )
         );      
        // ölçüm tablosu json açılarak veri olarak al
-       $viewData->json = json_decode($malzeme_olcum->olcum);
+       $viewData->json = json_decode($urun_olcum->olcum);
 
 
-       // seçilen malzemenin bilgilerini getir
-       $malzeme = $this->malzemeler_model->get(
+       // seçilen urunnin bilgilerini getir
+       $urun = $this->urunler_model->get(
         array(
-            "id"    => $malzeme_id,
+            "id"    => $urun_id,
         )); 
 
-       $viewData->malzeme= $malzeme;
+       $viewData->urun= $urun;
         
        $viewData->user = get_active_user();
 
@@ -806,7 +822,7 @@ class Anasayfa extends MY_Controller
 
         $parti_no = $this->input->post("parti_no");
         $tedarikci = $this->input->post("tedarikci");
-        $malzeme = $this->input->post("malzeme");
+        $urun = $this->input->post("urun");
         $irsaliye = $this->input->post("irsaliye");
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
@@ -849,7 +865,7 @@ class Anasayfa extends MY_Controller
         $data = array(
             "parti_no"      => $this->input->post("parti_no"),
             "tedarikci"     => $this->input->post("tedarikci"),
-            "malzeme"       => $this->input->post("malzeme"),
+            "urun"       => $this->input->post("urun"),
             "irsaliye"      => $this->input->post("irsaliye"),
             "aciklama"      => $this->input->post("aciklama"),  
             "kullanici"      => $this->input->post("kullanici"), 
@@ -893,7 +909,7 @@ class Anasayfa extends MY_Controller
             $viewData->form_error = true;
             $viewData->parti_no = $parti_no;
             $viewData->tedarikci = $tedarikci;
-            $viewData->malzeme = $malzeme;
+            $viewData->urun = $urun;
             $viewData->irsaliye = $irsaliye;
             $viewData->kullanici = $kullanici;
     
@@ -921,13 +937,13 @@ class Anasayfa extends MY_Controller
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($item->olcum);
 
-       // seçilen malzemenin bilgilerini getir
-       $malzeme = $this->malzemeler_model->get(
+       // seçilen urunnin bilgilerini getir
+       $urun = $this->urunler_model->get(
         array(
-            "id"    => $item->malzeme,
+            "id"    => $item->urun,
             )
         );  
-       $viewData->malzeme= $malzeme;
+       $viewData->urun= $urun;
         
        $viewData->user = get_active_user();
 
@@ -980,7 +996,7 @@ class Anasayfa extends MY_Controller
 
         $parti_no = $this->input->post("parti_no");
         $tedarikci = $this->input->post("tedarikci");
-        $malzeme = $this->input->post("malzeme");
+        $urun = $this->input->post("urun");
         $irsaliye = $this->input->post("irsaliye");
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
@@ -1008,7 +1024,7 @@ class Anasayfa extends MY_Controller
         $data = array(
             "parti_no"      => $this->input->post("parti_no"),
             "tedarikci"     => $this->input->post("tedarikci"),
-            "malzeme"       => $this->input->post("malzeme"),
+            "urun"       => $this->input->post("urun"),
             "irsaliye"      => $this->input->post("irsaliye"),
             "aciklama"      => $this->input->post("aciklama"),  
             "kullanici"      => $user->id,  
@@ -1049,7 +1065,7 @@ class Anasayfa extends MY_Controller
             $viewData->form_error = true;
             $viewData->parti_no = $parti_no;
             $viewData->tedarikci = $tedarikci;
-            $viewData->malzeme = $malzeme;
+            $viewData->urun = $urun;
             $viewData->irsaliye = $irsaliye;
             $viewData->kullanici = $kullanici;
     

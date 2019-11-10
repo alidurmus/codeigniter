@@ -9,10 +9,10 @@
             <table class="table table-striped table-sm"> 
                 <tbody>                    
                     <tr>
-                        <td colspan="2">Malzeme  Adı:</td>
+                        <td colspan="2">urun  Adı:</td>
                         <td colspan="2">
                             <div class="input-group">
-                                <input readonly type="text" name="malzeme_adi" class="form-control input-sm" value="<?php echo "$malzeme->adi " ?>" placeholder="malzeme"> 
+                                <input readonly type="text" name="urun_adi" class="form-control input-sm" value="<?php echo "$urun->adi " ?>" placeholder="urun"> 
                             </div>                            
                         </td>
                         <td></td>
@@ -123,7 +123,7 @@
                     </tr>
                 </tbody>
             </table>
-            <input  type="hidden" name="malzeme" class="form-control input-sm" value="<?php echo "$malzeme->id " ?>" > 
+            <input  type="hidden" name="urun" class="form-control input-sm" value="<?php echo "$urun->id " ?>" > 
             <input  type="hidden" name="tarih" class="form-control input-sm"   value="<?php echo date("Y-m-d H:i:s"); ?>"/>
             <input   type="hidden" name="kullanici" class="form-control input-sm"  value="<?php echo $user->id ?>" />
             <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
