@@ -33,8 +33,24 @@ class Userop extends MY_Controller {
 
     public function do_login(){
 
+        $user = get_active_user();
 
-        if(get_active_user()){
+        var_dump($user);
+        die();
+
+
+        if($user){
+
+            if($user->user_role_id == 1){
+
+
+            } 
+            if($user->user_role_id == 2){
+
+
+            }
+
+            
             redirect(base_url("anasayfa"));
         }
 

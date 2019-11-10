@@ -34,16 +34,7 @@
         <div class="row">
             <div class="col-md-12 text-right">
                 <hr>
-                    <div class="col-md-4 text-left">
-                    <a href="<?php echo base_url(); ?>anasayfa/kalite" class="btn btn-success">Yeni Ekle</a>
-
-                    </div>
-                    <div class="col-md-4 ">
-                    </div>
-                    <div class="col-md-4 text-right">
-                    <a href="<?php echo base_url(); ?>arayuz/girdi" class="btn btn-success">Yeni Ekle</a>
-
-                    </div>
+                <a href="<?php echo base_url(); ?>arayuz/girdi" class="btn btn-success">Yeni Ekle</a>
                 <hr>
             </div>
             <div class="col-md-12">

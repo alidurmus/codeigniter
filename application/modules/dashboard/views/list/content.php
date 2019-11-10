@@ -1,12 +1,13 @@
 <?php
 
-
+echo "Merhaba : ";
 echo "<pre>";
-print_r(get_active_user());
+print_r(get_active_user()->full_name);
 echo "<hr/>";
-print_r(get_user_roles());
+//print_r(get_active_user());
+//print_r(get_user_roles());
 echo "<hr/>";
-echo isAllowedViewModule();
+//echo isAllowedViewModule();
 echo "</pre>";
 
 

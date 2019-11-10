@@ -14,7 +14,7 @@ class Anasayfa extends MY_Controller
             redirect(base_url("login"));
         }
 
-        $this->load->model("anasayfa/girdi_kontrol_model");
+        $this->load->model("girdikontrol/girdi_kontrol_model");
         $this->load->model("tedarikciler/tedarikciler_model");
         $this->load->model("malzemeler/malzemeler_model");
         $this->load->model("malzemeler/malzeme_olcum_model");
@@ -25,7 +25,6 @@ class Anasayfa extends MY_Controller
     public function index(){
 
         $viewData = new stdClass();
-
        
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
@@ -35,7 +34,6 @@ class Anasayfa extends MY_Controller
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
-
     public function kalite(){
 
         $viewData = new stdClass();
@@ -43,6 +41,42 @@ class Anasayfa extends MY_Controller
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "kalite";
+        //$viewData->items = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+    public function planlama(){
+
+        $viewData = new stdClass();
+       
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "planlama";
+        //$viewData->items = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+    public function arge(){
+
+        $viewData = new stdClass();
+       
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "arge";
+        //$viewData->items = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+    public function yonetim(){
+
+        $viewData = new stdClass();
+       
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "yonetim";
         //$viewData->items = $items;
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -236,13 +270,9 @@ class Anasayfa extends MY_Controller
                 "isActive"  => 1
             )
         );
-
-        
-
           
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($item->olcum);
-
 
        // seçilen malzemenin bilgilerini getir
        $malzeme = $this->malzemeler_model->get(
@@ -254,8 +284,6 @@ class Anasayfa extends MY_Controller
         
        $viewData->user = get_active_user();
 
-        
-       
        //die();
         // var_dump($viewData->json);
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
@@ -264,7 +292,38 @@ class Anasayfa extends MY_Controller
         $viewData->item = $item;
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
    
+    }
 
+    public function girdikontrol_sil($id){
+
+        $delete = $this->girdi_kontrol_model->delete(
+            array(
+                "id"    => $id
+            )
+        );
+
+        // TODO Alert Sistemi Eklenecek...
+        if($delete){
+
+            $alert = array(
+                "title" => "İşlem Başarılı",
+                "text" => "Kayıt başarılı bir şekilde silindi",
+                "type"  => "success"
+            );
+
+        } else {
+
+            $alert = array(
+                "title" => "İşlem Başarılı",
+                "text" => "Kayıt silme sırasında bir problem oluştu",
+                "type"  => "error"
+            );
+
+
+        }
+
+        $this->session->set_flashdata("alert", $alert);
+        redirect(base_url("anasayfa/girdikontrol"));
     }
 
     public function girdikontrol_guncelle($id){
@@ -353,7 +412,7 @@ class Anasayfa extends MY_Controller
                     "id"    => $id,
                 )
             );
-            
+
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
 

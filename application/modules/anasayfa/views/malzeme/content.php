@@ -26,16 +26,12 @@
             </div>
         </div><!-- .form-group -->
         <button type="submit" class="btn btn-primary btn-md btn-outline">Seç</button>
-        <a href="<?php echo base_url("anasayfa/kalite"); ?>" class="btn btn-md btn-danger btn-outline">Kalite</a>
+        <a href="<?php echo base_url("anasayfa/girdikontrol"); ?>" class="btn btn-md btn-danger btn-outline">iptal</a>
     </form>
      
     </div>
     <div class="col-sm-4">
-    <ul>       
-        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/girdikontrol">Girdi Kontrol</a></li>
-        <li class="list-group-item "><a href="<?php echo base_url(); ?>arayuz/girdi">Yeni Girdi Kontrol</a></li>
-        <li class="list-group-item "><a href="">Final Kontrol</a></li>
-    </ul>
+    
     </div>
   </div>
 </div>
