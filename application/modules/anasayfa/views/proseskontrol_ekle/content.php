@@ -9,37 +9,34 @@
             <table class="table table-striped table-sm"> 
                 <tbody>                    
                     <tr>
-                        <td colspan="2">urun  Adı:</td>
+                        <td colspan="2">Parça Adı:</td>
                         <td colspan="2">
                             <div class="input-group">
                                 <input readonly type="text" name="urun_adi" class="form-control input-sm" value="<?php echo "$urun->adi " ?>" placeholder="urun"> 
                             </div>                            
                         </td>
                         <td></td>
-                        <td colspan="2">Parti Nr:</td>
+                        <td colspan="2">Lot Nr:</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                            <input  type="text" class="form-control input-sm"  name="parti_no"  placeholder="0000">                             </div>
+                            <input  type="text" class="form-control input-sm"  name="lot"  placeholder="0000">                             </div>
                         </td>
                         <td> </td>
                         <td> </td>
                     </tr>                    
                     <tr>
-                        <td colspan="2">Tedarikçi Adı:	</td>
+                        <td colspan="2">Parça Kodu:	</td>
                         <td colspan="2">
                             <div class="form-group">  
-                                <select name="tedarikci" class="form-control">                               
-                                    <?php foreach($tedarikciler as $tedarikci) { ?>                                       
-                                        <option value="<?php echo $tedarikci->id; ?>"><?php echo $tedarikci->adi; ?></option>
-                                    <?php } ?>
-                                </select>      
+                            <input readonly type="text" name="urun_kodu" class="form-control input-sm" value="<?php echo "$urun->kodu " ?>" placeholder="urun"> 
+ 
                             </div><!-- .form-group -->                            
                         </td>
                         <td>-</td>
-                        <td colspan="2">İrsaliye No</td>
+                        <td colspan="2">Parti No</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                                    <input  type="text" class="form-control input-sm"  name="irsaliye" value="<?php echo ""; ?>" placeholder="0000"> 
+                                    <input  type="text" class="form-control input-sm"  name="parti_no" value="<?php echo ""; ?>" placeholder="0000"> 
                             </div>
                         </td>
                         <td></td>

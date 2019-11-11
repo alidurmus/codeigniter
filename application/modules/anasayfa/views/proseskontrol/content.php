@@ -20,7 +20,7 @@
                 <table id="dataTable" class="table table-hover table-striped table-bordered content-container">
                     <thead>
                         <th>urun</th>
-                        <th>Tedarikçi</th>
+                        <th>lot</th>
                         <th>Kontrol No</th>
                         <th>Parti_no</th>
                         <th>İrsaliye</th>
@@ -31,7 +31,7 @@
                     <?php foreach($items as $item) { ?>
                         <tr>
                             <td><?php echo $item->urun_adi; ?></td>
-                            <td><?php echo $item->td_adi; ?></td>
+                            <td><?php echo $item->lot; ?></td>
                             <td><?php echo $item->kontrol_no; ?></td>
                             <td><?php echo $item->parti_no; ?></td>
                             <td><?php echo $item->irsaliye; ?></td>

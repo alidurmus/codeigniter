@@ -114,6 +114,20 @@ class Anasayfa extends MY_Controller
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
+    public function urun2(){
+
+        $viewData = new stdClass();
+       
+        $viewData->urunler = $this->urunler_model->get_all();
+
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "urun";
+        //$viewData->items = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index2", $viewData);
+    }
+
     public function girdikontrol(){
 
         $viewData = new stdClass();
@@ -455,16 +469,13 @@ class Anasayfa extends MY_Controller
 
         $viewData = new stdClass();
 
-        $viewData->tedarikciler = $this->tedarikciler_model->get_all();      
-        $viewData->kullanicilar = $this->kullanicilar_model->get_all();
-
         // formdan gelen bilgilere göre olcum tablosunu getir
         $urun_id = $this->input->post("urun");       
 
         $urun_olcum = $this->urun_olcum_model->get(
             array(
                 "urun"    => $urun_id,
-            )
+                )
         );      
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($urun_olcum->olcum);
@@ -498,9 +509,8 @@ class Anasayfa extends MY_Controller
         // Kurallar yazilir..
 
         $parti_no = $this->input->post("parti_no");
-        $tedarikci = $this->input->post("tedarikci");
-        $urun = $this->input->post("urun");
-        $irsaliye = $this->input->post("irsaliye");
+        $urun = $this->input->post("urun");       
+        $lot = $this->input->post("lot");
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
@@ -508,7 +518,8 @@ class Anasayfa extends MY_Controller
          
 
         $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
-        $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");   
+       
+        $this->form_validation->set_rules("lot", "lot ", "required|trim");   
        
         $this->form_validation->set_message(
             array(
@@ -524,7 +535,7 @@ class Anasayfa extends MY_Controller
             $data2 = array(
                 "process_isim"  => "proseskontrol",
                 "parti_no"      => $parti_no,
-                "lot_no"        => "",
+                "lot_no"        => $lot,
                 "kutu_no"       => "",                
                 "tarih"         => date("Y-m-d H:i:s")
             );
@@ -541,11 +552,10 @@ class Anasayfa extends MY_Controller
             
         $data = array(
             "parti_no"      => $this->input->post("parti_no"),
-            "tedarikci"     => $this->input->post("tedarikci"),
-            "urun"       => $this->input->post("urun"),
-            "irsaliye"      => $this->input->post("irsaliye"),
+            "lot"           => $this->input->post("lot"),
+            "urun"          => $this->input->post("urun"),            
             "aciklama"      => $this->input->post("aciklama"),  
-            "kullanici"      => $this->input->post("kullanici"), 
+            "kullanici"     => $this->input->post("kullanici"), 
             "kontrol_no"    => $get_kontrol_id,  
             "tarih"         => $this->input->post("tarih"),
             "olcum"         => $olcum
@@ -587,7 +597,6 @@ class Anasayfa extends MY_Controller
             $viewData->parti_no = $parti_no;
             $viewData->tedarikci = $tedarikci;
             $viewData->urun = $urun;
-            $viewData->irsaliye = $irsaliye;
             $viewData->kullanici = $kullanici;
     
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -602,14 +611,7 @@ class Anasayfa extends MY_Controller
             array(
                 "id"    => $id,
             )
-        );
-
-
-        $viewData->tedarikciler = $this->tedarikciler_model->get_all(
-            array(
-                "isActive"  => 1
-            )
-        );
+        );      
           
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($item->olcum);
@@ -672,17 +674,16 @@ class Anasayfa extends MY_Controller
         // Kurallar yazilir..
 
         $parti_no = $this->input->post("parti_no");
-        $tedarikci = $this->input->post("tedarikci");
+        $lot = $this->input->post("lot");
         $urun = $this->input->post("urun");
-        $irsaliye = $this->input->post("irsaliye");
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
         $olcum = json_encode($this->input->post("form"));       
          
 
-        $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
-        $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");   
+        $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");   
+        $this->form_validation->set_rules("lot", "lot ", "required|trim");   
        
         $this->form_validation->set_message(
             array(
@@ -700,9 +701,8 @@ class Anasayfa extends MY_Controller
             
         $data = array(
             "parti_no"      => $this->input->post("parti_no"),
-            "tedarikci"     => $this->input->post("tedarikci"),
+            "lot"     => $this->input->post("lot"),
             "urun"       => $this->input->post("urun"),
-            "irsaliye"      => $this->input->post("irsaliye"),
             "aciklama"      => $this->input->post("aciklama"),  
             "kullanici"      => $user->id,  
             "tarih"         => $this->input->post("tarih"),
@@ -741,9 +741,8 @@ class Anasayfa extends MY_Controller
             $viewData->subViewFolder = "anasayfa/proseskontrol_duzenle";
             $viewData->form_error = true;
             $viewData->parti_no = $parti_no;
-            $viewData->tedarikci = $tedarikci;
+            $viewData->lot = $lot;
             $viewData->urun = $urun;
-            $viewData->irsaliye = $irsaliye;
             $viewData->kullanici = $kullanici;
     
              /** Tablodan Verilerin Getirilmesi.. */
@@ -758,13 +757,11 @@ class Anasayfa extends MY_Controller
 
     }
 
-
- public function finalkontrol(){
+    public function finalkontrol(){
 
         $viewData = new stdClass();
         /** Tablodan Verilerin Getirilmesi.. */
-        $items = $this->final_kontrol_model->listele();
-       
+        $items = $this->final_kontrol_model->listele();       
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
@@ -778,9 +775,6 @@ class Anasayfa extends MY_Controller
 
         $viewData = new stdClass();
 
-        $viewData->tedarikciler = $this->tedarikciler_model->get_all();      
-        $viewData->kullanicilar = $this->kullanicilar_model->get_all();
-
         // formdan gelen bilgilere göre olcum tablosunu getir
         $urun_id = $this->input->post("urun");       
 
@@ -792,7 +786,6 @@ class Anasayfa extends MY_Controller
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($urun_olcum->olcum);
 
-
        // seçilen urunnin bilgilerini getir
        $urun = $this->urunler_model->get(
         array(
@@ -801,9 +794,7 @@ class Anasayfa extends MY_Controller
 
        $viewData->urun= $urun;
         
-       $viewData->user = get_active_user();
-
-        
+       $viewData->user = get_active_user();        
        
        //die();
         // var_dump($viewData->json);
@@ -820,18 +811,17 @@ class Anasayfa extends MY_Controller
 
         // Kurallar yazilir..
 
-        $parti_no = $this->input->post("parti_no");
-        $tedarikci = $this->input->post("tedarikci");
+        $kutu_no = $this->input->post("kutu_no");
+        $lot = $this->input->post("lot");
         $urun = $this->input->post("urun");
-        $irsaliye = $this->input->post("irsaliye");
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
         $olcum = json_encode($this->input->post("form"));       
          
 
-        $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
-        $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");   
+        $this->form_validation->set_rules("kutu_no", "Kutu No", "required|trim");   
+        $this->form_validation->set_rules("lot", "lot ", "required|trim");   
        
         $this->form_validation->set_message(
             array(
@@ -846,9 +836,9 @@ class Anasayfa extends MY_Controller
 
             $data2 = array(
                 "process_isim"  => "finalkontrol",
-                "parti_no"      => $parti_no,
-                "lot_no"        => "",
-                "kutu_no"       => "",                
+                "parti_no"      => "",
+                "lot_no"        =>  $lot,
+                "kutu_no"       => $kutu_no,                
                 "tarih"         => date("Y-m-d H:i:s")
             );
 
@@ -863,10 +853,9 @@ class Anasayfa extends MY_Controller
         $user = get_active_user(); 
             
         $data = array(
-            "parti_no"      => $this->input->post("parti_no"),
-            "tedarikci"     => $this->input->post("tedarikci"),
+            "kutu_no"      => $this->input->post("kutu_no"),
+            "lot"     => $this->input->post("lot"),
             "urun"       => $this->input->post("urun"),
-            "irsaliye"      => $this->input->post("irsaliye"),
             "aciklama"      => $this->input->post("aciklama"),  
             "kullanici"      => $this->input->post("kullanici"), 
             "kontrol_no"    => $get_kontrol_id,  
@@ -907,10 +896,9 @@ class Anasayfa extends MY_Controller
             $viewData->viewFolder = $this->viewFolder;
             $viewData->subViewFolder = "anasayfa/finalkontrol_ekle";
             $viewData->form_error = true;
-            $viewData->parti_no = $parti_no;
-            $viewData->tedarikci = $tedarikci;
+            $viewData->kutu_no = $kutu_no;
+            $viewData->lot = $lot;
             $viewData->urun = $urun;
-            $viewData->irsaliye = $irsaliye;
             $viewData->kullanici = $kullanici;
     
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -925,14 +913,7 @@ class Anasayfa extends MY_Controller
             array(
                 "id"    => $id,
             )
-        );
-
-
-        $viewData->tedarikciler = $this->tedarikciler_model->get_all(
-            array(
-                "isActive"  => 1
-            )
-        );
+        );      
           
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($item->olcum);
@@ -994,18 +975,17 @@ class Anasayfa extends MY_Controller
 
         // Kurallar yazilir..
 
-        $parti_no = $this->input->post("parti_no");
-        $tedarikci = $this->input->post("tedarikci");
+        $kutu_no = $this->input->post("kutu_no");
+        $lot = $this->input->post("lot");
         $urun = $this->input->post("urun");
-        $irsaliye = $this->input->post("irsaliye");
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
         $olcum = json_encode($this->input->post("form"));       
          
 
-        $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
-        $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");   
+        $this->form_validation->set_rules("kutu_no", "Kutu No", "required|trim");
+        $this->form_validation->set_rules("lot", "lot ", "required|trim");   
        
         $this->form_validation->set_message(
             array(
@@ -1022,10 +1002,9 @@ class Anasayfa extends MY_Controller
         $user = get_active_user(); 
             
         $data = array(
-            "parti_no"      => $this->input->post("parti_no"),
-            "tedarikci"     => $this->input->post("tedarikci"),
+            "kutu_no"      => $this->input->post("kutu_no"),
+            "lot"     => $this->input->post("lot"),
             "urun"       => $this->input->post("urun"),
-            "irsaliye"      => $this->input->post("irsaliye"),
             "aciklama"      => $this->input->post("aciklama"),  
             "kullanici"      => $user->id,  
             "tarih"         => $this->input->post("tarih"),
@@ -1063,10 +1042,9 @@ class Anasayfa extends MY_Controller
             $viewData->viewFolder = $this->viewFolder;
             $viewData->subViewFolder = "anasayfa/finalkontrol_duzenle";
             $viewData->form_error = true;
-            $viewData->parti_no = $parti_no;
-            $viewData->tedarikci = $tedarikci;
+            $viewData->kutu_no = $kutu_no;
+            $viewData->lot = $lot;
             $viewData->urun = $urun;
-            $viewData->irsaliye = $irsaliye;
             $viewData->kullanici = $kullanici;
     
              /** Tablodan Verilerin Getirilmesi.. */
