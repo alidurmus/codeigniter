@@ -1,6 +1,6 @@
 <?php
 
-class Musteriler extends MY_Controller
+class Kontrol_no extends MY_Controller
 {
     public $viewFolder = "";
     
@@ -8,9 +8,17 @@ class Musteriler extends MY_Controller
     {
         parent::__construct();
 
-        $this->viewFolder = "musteriler";       
-       
-        $this->load->model("musteriler/musteriler_model"); 
+        $this->viewFolder = "kontrol_no";
+
+        $this->load->model("kontrol_no/kontrol_no_model");
+        $this->load->model("girdikontrol/girdi_kontrol_model");
+        $this->load->model("tedarikciler/tedarikciler_model");
+        $this->load->model("malzemeler/malzemeler_model");
+        $this->load->model("kontrol_no/kontrol_no_model");
+        $this->load->model("kullanicilar/kullanicilar_model");
+
+        $this->load->model("gorselkontrol/gorsel_kontrol_model");
+        $this->load->model("olcukontrol/olcu_kontrol_model");
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -25,7 +33,7 @@ class Musteriler extends MY_Controller
         $viewData = new stdClass();
 
         /** Tablodan Verilerin Getirilmesi.. */
-        $items = $this->musteriler_model->get_all(
+        $items = $this->kontrol_no_model->get_all(
             array(), "id ASC"
         );
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
@@ -41,7 +49,7 @@ class Musteriler extends MY_Controller
         $viewData = new stdClass();
 
         /** Tablodan Verilerin Getirilmesi.. */
-        $items = $this->musteriler_model->get_all(
+        $items = $this->kontrol_no_model->get_all(
             array(), "id ASC"
         );
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
@@ -52,12 +60,14 @@ class Musteriler extends MY_Controller
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
+
     public function new_form(){
 
         $viewData = new stdClass();
 
-        $viewData->musteriler = $this->musteriler_model->get_all();       
-   
+        $viewData->tedarikciler = $this->tedarikciler_model->get_all();
+        $viewData->malzemeler = $this->malzemeler_model->get_all();
+        $viewData->kullanicilar = $this->kullanicilar_model->get_all();
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
@@ -72,16 +82,18 @@ class Musteriler extends MY_Controller
 
         // Kurallar yazilir..
 
-        $adi = $this->input->post("adi");
-        $kodu = $this->input->post("kodu");
-
+        $parti_no = $this->input->post("parti_no");
+        $tedarikci = $this->input->post("tedarikci");
+        $malzeme = $this->input->post("malzeme");
+        $irsaliye = $this->input->post("irsaliye");
+        $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
-               
+        $kullanici = $this->input->post("kullanici");            
 
-        $this->form_validation->set_rules("adi", "adi ", "required|trim");
-       // $this->form_validation->set_rules("kodu", "kodu", "required|trim");
+        $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
+       // $this->form_validation->set_rules("tedarikci", "tedarikci", "required|trim");
         //$this->form_validation->set_rules("malzeme", "malzeme ", "required|trim");
-        $this->form_validation->set_rules("kodu", "kodu ", "required|trim");        
+        $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");        
 
         $this->form_validation->set_message(
             array(
@@ -93,18 +105,37 @@ class Musteriler extends MY_Controller
         $validate = $this->form_validation->run();
 
         if($validate){
+           
+
+            $data2 = array(
+                "process_isim"  => "girdikontrol",
+                "parti_no"      => $this->input->post("parti_no"),
+                "lot_no"        => "",
+                "kutu_no"       => "",                
+                "tarih"         => date("Y-m-d H:i:s")
+            );
+
+            // kontrol numarası alma işlemi
+            $insert2 = $this->kontrol_no_model->add($data2);
+            $get_kontrol_id = get_kontrol_id($data2);
+
 
             // aktif kullanıcı bilgilerini al
             $user = get_active_user(); 
           
             $data = array(
-                "adi"      => $this->input->post("adi"),
-                "kodu"     => $this->input->post("kodu"),                
-                "aciklama"      => $this->input->post("aciklama")
+                "parti_no"      => $this->input->post("parti_no"),
+                "tedarikci"     => $this->input->post("tedarikci"),
+                "malzeme"       => $this->input->post("malzeme"),
+                "irsaliye"      => $this->input->post("irsaliye"),
+                "aciklama"      => $this->input->post("aciklama"),  
+                "kullanici"      => $this->input->post("kullanici"), 
+                "kontrol_no"    => $get_kontrol_id,  
+                "tarih"         => $this->input->post("tarih")
             );
 
 
-            $insert = $this->musteriler_model->add($data);
+            $insert = $this->girdi_kontrol_model->add($data);
 
             // TODO Alert sistemi eklenecek...
             if($insert){
@@ -127,7 +158,7 @@ class Musteriler extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("musteriler"));
+            redirect(base_url("girdikontrol"));
 
         } else {
 
@@ -137,12 +168,15 @@ class Musteriler extends MY_Controller
             $viewData->viewFolder = $this->viewFolder;
             $viewData->subViewFolder = "add";
             $viewData->form_error = true;
-            $viewData->adi = $adi;
-            $viewData->kodu = $kodu;
-            $viewData->aciklama = $aciklama;      
+            $viewData->parti_no = $parti_no;
+            $viewData->tedarikci = $tedarikci;
+            $viewData->malzeme = $malzeme;
+            $viewData->irsaliye = $irsaliye;
+            $viewData->kullanici = $kullanici;
      
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
+
     }
 
     public function update_form($id){
@@ -150,11 +184,30 @@ class Musteriler extends MY_Controller
         $viewData = new stdClass();
 
         /** Tablodan Verilerin Getirilmesi.. */
-        $item = $this->musteriler_model->get(
+        $item = $this->girdi_kontrol_model->get(
             array(
                 "id"    => $id,
             )
-        ); 
+        );
+             
+        $viewData->tedarikciler = $this->tedarikciler_model->get_all(
+            array(
+                "isActive"  => 1
+            )
+        );
+
+        $viewData->malzemeler = $this->malzemeler_model->get_all(
+            array(
+                "isActive"  => 1
+            )
+        );
+
+        $viewData->kullanicilar = $this->kullanicilar_model->get_all(
+            array(
+                "isActive"  => 1
+            )
+        );
+
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
@@ -169,14 +222,18 @@ class Musteriler extends MY_Controller
 
         // Kurallar yazilir.
 
-        $adi = $this->input->post("adi");
-        $kodu = $this->input->post("kodu");        
+        $parti_no = $this->input->post("parti_no");
+        $tedarikci = $this->input->post("tedarikci");
+        $malzeme = $this->input->post("malzeme");
+        $irsaliye = $this->input->post("irsaliye");
+        $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");     
-                
+        $kullanici = $this->input->post("kullanici");           
 
-        $this->form_validation->set_rules("adi", "Adı", "required|trim");
-        $this->form_validation->set_rules("kodu", "kodu", "required|trim");
-          
+        $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
+       // $this->form_validation->set_rules("tedarikci", "tedarikci", "required|trim");
+        //$this->form_validation->set_rules("malzeme", "malzeme ", "required|trim");
+        $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");        
 
         $this->form_validation->set_message(
             array(
@@ -191,14 +248,18 @@ class Musteriler extends MY_Controller
 
 
             $data = array(
-                "adi"      => $this->input->post("adi"),
-                "kodu"     => $this->input->post("kodu"),
-                "aciklama"      => $this->input->post("aciklama")
+                "parti_no"      => $this->input->post("parti_no"),
+                "tedarikci"     => $this->input->post("tedarikci"),
+                "malzeme"       => $this->input->post("malzeme"),
+                "irsaliye"      => $this->input->post("irsaliye"),
+                "aciklama"      => $this->input->post("aciklama"),                
+                "kullanici"      => $this->input->post("kullanici"),
+                "tarih"         => $this->input->post("tarih")
             );
 
         
 
-            $update = $this->musteriler_model->update(array("id" => $id), $data);
+            $update = $this->girdi_kontrol_model->update(array("id" => $id), $data);
 
             // TODO Alert sistemi eklenecek...
             if($update){
@@ -221,7 +282,7 @@ class Musteriler extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("musteriler"));
+            redirect(base_url("girdikontrol"));
 
         } else {
 
@@ -231,12 +292,15 @@ class Musteriler extends MY_Controller
             $viewData->viewFolder = $this->viewFolder;
             $viewData->subViewFolder = "update";
             $viewData->form_error = true;
-            $viewData->adi = $adi;
-            $viewData->kodu = $kodu;
-            $viewData->aciklama = $aciklama;
+            $viewData->parti_no = $parti_no;
+            $viewData->tedarikci = $tedarikci;
+            $viewData->malzeme = $malzeme;
+            $viewData->irsaliye = $irsaliye;
+
+
 
             /** Tablodan Verilerin Getirilmesi.. */
-            $viewData->item = $this->musteriler_model->get(
+            $viewData->item = $this->girdi_kontrol_model->get(
                 array(
                     "id"    => $id,
                 )
@@ -249,7 +313,7 @@ class Musteriler extends MY_Controller
 
     public function delete($id){
 
-        $delete = $this->musteriler_model->delete(
+        $delete = $this->girdi_kontrol_model->delete(
             array(
                 "id"    => $id
             )
@@ -271,10 +335,54 @@ class Musteriler extends MY_Controller
                 "text" => "Kayıt silme sırasında bir problem oluştu",
                 "type"  => "error"
             );
+
+
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("musteriler"));
+        redirect(base_url("girdikontrol"));
+
+    } 
+
+    public function gorsel_new_form(){
+        
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "gorsel_add";
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     } 
     
+    public function gorsel_save(){
+    } 
+    
+    public function gorsel_update_form($id){
+    } 
+    
+    public function gorsel_update($id){
+    } 
+    
+    public function gorsel_delete($id){
+    } 
+
+    public function olcum_new_form(){
+        
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "add";
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    } 
+    
+    public function olcum_save(){
+    } 
+    
+    public function olcum_update_form($id){
+    } 
+    
+    public function olcum_update($id){
+    } 
+
+    public function olcum_delete($id){
+    }
 }

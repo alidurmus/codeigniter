@@ -3,7 +3,7 @@
         <h4 class="m-b-lg">
             Müşteriler Listesi
             <?php   if(isAllowedWriteModule()){ ?>
-                <a href="<?php echo base_url("musteriler/new_form"); ?>" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i> Yeni Ekle</a>
+                <a href="<?php echo base_url("malzemeler/new_form"); ?>" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i> Yeni Ekle</a>
             <?php } ?>
         </h4>
     </div><!-- END column -->
@@ -13,7 +13,7 @@
             <?php if(empty($items)) { ?>
 
                 <div class="alert alert-info text-center">
-                    <p>Burada herhangi bir veri bulunmamaktadır. Eklemek için lütfen <a href="<?php echo base_url("musteriler/new_form"); ?>">tıklayınız</a></p>
+                    <p>Burada herhangi bir veri bulunmamaktadır. Eklemek için lütfen <a href="<?php echo base_url("malzemeler/new_form"); ?>">tıklayınız</a></p>
                 </div>
 
             <?php } else { ?>
@@ -26,7 +26,7 @@
                         <th>Kodu</th>
                         <th>İşlem</th>
                     </thead>
-                    <tbody class="sortable" data-url="<?php echo base_url("musteriler/rankSetter"); ?>">
+                    <tbody class="sortable" data-url="<?php echo base_url("malzemeler/rankSetter"); ?>">
 
                         <?php foreach($items as $item) { ?>
 
@@ -38,13 +38,13 @@
                                 <td class="text-center w200">
                                     <?php   if(isAllowedDeleteModule()){ ?>
                                         <button
-                                            data-url="<?php echo base_url("musteriler/delete/$item->id"); ?>"
+                                            data-url="<?php echo base_url("malzemeler/delete/$item->id"); ?>"
                                             class="btn btn-sm btn-danger btn-outline remove-btn">
                                             <i class="fa fa-trash"></i> Sil
                                         </button>
                                     <?php } ?> 
                                     <?php   if(isAllowedUpdateModule()){ ?>
-                                        <a href="<?php echo base_url("musteriler/update_form/$item->id"); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Düzenle</a>
+                                        <a href="<?php echo base_url("malzemeler/update_form/$item->id"); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Düzenle</a>
                                     <?php } ?>                                   
                                  </td>
                             </tr>

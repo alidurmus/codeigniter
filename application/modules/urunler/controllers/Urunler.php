@@ -1,6 +1,6 @@
 <?php
 
-class Musteriler extends MY_Controller
+class Urunler extends MY_Controller
 {
     public $viewFolder = "";
     
@@ -8,9 +8,9 @@ class Musteriler extends MY_Controller
     {
         parent::__construct();
 
-        $this->viewFolder = "musteriler";       
+        $this->viewFolder = "urunler";       
        
-        $this->load->model("musteriler/musteriler_model"); 
+        $this->load->model("urunler/urunler_model"); 
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -25,7 +25,7 @@ class Musteriler extends MY_Controller
         $viewData = new stdClass();
 
         /** Tablodan Verilerin Getirilmesi.. */
-        $items = $this->musteriler_model->get_all(
+        $items = $this->urunler_model->get_all(
             array(), "id ASC"
         );
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
@@ -41,7 +41,7 @@ class Musteriler extends MY_Controller
         $viewData = new stdClass();
 
         /** Tablodan Verilerin Getirilmesi.. */
-        $items = $this->musteriler_model->get_all(
+        $items = $this->urunler_model->get_all(
             array(), "id ASC"
         );
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
@@ -56,8 +56,33 @@ class Musteriler extends MY_Controller
 
         $viewData = new stdClass();
 
-        $viewData->musteriler = $this->musteriler_model->get_all();       
-   
+        $viewData->urunler = $this->urunler_model->get_all();        
+
+        $json ='
+        {"olcum":
+            {
+                "k1":{"adi":"K1","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G1","gorsel":"3"},
+                "k2":{"adi":"K2","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G2","gorsel":"1"},
+                "k3":{"adi":"K3","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G3","gorsel":"2"},
+                "k4":{"adi":"K4","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G4","gorsel":"3"},
+                "k5":{"adi":"K5","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G5","gorsel":"3"},
+                "k6":{"adi":"K6","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G6","gorsel":"3"},
+                "k7":{"adi":"K7","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G7","gorsel":"2"},
+                "k8":{"adi":"K8","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G8","gorsel":"3"},
+                "k9":{"adi":"K9","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G9","gorsel":"2"},
+                "k10":{"adi":"K10","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G10","gorsel":"1"},
+                "k11":{"adi":"K11","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G11","gorsel":"1"},
+                "k12":{"adi":"K12","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G12","gorsel":"3"},
+                "k13":{"adi":"K13","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G13","gorsel":"1"},
+                "k14":{"adi":"K14","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G14","gorsel":"3"},
+                "k15":{"adi":"K15","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G15","gorsel":"2"},
+                "k16":{"adi":"K16","olcu":"0","tolerans":"0","alt_limit":"0","ust_limit":"0","olcum":"0","sonuc":"","kontrol_noktasi":"G16","gorsel":"3"}
+            }
+        }';
+
+
+        $viewData->json = json_decode($json);
+
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
@@ -74,7 +99,7 @@ class Musteriler extends MY_Controller
 
         $adi = $this->input->post("adi");
         $kodu = $this->input->post("kodu");
-
+        $olcum = json_encode($this->input->post("form"));  
         $aciklama = $this->input->post("aciklama");   
                
 
@@ -99,12 +124,13 @@ class Musteriler extends MY_Controller
           
             $data = array(
                 "adi"      => $this->input->post("adi"),
-                "kodu"     => $this->input->post("kodu"),                
+                "kodu"     => $this->input->post("kodu"), 
+                "olcum"         => $olcum,               
                 "aciklama"      => $this->input->post("aciklama")
             );
 
 
-            $insert = $this->musteriler_model->add($data);
+            $insert = $this->urunler_model->add($data);
 
             // TODO Alert sistemi eklenecek...
             if($insert){
@@ -127,7 +153,7 @@ class Musteriler extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("musteriler"));
+            redirect(base_url("urunler"));
 
         } else {
 
@@ -139,6 +165,7 @@ class Musteriler extends MY_Controller
             $viewData->form_error = true;
             $viewData->adi = $adi;
             $viewData->kodu = $kodu;
+            $viewData->json = json_decode($olcum); 
             $viewData->aciklama = $aciklama;      
      
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -150,11 +177,14 @@ class Musteriler extends MY_Controller
         $viewData = new stdClass();
 
         /** Tablodan Verilerin Getirilmesi.. */
-        $item = $this->musteriler_model->get(
+        $item = $this->urunler_model->get(
             array(
                 "id"    => $id,
             )
         ); 
+
+         // ölçüm tablosu json açılarak veri olarak al
+       $viewData->json = json_decode($item->olcum);
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
@@ -172,7 +202,7 @@ class Musteriler extends MY_Controller
         $adi = $this->input->post("adi");
         $kodu = $this->input->post("kodu");        
         $aciklama = $this->input->post("aciklama");     
-                
+        $olcum = json_encode($this->input->post("form"));        
 
         $this->form_validation->set_rules("adi", "Adı", "required|trim");
         $this->form_validation->set_rules("kodu", "kodu", "required|trim");
@@ -191,14 +221,15 @@ class Musteriler extends MY_Controller
 
 
             $data = array(
-                "adi"      => $this->input->post("adi"),
-                "kodu"     => $this->input->post("kodu"),
+                "adi"           => $this->input->post("adi"),
+                "kodu"          => $this->input->post("kodu"),
+                "olcum"         => $olcum,
                 "aciklama"      => $this->input->post("aciklama")
             );
 
         
 
-            $update = $this->musteriler_model->update(array("id" => $id), $data);
+            $update = $this->urunler_model->update(array("id" => $id), $data);
 
             // TODO Alert sistemi eklenecek...
             if($update){
@@ -221,7 +252,7 @@ class Musteriler extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("musteriler"));
+            redirect(base_url("urunler"));
 
         } else {
 
@@ -233,10 +264,11 @@ class Musteriler extends MY_Controller
             $viewData->form_error = true;
             $viewData->adi = $adi;
             $viewData->kodu = $kodu;
+            $viewData->json = json_decode($olcum); 
             $viewData->aciklama = $aciklama;
 
             /** Tablodan Verilerin Getirilmesi.. */
-            $viewData->item = $this->musteriler_model->get(
+            $viewData->item = $this->urunler_model->get(
                 array(
                     "id"    => $id,
                 )
@@ -249,7 +281,7 @@ class Musteriler extends MY_Controller
 
     public function delete($id){
 
-        $delete = $this->musteriler_model->delete(
+        $delete = $this->urunler_model->delete(
             array(
                 "id"    => $id
             )
@@ -274,7 +306,7 @@ class Musteriler extends MY_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("musteriler"));
+        redirect(base_url("urunler"));
     } 
     
 }

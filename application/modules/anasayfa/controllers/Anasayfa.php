@@ -19,9 +19,9 @@ class Anasayfa extends MY_Controller
         $this->load->model("finalkontrol/final_kontrol_model");
         $this->load->model("tedarikciler/tedarikciler_model");
         $this->load->model("malzemeler/malzemeler_model");
-        $this->load->model("malzemeler/malzeme_olcum_model");
+        
         $this->load->model("urunler/urunler_model");
-        $this->load->model("urunler/urun_olcum_model");
+        
         $this->load->model("kontrol_no/kontrol_no_model");
         $this->load->model("kullanicilar/kullanicilar_model");        
     }
@@ -153,26 +153,17 @@ class Anasayfa extends MY_Controller
         // formdan gelen bilgilere göre olcum tablosunu getir
         $malzeme_id = $this->input->post("malzeme");       
 
-        $malzeme_olcum = $this->malzeme_olcum_model->get(
+        $malzeme = $this->malzemeler_model->get(
             array(
-                "malzeme"    => $malzeme_id,
+                "id"    => $malzeme_id,
             )
         );      
        // ölçüm tablosu json açılarak veri olarak al
-       $viewData->json = json_decode($malzeme_olcum->olcum);
-
-
-       // seçilen malzemenin bilgilerini getir
-       $malzeme = $this->malzemeler_model->get(
-        array(
-            "id"    => $malzeme_id,
-        )); 
+       $viewData->json = json_decode($malzeme->olcum);    
 
        $viewData->malzeme= $malzeme;
         
-       $viewData->user = get_active_user();
-
-        
+       $viewData->user = get_active_user();        
        
        //die();
         // var_dump($viewData->json);
@@ -280,6 +271,7 @@ class Anasayfa extends MY_Controller
             $viewData->tedarikci = $tedarikci;
             $viewData->malzeme = $malzeme;
             $viewData->irsaliye = $irsaliye;
+            $viewData->json = json_decode($olcum); 
             $viewData->kullanici = $kullanici;
     
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -436,6 +428,7 @@ class Anasayfa extends MY_Controller
             $viewData->tedarikci = $tedarikci;
             $viewData->malzeme = $malzeme;
             $viewData->irsaliye = $irsaliye;
+            $viewData->json = json_decode($olcum); 
             $viewData->kullanici = $kullanici;
     
              /** Tablodan Verilerin Getirilmesi.. */
@@ -472,26 +465,17 @@ class Anasayfa extends MY_Controller
         // formdan gelen bilgilere göre olcum tablosunu getir
         $urun_id = $this->input->post("urun");       
 
-        $urun_olcum = $this->urun_olcum_model->get(
+        $urun = $this->urunler_model->get(
             array(
-                "urun"    => $urun_id,
+                "id"    => $urun_id,
                 )
         );      
        // ölçüm tablosu json açılarak veri olarak al
-       $viewData->json = json_decode($urun_olcum->olcum);
-
-
-       // seçilen urunnin bilgilerini getir
-       $urun = $this->urunler_model->get(
-        array(
-            "id"    => $urun_id,
-        )); 
+       $viewData->json = json_decode($urun->olcum);     
 
        $viewData->urun= $urun;
         
-       $viewData->user = get_active_user();
-
-        
+       $viewData->user = get_active_user();        
        
        //die();
         // var_dump($viewData->json);
@@ -597,6 +581,7 @@ class Anasayfa extends MY_Controller
             $viewData->parti_no = $parti_no;
             $viewData->tedarikci = $tedarikci;
             $viewData->urun = $urun;
+            $viewData->json = json_decode($olcum); 
             $viewData->kullanici = $kullanici;
     
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -743,6 +728,7 @@ class Anasayfa extends MY_Controller
             $viewData->parti_no = $parti_no;
             $viewData->lot = $lot;
             $viewData->urun = $urun;
+            $viewData->json = json_decode($olcum); 
             $viewData->kullanici = $kullanici;
     
              /** Tablodan Verilerin Getirilmesi.. */
@@ -778,19 +764,15 @@ class Anasayfa extends MY_Controller
         // formdan gelen bilgilere göre olcum tablosunu getir
         $urun_id = $this->input->post("urun");       
 
-        $urun_olcum = $this->urun_olcum_model->get(
+        $urun = $this->urunler_model->get(
             array(
-                "urun"    => $urun_id,
+                "id"    => $urun_id,
             )
         );      
        // ölçüm tablosu json açılarak veri olarak al
-       $viewData->json = json_decode($urun_olcum->olcum);
+       $viewData->json = json_decode($urun->olcum);
 
-       // seçilen urunnin bilgilerini getir
-       $urun = $this->urunler_model->get(
-        array(
-            "id"    => $urun_id,
-        )); 
+      
 
        $viewData->urun= $urun;
         
@@ -899,6 +881,7 @@ class Anasayfa extends MY_Controller
             $viewData->kutu_no = $kutu_no;
             $viewData->lot = $lot;
             $viewData->urun = $urun;
+            $viewData->json = json_decode($olcum); 
             $viewData->kullanici = $kullanici;
     
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
@@ -1044,7 +1027,7 @@ class Anasayfa extends MY_Controller
             $viewData->form_error = true;
             $viewData->kutu_no = $kutu_no;
             $viewData->lot = $lot;
-            $viewData->urun = $urun;
+            $viewData->json = json_decode($olcum);           
             $viewData->kullanici = $kullanici;
     
              /** Tablodan Verilerin Getirilmesi.. */

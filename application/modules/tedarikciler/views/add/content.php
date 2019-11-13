@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <div class="widget">
             <div class="widget-body">
-                <form action="<?php echo base_url("musteriler/save"); ?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo base_url("tedarikciler/save"); ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label>Adı</label>
                         <input class="form-control" placeholder="adi" name="adi">                        
@@ -21,7 +21,7 @@
                         <textarea name="aciklama" class="m-0" data-plugin="summernote" data-options="{height: 250}"></textarea>
                     </div> 
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
-                    <a href="<?php echo base_url("musteriler"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
+                    <a href="<?php echo base_url("tedarikciler"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
                 </form>
             </div><!-- .widget-body -->
         </div><!-- .widget -->

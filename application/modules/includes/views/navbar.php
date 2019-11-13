@@ -24,7 +24,7 @@
                 <?php if($settings->logo != "default"){ ?>
                     <img
                         width="70"
-                        src="<?php echo get_picture("settings_v",$settings->logo, "150x35"); ?>"
+                        src="<?php // echo get_picture("settings_v",$settings->logo, "150x35"); ?>"
                         alt=""
                         class="img-responsive">
 

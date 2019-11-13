@@ -1,6 +1,6 @@
 <?php
 
-class Musteriler extends MY_Controller
+class Tedarikciler extends MY_Controller
 {
     public $viewFolder = "";
     
@@ -8,9 +8,9 @@ class Musteriler extends MY_Controller
     {
         parent::__construct();
 
-        $this->viewFolder = "musteriler";       
+        $this->viewFolder = "tedarikciler";       
        
-        $this->load->model("musteriler/musteriler_model"); 
+        $this->load->model("tedarikciler/tedarikciler_model"); 
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -25,7 +25,7 @@ class Musteriler extends MY_Controller
         $viewData = new stdClass();
 
         /** Tablodan Verilerin Getirilmesi.. */
-        $items = $this->musteriler_model->get_all(
+        $items = $this->tedarikciler_model->get_all(
             array(), "id ASC"
         );
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
@@ -41,7 +41,7 @@ class Musteriler extends MY_Controller
         $viewData = new stdClass();
 
         /** Tablodan Verilerin Getirilmesi.. */
-        $items = $this->musteriler_model->get_all(
+        $items = $this->tedarikciler_model->get_all(
             array(), "id ASC"
         );
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
@@ -56,7 +56,7 @@ class Musteriler extends MY_Controller
 
         $viewData = new stdClass();
 
-        $viewData->musteriler = $this->musteriler_model->get_all();       
+        $viewData->tedarikciler = $this->tedarikciler_model->get_all();       
    
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
@@ -104,7 +104,7 @@ class Musteriler extends MY_Controller
             );
 
 
-            $insert = $this->musteriler_model->add($data);
+            $insert = $this->tedarikciler_model->add($data);
 
             // TODO Alert sistemi eklenecek...
             if($insert){
@@ -127,7 +127,7 @@ class Musteriler extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("musteriler"));
+            redirect(base_url("tedarikciler"));
 
         } else {
 
@@ -150,7 +150,7 @@ class Musteriler extends MY_Controller
         $viewData = new stdClass();
 
         /** Tablodan Verilerin Getirilmesi.. */
-        $item = $this->musteriler_model->get(
+        $item = $this->tedarikciler_model->get(
             array(
                 "id"    => $id,
             )
@@ -198,7 +198,7 @@ class Musteriler extends MY_Controller
 
         
 
-            $update = $this->musteriler_model->update(array("id" => $id), $data);
+            $update = $this->tedarikciler_model->update(array("id" => $id), $data);
 
             // TODO Alert sistemi eklenecek...
             if($update){
@@ -221,7 +221,7 @@ class Musteriler extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("musteriler"));
+            redirect(base_url("tedarikciler"));
 
         } else {
 
@@ -236,7 +236,7 @@ class Musteriler extends MY_Controller
             $viewData->aciklama = $aciklama;
 
             /** Tablodan Verilerin Getirilmesi.. */
-            $viewData->item = $this->musteriler_model->get(
+            $viewData->item = $this->tedarikciler_model->get(
                 array(
                     "id"    => $id,
                 )
@@ -249,7 +249,7 @@ class Musteriler extends MY_Controller
 
     public function delete($id){
 
-        $delete = $this->musteriler_model->delete(
+        $delete = $this->tedarikciler_model->delete(
             array(
                 "id"    => $id
             )
@@ -274,7 +274,7 @@ class Musteriler extends MY_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("musteriler"));
+        redirect(base_url("tedarikciler"));
     } 
     
 }

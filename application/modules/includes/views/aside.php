@@ -3,15 +3,7 @@
 <aside id="menubar" class="menubar light">
     <div class="app-user">
         <div class="media">
-            <div class="media-left">
-                <div class="avatar avatar-md avatar-circle">
-                    <a href="javascript:void(0)">
-                        <img class="img-responsive"
-                             src="<?php echo base_url("assets"); ?>/assets/images/221.jpg"
-                             alt="<?php echo convertToSEO($user->full_name); ?>"/>
-                    </a>
-                </div><!-- .avatar -->
-            </div>
+           <br>
             <div class="media-body">
                 <div class="foldable">
                     <h5><a href="javascript:void(0)" class="username"><?php echo $user->full_name; ?></a></h5>
@@ -52,7 +44,12 @@
     <div class="menubar-scroll">
         <div class="menubar-scroll-inner">
             <ul class="app-menu">
-
+            <li>
+                    <a href="<?php echo base_url(); ?>">
+                        <i class="menu-icon zmdi zmdi-view-web zmdi-hc-lg"></i>
+                        <span class="menu-text">Ana Sayfa</span>
+                    </a>
+                </li>
 
                 <?php if(isAllowedViewModule("dashboard")) { ?>
                     <li>
@@ -63,24 +60,76 @@
                     </li>
                 <?php } ?>
 
-                <?php if(isAllowedViewModule("settings")) { ?>
+             
+
+
+                <?php if(isAllowedViewModule("urunler")) { ?>
                     <li>
-                        <a href="<?php echo base_url("settings"); ?>">
-                            <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
-                            <span class="menu-text">Site Ayarları</span>
+                        <a href="<?php echo base_url("urunler"); ?>">
+                            <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
+                            <span class="menu-text">Ürünler</span>
                         </a>
                     </li>
                 <?php } ?>
 
-                <?php if(isAllowedViewModule("emailsettings")) { ?>
-                        <li>
-                            <a href="<?php echo base_url("emailsettings"); ?>">
-                                <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
-                                <span class="menu-text">E-posta Ayarları</span>
-                            </a>
-                        </li>
+                <?php if(isAllowedViewModule("malzemeler")) { ?>
+                    <li>
+                        <a href="<?php echo base_url("malzemeler"); ?>">
+                            <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
+                            <span class="menu-text">Malzemeler</span>
+                        </a>
+                    </li>
                 <?php } ?>
 
+
+                <?php if(isAllowedViewModule("musteriler")) { ?>
+                    <li>
+                        <a href="<?php echo base_url("musteriler"); ?>">
+                            <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
+                            <span class="menu-text">Müşteriler</span>
+                        </a>
+                    </li>
+                <?php } ?>
+
+                <?php if(isAllowedViewModule("tedarikciler")) { ?>
+                    <li>
+                        <a href="<?php echo base_url("tedarikciler"); ?>">
+                            <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
+                            <span class="menu-text">Tedarikçiler</span>
+                        </a>
+                    </li>
+                <?php } ?>
+
+                <?php if(isAllowedViewModule("isemri")) { ?>
+                    <li>
+                        <a href="<?php echo base_url("isemri"); ?>">
+                            <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
+                            <span class="menu-text">İş Emri</span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if(isAllowedViewModule("user_roles")) { ?>
+
+                <li>
+                    <a href="<?php echo base_url("user_roles"); ?>">
+                        <i class="menu-icon fa fa-eye"></i>
+                        <span class="menu-text">Kullanıcı Rolü</span>
+                    </a>
+                </li>
+
+                <?php } ?>
+
+
+                <?php if(isAllowedViewModule("users")) { ?>
+
+                <li>
+                    <a href="<?php echo base_url("users"); ?>">
+                        <i class="menu-icon fa fa-user-secret"></i>
+                        <span class="menu-text">Kullanıcılar</span>
+                    </a>
+                </li>
+
+                <?php } ?>
                 <?php if(isAllowedViewModule("girdikontrol")) { ?>
                     <li>
                         <a href="<?php echo base_url("girdikontrol"); ?>">
@@ -108,15 +157,7 @@
                     </li>
                 <?php } ?>
 
-                <?php if(isAllowedViewModule("tedarikciler")) { ?>
-                    <li>
-                        <a href="<?php echo base_url("tedarikciler"); ?>">
-                            <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
-                            <span class="menu-text">Tedarikçiler</span>
-                        </a>
-                    </li>
-                <?php } ?>
-
+              
 
 
                 <?php if(isAllowedViewModule("galleries")) { ?>
@@ -128,6 +169,23 @@
                         </a>
                     </li>
 
+                <?php } ?>
+                <?php if(isAllowedViewModule("settings")) { ?>
+                    <li>
+                        <a href="<?php echo base_url("settings"); ?>">
+                            <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
+                            <span class="menu-text">Site Ayarları</span>
+                        </a>
+                    </li>
+                <?php } ?>
+
+                <?php if(isAllowedViewModule("emailsettings")) { ?>
+                        <li>
+                            <a href="<?php echo base_url("emailsettings"); ?>">
+                                <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
+                                <span class="menu-text">E-posta Ayarları</span>
+                            </a>
+                        </li>
                 <?php } ?>
 
 
@@ -241,28 +299,6 @@
                 <?php } ?>
 
 
-                <?php if(isAllowedViewModule("user_roles")) { ?>
-
-                    <li>
-                        <a href="<?php echo base_url("user_roles"); ?>">
-                            <i class="menu-icon fa fa-eye"></i>
-                            <span class="menu-text">Kullanıcı Rolü</span>
-                        </a>
-                    </li>
-
-                <?php } ?>
-
-
-                <?php if(isAllowedViewModule("users")) { ?>
-
-                    <li>
-                        <a href="<?php echo base_url("users"); ?>">
-                            <i class="menu-icon fa fa-user-secret"></i>
-                            <span class="menu-text">Kullanıcılar</span>
-                        </a>
-                    </li>
-
-                <?php } ?>
 
 
                 <?php if(isAllowedViewModule("members")) { ?>
@@ -304,7 +340,7 @@
 
 
                 <li>
-                    <a href="documentation.html">
+                    <a href="<?php echo base_url(); ?>">
                         <i class="menu-icon zmdi zmdi-view-web zmdi-hc-lg"></i>
                         <span class="menu-text">Ana Sayfa</span>
                     </a>
