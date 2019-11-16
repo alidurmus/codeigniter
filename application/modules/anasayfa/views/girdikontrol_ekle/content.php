@@ -3,6 +3,7 @@
         <h4 class="m-b-lg">
             Girdi Kontrol Formu Ekle
         </h4>
+        <?php  //var_dump($json);  ?>
     </div><!-- END column -->
     <div class="col-md-12">
         <form action="<?php echo base_url("anasayfa/girdikontrol_kaydet"); ?>" method="post" enctype="multipart/form-data">
@@ -69,23 +70,27 @@
                             <?php if($key == "gorsel"){ ?>                                            
                             <td>
                                 <div class="input-group"> 
-                                    <input  type="radio" value="<?php echo $val; ?>" <?php echo ($val == '1') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="00"> 
+                                    <input  type="radio" value="1" <?php echo ($val == '1') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="00"> 
                                 </div>
                             </td>
                             <td>
                                 <div class="input-group"> 
-                                    <input  type="radio" value="<?php echo $val; ?>" <?php echo ($val == '2') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="00"> 
+                                    <input  type="radio" value="2" <?php echo ($val == '2') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="00"> 
                                 </div>
                             </td> 
                             <td>
                                 <div class="input-group"> 
-                                    <input  type="radio" value="<?php echo $val; ?>" <?php echo ($val == '3') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="00"> 
+                                    <input  type="radio" value="3" <?php echo ($val == '3') ? 'checked' : ''; ?> name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="00"> 
                                 </div>
                             </td>
                             <?php }else { ?>
                                 <td>
                                         <div class="input-group"> 
-                                                <input  type="text" class="form-control input-sm" value="<?php echo $val; ?>" name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" placeholder="Username"> 
+                                            <?php if($key == "olcum" || $key == "sonuc" ){ ?>  
+                                                <input  type="text" class="form-control input-sm" value="<?php echo $val; ?>" name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" > 
+                                            <?php }else { ?>
+                                                <input readonly type="text" class="form-control input-sm" value="<?php echo $val; ?>" name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" > 
+                                            <?php } ?>
                                         </div>
                                     </td>
                             <?php } ?>

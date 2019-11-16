@@ -16,8 +16,7 @@ class Girdikontrol extends MY_Controller
         $this->load->model("kontrol_no/kontrol_no_model");
         $this->load->model("kullanicilar/kullanicilar_model");
 
-        $this->load->model("gorselkontrol/gorsel_kontrol_model");
-        $this->load->model("olcukontrol/olcu_kontrol_model");
+
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -67,6 +66,11 @@ class Girdikontrol extends MY_Controller
         $viewData->tedarikciler = $this->tedarikciler_model->get_all();
         $viewData->malzemeler = $this->malzemeler_model->get_all();
         $viewData->kullanicilar = $this->kullanicilar_model->get_all();
+
+         // ölçüm tablosu json açılarak veri olarak al
+         //malzeme seçme işlemi yapıldıktan sonra alttaki yorumu kaldır
+       //$viewData->json = json_decode($malzeme->olcum);
+
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;

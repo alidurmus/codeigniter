@@ -157,14 +157,7 @@
                     </li>
                 <?php } ?>
 
-                <?php if(isAllowedViewModule("kontrol_no")) { ?>
-                    <li>
-                        <a href="<?php echo base_url("kontrol_no"); ?>">
-                            <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
-                            <span class="menu-text"> Kontrol No</span>
-                        </a>
-                    </li>
-                <?php } ?>
+              
 
 
                 <?php if(isAllowedViewModule("galleries")) { ?>

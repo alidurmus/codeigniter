@@ -7,8 +7,10 @@
                 <div class="row">
                         <div class="col-md-4 text-left">
                                 <a href="<?php echo base_url("anasayfa/kalite"); ?>" class="btn btn-primary"><-- Kalite</a>
+                               
                             </div>
                             <div class="col-md-4 ">
+                            <a href="<?php echo base_url("dashboard"); ?>" class="btn btn-warning"><-- Yönetim</a>
                             </div>
                             <div class="col-md-4 text-right">
                                 <a href="<?php echo base_url("anasayfa/urun2"); ?>" class="btn btn-success">Yeni Ekle --></a>

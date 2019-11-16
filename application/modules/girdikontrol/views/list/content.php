@@ -3,7 +3,7 @@
         <h4 class="m-b-lg">
             Girdi Kontrol Listesi
             <?php   if(isAllowedWriteModule()){ ?>
-                <a href="<?php echo base_url("girdikontrol/new_form"); ?>" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i> Yeni Ekle</a>
+                <a href="<?php echo base_url("anasayfa/malzeme"); ?>" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i> Yeni Ekle</a>
             <?php } ?>
         </h4>
     </div><!-- END column -->
@@ -52,14 +52,10 @@
                                         </button>
                                     <?php } ?> 
                                     <?php   if(isAllowedUpdateModule()){ ?>
-                                        <a href="<?php echo base_url("girdikontrol/update_form/$item->id"); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Düzenle</a>
+                                        <a href="<?php echo base_url("anasayfa/girdikontrol_duzenle/$item->id"); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Düzenle</a>
                                     <?php } ?>
 
                                    
-                                        <a href="<?php echo base_url("girdikontrol/olcum_form/$item->id"); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Ölçüm</a>
-                                  
-                                        <a href="<?php echo base_url("girdikontrol/gorsel_form/$item->id"); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Görsel</a>
-                                    
 
                                 </td>
                             </tr>

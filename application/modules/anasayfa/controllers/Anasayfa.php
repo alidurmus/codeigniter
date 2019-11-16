@@ -909,6 +909,7 @@ class Anasayfa extends MY_Controller
         );  
        $viewData->urun= $urun;
         
+       
        $viewData->user = get_active_user();
 
        //die();

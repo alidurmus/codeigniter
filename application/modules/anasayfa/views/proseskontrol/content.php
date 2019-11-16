@@ -9,6 +9,7 @@
                                 <a href="<?php echo base_url("anasayfa/kalite"); ?>" class="btn btn-primary"><-- Kalite</a>
                             </div>
                             <div class="col-md-4 ">
+                            <a href="<?php echo base_url("dashboard"); ?>" class="btn btn-warning"><-- Yönetim</a>
                             </div>
                             <div class="col-md-4 text-right">
                                 <a href="<?php echo base_url("anasayfa/urun"); ?>" class="btn btn-success">Yeni Ekle --></a>
@@ -39,10 +40,10 @@
                             <td>
                                 <a href="<?php echo base_url("anasayfa/proseskontrol_duzenle"); ?>/<?php echo $item->id;?>" class="btn btn-info">Düzenle</a>
                                 <button
-                                            data-url="<?php echo base_url("anasayfa/proseskontrol_sil/$item->id"); ?>"
-                                            class="btn btn-sm btn-danger btn-outline remove-btn">
-                                            <i class="fa fa-trash"></i> Sil
-                                        </button>                               
+                                    data-url="<?php echo base_url("anasayfa/proseskontrol_sil/$item->id"); ?>"
+                                    class="btn btn-sm btn-danger btn-outline remove-btn">
+                                    <i class="fa fa-trash"></i> Sil
+                                </button>                               
                             </td>
                         </tr>
                         <?php } ?>

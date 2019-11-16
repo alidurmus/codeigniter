@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <?php $this->load->view("includes/head"); ?>
-
-      <!-- Optional theme -->
-      
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
- 
+    <?php $this->load->view("vuejs/includes/head"); ?>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 </head>
 
@@ -14,15 +10,15 @@
 <!--============= start main area -->
 
     <!-- APP NAVBAR ==========-->
-    <?php $this->load->view("includes/navbar"); ?>
+    <?php $this->load->view("vuejs/includes/navbar"); ?>
     <!--========== END app navbar -->
 
     <!-- APP ASIDE ==========-->
-    <?php $this->load->view("includes/aside"); ?>
+    <?php $this->load->view("vuejs/includes/aside"); ?>
     <!--========== END app aside -->
 
     <!-- navbar search -->
-    <?php $this->load->view("includes/navbar-search"); ?>
+    <?php $this->load->view("vuejs/includes/navbar-search"); ?>
     <!-- .navbar-search -->
 
     <!-- APP MAIN ==========-->
@@ -34,12 +30,12 @@
         </div><!-- .wrap -->
 
         <!-- APP FOOTER -->
-        <?php $this->load->view("includes/footer"); ?>
+        <?php $this->load->view("vuejs/includes/footer"); ?>
         <!-- /#app-footer -->
     </main>
     <!--========== END app main -->
 
-    <?php $this->load->view("includes/include_script"); ?>
-   
+    <?php $this->load->view("vuejs/includes/include_script"); ?>
+
 </body>
 </html>

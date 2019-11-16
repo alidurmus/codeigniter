@@ -17,9 +17,9 @@
     <div class="col-sm-4">
  
       <ul>
-        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/yonetim/">Yönetm Komtrol</a></li>
-        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/arge/">ARGE Komtrol</a></li>
-        <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/planlama/">Planlama Komtrol</a></li>
+        <li class="list-group-item "><a href="<?php echo base_url(); ?>dashboard/">Yönetm Komtrol</a></li>
+        <li class="list-group-item "><a href="<?php echo base_url(); ?>dashboard/">ARGE Komtrol</a></li>
+        <li class="list-group-item "><a href="<?php echo base_url(); ?>dashboard/">Planlama Komtrol</a></li>
         <li class="list-group-item "><a href="<?php echo base_url(); ?>anasayfa/kalite/">Kalite Kontrol</a></li>
     </ul>
     </div>

@@ -12,6 +12,17 @@ class Dashboard extends MY_Controller {
 
         $this->viewFolder = "dashboard";
 //        $this->user = get_active_user();
+$this->load->model("kontrol_no/kontrol_no_model");
+$this->load->model("girdikontrol/girdi_kontrol_model");
+$this->load->model("tedarikciler/tedarikciler_model");
+$this->load->model("malzemeler/malzemeler_model");
+$this->load->model("kontrol_no/kontrol_no_model");
+$this->load->model("kullanicilar/kullanicilar_model");
+
+$this->load->model("gorselkontrol/gorsel_kontrol_model");
+$this->load->model("olcukontrol/olcu_kontrol_model");
+
+
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -21,11 +32,21 @@ class Dashboard extends MY_Controller {
 
     public function index()
 	{
+	    $viewData = new stdClass();    
+     
 
-	    $viewData = new stdClass();
+        /** Tablodan Verilerin Getirilmesi.. */
+        $items = $this->kontrol_no_model->get_all(
+            array(), "id ASC"
+        );
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "list";
+        $viewData->items = $items;
 
 		$this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
 	}
 }
+
+
+

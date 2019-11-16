@@ -13,11 +13,11 @@ class Finalkontrol extends MY_Controller
         $this->load->model("finalkontrol/final_kontrol_model");
         $this->load->model("tedarikciler/tedarikciler_model");
         $this->load->model("malzemeler/malzemeler_model");
+        $this->load->model("urunler/urunler_model");
         $this->load->model("kontrol_no/kontrol_no_model");
         $this->load->model("kullanicilar/kullanicilar_model");
 
-        $this->load->model("gorselkontrol/gorsel_kontrol_model");
-        $this->load->model("olcukontrol/olcu_kontrol_model");
+   
 
         if(!get_active_user()){
             redirect(base_url("login"));
@@ -207,6 +207,18 @@ class Finalkontrol extends MY_Controller
             )
         );
 
+        
+
+         // seçilen urunnin bilgilerini getir
+       $urun = $this->urunler_model->get(
+        array(
+            "id"    => $item->urun,
+            )
+        );  
+       $viewData->urun= $urun;
+        
+        // ölçüm tablosu json açılarak veri olarak al
+       $viewData->json = json_decode($item->olcum);
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
