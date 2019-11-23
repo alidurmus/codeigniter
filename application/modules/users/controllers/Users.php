@@ -6,15 +6,11 @@ class Users extends MY_Controller
 
     public function __construct()
     {
-
         parent::__construct();
-
         $this->viewFolder = "users";
 
         $this->load->model("users/user_model");
-        $this->load->model("user_roles/user_role_model");
-
-     
+        $this->load->model("user_roles/user_role_model");     
     }
 
     public function index(){
@@ -28,11 +24,9 @@ class Users extends MY_Controller
             $where = array();
 
         } else {
-
             $where = array(
                 "id"    => $user->id
             );
-
         }
 
         /** Tablodan Verilerin Getirilmesi.. */
@@ -40,8 +34,6 @@ class Users extends MY_Controller
             $where
         );
         
-
-
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "list";

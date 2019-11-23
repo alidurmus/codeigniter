@@ -17,13 +17,16 @@ class Anasayfa extends MY_Controller
         $this->load->model("girdikontrol/girdi_kontrol_model");
         $this->load->model("proseskontrol/proses_kontrol_model");
         $this->load->model("finalkontrol/final_kontrol_model");
+
         $this->load->model("tedarikciler/tedarikciler_model");
-        $this->load->model("malzemeler/malzemeler_model");
-        
+        $this->load->model("malzemeler/malzemeler_model");        
         $this->load->model("urunler/urunler_model");
         
         $this->load->model("kontrol_no/kontrol_no_model");
-        $this->load->model("kullanicilar/kullanicilar_model");        
+        $this->load->model("kullanicilar/kullanicilar_model");   
+        
+        $this->load->model("sonuc_secim/sonuc_secim_model");
+        
     }
 
     public function index(){
@@ -149,6 +152,7 @@ class Anasayfa extends MY_Controller
 
         $viewData->tedarikciler = $this->tedarikciler_model->get_all();      
         $viewData->kullanicilar = $this->kullanicilar_model->get_all();
+        $viewData->sonuc_secim = $this->sonuc_secim_model->get_all();
 
         // formdan gelen bilgilere göre olcum tablosunu getir
         $malzeme_id = $this->input->post("malzeme");       
@@ -186,7 +190,8 @@ class Anasayfa extends MY_Controller
         $irsaliye = $this->input->post("irsaliye");
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
-        $kullanici = $this->input->post("kullanici");            
+        $kullanici = $this->input->post("kullanici"); 
+        $sonuc = $this->input->post("sonuc");           
         $olcum = json_encode($this->input->post("form"));       
          
 
@@ -229,6 +234,7 @@ class Anasayfa extends MY_Controller
             "irsaliye"      => $this->input->post("irsaliye"),
             "aciklama"      => $this->input->post("aciklama"),  
             "kullanici"      => $this->input->post("kullanici"), 
+            "sonuc"      => $this->input->post("sonuc"), 
             "kontrol_no"    => $get_kontrol_id,  
             "tarih"         => $this->input->post("tarih"),
             "olcum"         => $olcum
@@ -273,6 +279,7 @@ class Anasayfa extends MY_Controller
             $viewData->irsaliye = $irsaliye;
             $viewData->json = json_decode($olcum); 
             $viewData->kullanici = $kullanici;
+            $viewData->sonuc = $sonuc;
     
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
@@ -282,6 +289,8 @@ class Anasayfa extends MY_Controller
     public function girdikontrol_duzenle($id){
         $viewData = new stdClass();
         /** Tablodan Verilerin Getirilmesi.. */
+        $viewData->sonuc_secim = $this->sonuc_secim_model->get_all();
+
         $item = $this->girdi_kontrol_model->get(
             array(
                 "id"    => $id,
@@ -362,6 +371,7 @@ class Anasayfa extends MY_Controller
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
+        $sonuc = $this->input->post("sonuc");            
         $olcum = json_encode($this->input->post("form"));       
          
 
@@ -388,6 +398,7 @@ class Anasayfa extends MY_Controller
             "malzeme"       => $this->input->post("malzeme"),
             "irsaliye"      => $this->input->post("irsaliye"),
             "aciklama"      => $this->input->post("aciklama"),  
+            "sonuc"      => $this->input->post("sonuc"),  
             "kullanici"      => $user->id,  
             "tarih"         => $this->input->post("tarih"),
             "olcum"         => $olcum
@@ -430,6 +441,7 @@ class Anasayfa extends MY_Controller
             $viewData->irsaliye = $irsaliye;
             $viewData->json = json_decode($olcum); 
             $viewData->kullanici = $kullanici;
+            $viewData->sonuc = $sonuc;
     
              /** Tablodan Verilerin Getirilmesi.. */
              $viewData->item = $this->girdi_kontrol_model->get(
@@ -461,6 +473,8 @@ class Anasayfa extends MY_Controller
     public function proseskontrol_ekle(){
 
         $viewData = new stdClass();
+
+        $viewData->sonuc_secim = $this->sonuc_secim_model->get_all();
 
         // formdan gelen bilgilere göre olcum tablosunu getir
         $urun_id = $this->input->post("urun");       
@@ -498,6 +512,7 @@ class Anasayfa extends MY_Controller
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
+        $sonuc = $this->input->post("sonuc");            
         $olcum = json_encode($this->input->post("form"));       
          
 
@@ -540,6 +555,7 @@ class Anasayfa extends MY_Controller
             "urun"          => $this->input->post("urun"),            
             "aciklama"      => $this->input->post("aciklama"),  
             "kullanici"     => $this->input->post("kullanici"), 
+            "sonuc"     => $this->input->post("sonuc"), 
             "kontrol_no"    => $get_kontrol_id,  
             "tarih"         => $this->input->post("tarih"),
             "olcum"         => $olcum
@@ -583,6 +599,7 @@ class Anasayfa extends MY_Controller
             $viewData->urun = $urun;
             $viewData->json = json_decode($olcum); 
             $viewData->kullanici = $kullanici;
+            $viewData->sonuc = $sonuc;
     
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
@@ -598,6 +615,8 @@ class Anasayfa extends MY_Controller
             )
         );      
           
+        $viewData->sonuc_secim = $this->sonuc_secim_model->get_all();
+
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($item->olcum);
 
@@ -664,6 +683,7 @@ class Anasayfa extends MY_Controller
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
+        $sonuc = $this->input->post("sonuc");            
         $olcum = json_encode($this->input->post("form"));       
          
 
@@ -689,6 +709,7 @@ class Anasayfa extends MY_Controller
             "lot"     => $this->input->post("lot"),
             "urun"       => $this->input->post("urun"),
             "aciklama"      => $this->input->post("aciklama"),  
+            "sonuc"      => $this->input->post("sonuc"),  
             "kullanici"      => $user->id,  
             "tarih"         => $this->input->post("tarih"),
             "olcum"         => $olcum
@@ -730,6 +751,7 @@ class Anasayfa extends MY_Controller
             $viewData->urun = $urun;
             $viewData->json = json_decode($olcum); 
             $viewData->kullanici = $kullanici;
+            $viewData->sonuc = $sonuc;
     
              /** Tablodan Verilerin Getirilmesi.. */
              $viewData->item = $this->proses_kontrol_model->get(
@@ -760,7 +782,7 @@ class Anasayfa extends MY_Controller
     public function finalkontrol_ekle(){
 
         $viewData = new stdClass();
-
+        $viewData->sonuc_secim = $this->sonuc_secim_model->get_all();
         // formdan gelen bilgilere göre olcum tablosunu getir
         $urun_id = $this->input->post("urun");       
 
@@ -799,6 +821,7 @@ class Anasayfa extends MY_Controller
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
+        $sonuc = $this->input->post("sonuc");            
         $olcum = json_encode($this->input->post("form"));       
          
 
@@ -840,6 +863,7 @@ class Anasayfa extends MY_Controller
             "urun"       => $this->input->post("urun"),
             "aciklama"      => $this->input->post("aciklama"),  
             "kullanici"      => $this->input->post("kullanici"), 
+            "sonuc"      => $this->input->post("sonuc"), 
             "kontrol_no"    => $get_kontrol_id,  
             "tarih"         => $this->input->post("tarih"),
             "olcum"         => $olcum
@@ -883,6 +907,7 @@ class Anasayfa extends MY_Controller
             $viewData->urun = $urun;
             $viewData->json = json_decode($olcum); 
             $viewData->kullanici = $kullanici;
+            $viewData->sonuc = $sonuc;
     
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
@@ -897,7 +922,7 @@ class Anasayfa extends MY_Controller
                 "id"    => $id,
             )
         );      
-          
+        $viewData->sonuc_secim = $this->sonuc_secim_model->get_all();  
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($item->olcum);
 
@@ -965,6 +990,7 @@ class Anasayfa extends MY_Controller
         $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
+        $sonuc = $this->input->post("sonuc");            
         $olcum = json_encode($this->input->post("form"));       
          
 
@@ -986,11 +1012,12 @@ class Anasayfa extends MY_Controller
         $user = get_active_user(); 
             
         $data = array(
-            "kutu_no"      => $this->input->post("kutu_no"),
-            "lot"     => $this->input->post("lot"),
-            "urun"       => $this->input->post("urun"),
+            "kutu_no"       => $this->input->post("kutu_no"),
+            "lot"           => $this->input->post("lot"),
+            "urun"          => $this->input->post("urun"),
             "aciklama"      => $this->input->post("aciklama"),  
-            "kullanici"      => $user->id,  
+            "sonuc"         => $this->input->post("sonuc"),  
+            "kullanici"     => $user->id,  
             "tarih"         => $this->input->post("tarih"),
             "olcum"         => $olcum
         );
@@ -1030,6 +1057,7 @@ class Anasayfa extends MY_Controller
             $viewData->lot = $lot;
             $viewData->json = json_decode($olcum);           
             $viewData->kullanici = $kullanici;
+            $viewData->sonuc = $sonuc;
     
              /** Tablodan Verilerin Getirilmesi.. */
              $viewData->item = $this->final_kontrol_model->get(

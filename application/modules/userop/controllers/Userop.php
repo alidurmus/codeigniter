@@ -16,13 +16,15 @@ class Userop extends MY_Controller {
 
     public function login(){
 
-
         if(get_active_user()){
             redirect(base_url("anasayfa"));
         }
-
         $viewData = new stdClass();
 
+        $users = $this->user_model->get_all(
+            
+        );  
+        $viewData->users = $users;
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "login";
@@ -31,10 +33,7 @@ class Userop extends MY_Controller {
 
     }
 
-    public function do_login(){
-
-
-  
+    public function do_login(){ 
 
          /*
             #1	Admin
@@ -43,40 +42,29 @@ class Userop extends MY_Controller {
             #4	Planlama  
             #5	Arge
         */
-
-
-
         if(get_active_user()){
-
             if(get_active_user()->user_role_id == 1){//admin
-
                 redirect(base_url("dashboard"));
             } 
             if(get_active_user()->user_role_id == 2){// kalite
                 redirect(base_url("anasayfa/kalite"));
-
             }
             if(get_active_user()->user_role_id == 3){// yonetim
                 redirect(base_url("anasayfa/yonetim"));
-
             }
             if(get_active_user()->user_role_id == 4){// planlama
-
                 redirect(base_url("anasayfa/planlama"));
             }
             if(get_active_user()->user_role_id == 5){// arge
-
                 redirect(base_url("anasayfa/arge"));
-
-            }
-            
-           
+            }          
         }
 
         $this->load->library("form_validation");
 
         // Kurallar yazilir..
-        $this->form_validation->set_rules("user_email", "E-posta", "required|trim|valid_email");
+        //$this->form_validation->set_rules("user_email", "E-posta", "required|trim|valid_email");
+        $this->form_validation->set_rules("user_name", "Kullanıcı Adı", "required|trim");
         $this->form_validation->set_rules("user_password", "Şifre", "required|trim|min_length[6]|max_length[8]");
 
         $this->form_validation->set_message(
@@ -105,11 +93,12 @@ class Userop extends MY_Controller {
 
             $user = $this->user_model->get(
                 array(
-                    "email"     => $this->input->post("user_email"),
+                    "user_name"     => $this->input->post("user_name"),
                     "password"  => md5($this->input->post("user_password")),
                     "isActive"  => 1
                 )
             );
+            
 
             if($user){
 

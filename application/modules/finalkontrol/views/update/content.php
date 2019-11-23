@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <label for="control-demo-6" class="">Kullanicilar</label>
                         <div id="control-demo-6" class=""> 
-                            <select name="kullanici" class="form-control">                               
+                            <select name="kullanici" class="form-control">               
                                     <?php foreach($kullanicilar as $kullanici) { ?>
                                         <?php $kullanici_id = isset($form_error) ? set_value("kullanici") : $item->kullanici; ?>
                                         <option
@@ -73,8 +73,7 @@
 
                                 <?php if(isset($form_error)){ ?>
                                     <small class="pull-right input-form-error"> <?php echo form_error("kullanici"); ?></small>
-                                <?php } ?>                               
-                                                     
+                                <?php } ?>                                                     
                         </div>
                     </div><!-- .form-group -->
                     <div class="form-group">

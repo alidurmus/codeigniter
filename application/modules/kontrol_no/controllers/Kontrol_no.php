@@ -17,8 +17,7 @@ class Kontrol_no extends MY_Controller
         $this->load->model("kontrol_no/kontrol_no_model");
         $this->load->model("kullanicilar/kullanicilar_model");
 
-        $this->load->model("gorselkontrol/gorsel_kontrol_model");
-        $this->load->model("olcukontrol/olcu_kontrol_model");
+       
 
         if(!get_active_user()){
             redirect(base_url("login"));

@@ -19,8 +19,7 @@ $this->load->model("malzemeler/malzemeler_model");
 $this->load->model("kontrol_no/kontrol_no_model");
 $this->load->model("kullanicilar/kullanicilar_model");
 
-$this->load->model("gorselkontrol/gorsel_kontrol_model");
-$this->load->model("olcukontrol/olcu_kontrol_model");
+
 
 
 

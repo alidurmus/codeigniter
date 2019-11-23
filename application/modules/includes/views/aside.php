@@ -45,24 +45,17 @@
         <div class="menubar-scroll-inner">
             <ul class="app-menu">
             <li>
-                    <a href="<?php echo base_url(); ?>">
+                    <a href="<?php echo base_url("dashboard"); ?>">
                         <i class="menu-icon zmdi zmdi-view-web zmdi-hc-lg"></i>
                         <span class="menu-text">Ana Sayfa</span>
                     </a>
                 </li>
-
-                <?php if(isAllowedViewModule("dashboard")) { ?>
-                    <li>
-                        <a href="<?php echo base_url("dashboard"); ?>">
-                            <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
-                            <span class="menu-text">Dashboard</span>
-                        </a>
-                    </li>
-                <?php } ?>
-
-             
-
-
+                <li>
+                    <a href="<?php echo base_url("anasayfa/kalite"); ?>">
+                        <i class="menu-icon zmdi zmdi-view-web zmdi-hc-lg"></i>
+                        <span class="menu-text">Kalite İşlemleri</span>
+                    </a>
+                </li>    
                 <?php if(isAllowedViewModule("urunler")) { ?>
                     <li>
                         <a href="<?php echo base_url("urunler"); ?>">

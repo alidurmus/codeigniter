@@ -7,7 +7,19 @@
             <input v-model="message">
             </div>
             <div id="app-5">
-            {{ message}}
+            {{ message}}            
+            </div>
+            <div id="app">
+              <p>
+                Last result: <b>{{ decodedContent }}</b>
+              </p>
+              <input v-model="decodedContent">
+
+              <p class="error">
+                {{ errorMessage }}
+              </p>
+
+              <qrcode-stream @decode="onDecode" @init="onInit"></qrcode-stream>
             </div>
 
             <?php   if(isAllowedWriteModule()){ ?>
@@ -35,9 +47,7 @@
                         <th>İşlem</th>
                     </thead>
                     <tbody class="sortable" data-url="<?php echo base_url("vuejs/rankSetter"); ?>">
-
                         <?php foreach($items as $item) { ?>
-
                             <tr id="ord-<?php echo $item->id; ?>">
                                 <td class="order"><i class="fa fa-reorder"></i></td>
                                 <td class="w50 text-center">#<?php echo $item->id; ?></td>
@@ -56,24 +66,63 @@
                                     <?php } ?>                                   
                                  </td>
                             </tr>
-
                         <?php } ?>
-
                     </tbody>
-
                 </table>
-
             <?php } ?>
-
         </div><!-- .widget -->
     </div><!-- END column -->
 </div>
+
+<script>
+    new Vue({
+      el: '#app',
+
+      data() {
+        return {
+          decodedContent: '',
+          errorMessage: ''
+        }
+      },
+
+      methods: {
+        onDecode(content) {
+          this.decodedContent = content
+        },
+
+        onInit(promise) {
+          promise.then(() => {
+              console.log('Successfully initilized! Ready for scanning now!')
+            })
+            .catch(error => {
+              if (error.name === 'NotAllowedError') {
+                this.errorMessage = 'Hey! I need access to your camera'
+              } else if (error.name === 'NotFoundError') {
+                this.errorMessage = 'Do you even have a camera on your device?'
+              } else if (error.name === 'NotSupportedError') {
+                this.errorMessage = 'Seems like this page is served in non-secure context (HTTPS, localhost or file://)'
+              } else if (error.name === 'NotReadableError') {
+                this.errorMessage = 'Couldn\'t access your camera. Is it already in use?'
+              } else if (error.name === 'OverconstrainedError') {
+                this.errorMessage = 'Constraints don\'t match any installed camera. Did you asked for the front camera although there is none?'
+              } else {
+                this.errorMessage = 'UNKNOWN ERROR: ' + error.message
+              }
+            })
+        }
+      }
+    })
+
+  </script>
+
 <script>
 var app5 = new Vue({
 el: '#app-5',
 data: {
     message: 'mesaj'
 }
+
+
 }
 )
 var app6 = new Vue({

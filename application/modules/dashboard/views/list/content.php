@@ -1,19 +1,4 @@
 
-<div class = 'row'>
-<div class = 'col-sm-4'>
-
-</div>
-<div class = 'col-sm-4'>
-
-<ul>
-<li class = 'list-group-item '><a href = '<?php echo base_url(); ?>anasayfa/kalite/'>Kalite Kontrol</a></li>
-</ul>
-</div>
-<div class = 'col-sm-4'>
-
-</div>
-</div>
-
 <div class = 'col-md-12'>
 <div class = 'widget p-lg'>
 
@@ -24,13 +9,11 @@
     <p>Burada herhangi bir veri bulunmamaktadır. Eklemek için lütfen <a href = '<?php echo base_url('kontrol_no/new_form'); ?>'>tıklayınız</a></p>
     </div>
 
-    <?php } else {
-        ?>
-
+    <?php } else { ?>
         <table  id="dataTable" class = 'table display table-hover table-striped table-bordered content-container '>
             <thead>
                 <tr>               
-                    <th class = 'w50'>#id</th>
+                    <th class = 'w50'>Kontrol No</th>
                     <th>process_isim</th>
                     <th>parti_no</th>
                     <th>lot_no</th>
@@ -41,7 +24,7 @@
             <tbody class = 'sortable' data-url = '<?php echo base_url('kontrol_no/rankSetter'); ?>'>
             <?php foreach ( $items as $item ) { ?>
                 <tr id = "ord-<?php echo $item->id; ?>">                   
-                    <td class = 'w50 text-center'>#<?php echo $item->id;
+                    <td class = 'w50 text-center'><?php echo $item->id;
                     ?></td>
                     <td><?php echo $item->process_isim;
                     ?></td>
