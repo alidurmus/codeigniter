@@ -122,6 +122,7 @@ class Kontrol_no extends MY_Controller
             // aktif kullanıcı bilgilerini al
             $user = get_active_user(); 
           
+
             $data = array(
                 "parti_no"      => $this->input->post("parti_no"),
                 "tedarikci"     => $this->input->post("tedarikci"),

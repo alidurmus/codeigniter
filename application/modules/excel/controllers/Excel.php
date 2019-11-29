@@ -1,0 +1,366 @@
+<?php
+require_once FCPATH  . 'vendor\vendor\autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+class Excel extends MY_Controller
+{
+    public $viewFolder = "";
+    
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->viewFolder = "excel";     
+
+       
+        $this->load->model("girdikontrol/girdi_kontrol_model");
+        $this->load->model("proseskontrol/proses_kontrol_model");
+        $this->load->model("finalkontrol/final_kontrol_model");
+        $this->load->model("tedarikciler/tedarikciler_model");
+        $this->load->model("malzemeler/malzemeler_model");
+        $this->load->model("urunler/urunler_model");
+        $this->load->model("kontrol_no/kontrol_no_model");
+        $this->load->model("kullanicilar/kullanicilar_model");
+       // $this->load->model("excel/excel_model"); 
+
+        if(!get_active_user()){
+            redirect(base_url("login"));
+        }
+        if(!isAllowedViewModule()){
+            redirect(base_url());
+        }
+    }
+
+    public function index(){
+
+        $viewData = new stdClass();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'Hello World !');
+        
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('hello world.xlsx');
+       
+        echo APPPATH;
+        die();
+        /** Tablodan Verilerin Getirilmesi.. */
+    
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "list";
+        $viewData->items = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
+
+    public function girdi_kontrol()
+    {
+        $viewData = new stdClass();
+
+        // Create new Spreadsheet object
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        // Set document properties
+            $spreadsheet->getProperties()->setCreator('Tempar ')
+            ->setLastModifiedBy('Ali Durmus')
+            ->setTitle('Girdi Kontrol Verileri')
+            ->setSubject('Girdi Kontrol')
+            ->setDescription('Girdi Kontrol Dosyasının Oluşturulması');
+        // add style to the header
+            $styleArray = array(
+            'font' => array(
+                'bold' => true,
+            ),
+            'alignment' => array(
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ),
+            'borders' => array(
+                'bottom' => array(
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => array('rgb' => '333333'),
+                ),
+            ),
+            'fill' => array(
+                'type'       => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
+                'rotation'   => 90,
+                'startcolor' => array('rgb' => '0d0d0d'),
+                'endColor'   => array('rgb' => 'f2f2f2'),
+            ),
+            );
+            $spreadsheet->getActiveSheet()->getStyle('A1:J1')->applyFromArray($styleArray);
+            // auto fit column to content
+        foreach(range('A', 'J') as $columnID) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+            }
+        // set the names of header cells
+            $sheet->setCellValue('A1', 'ID');
+            $sheet->setCellValue('B1', 'parti_no');
+            $sheet->setCellValue('C1', 'tedarikci');
+            $sheet->setCellValue('D1', 'malzeme');
+            $sheet->setCellValue('E1', 'irsaliye');
+            $sheet->setCellValue('F1', 'tarih');
+            $sheet->setCellValue('G1', 'kullanici');  
+            $sheet->setCellValue('H1', 'kontrol_no');  
+            $sheet->setCellValue('I1', 'aciklama');  
+            $sheet->setCellValue('J1', 'sonuc');   
+            /** Tablodan Verilerin Getirilmesi.. */
+            $items = $this->girdi_kontrol_model->listele();
+            // Add some data
+            $x = 2;
+            foreach($items as $get){
+                $sheet->setCellValue('A'.$x, $get->id);
+                $sheet->setCellValue('B'.$x, $get->parti_no);
+                $sheet->setCellValue('C'.$x, $get->tedarikci);
+                $sheet->setCellValue('D'.$x, $get->malzeme);
+                $sheet->setCellValue('E'.$x, $get->irsaliye);
+                $sheet->setCellValue('F'.$x, $get->tarih);
+                $sheet->setCellValue('G'.$x, $get->kullanici);
+                $sheet->setCellValue('H'.$x, $get->kontrol_no);
+                $sheet->setCellValue('I'.$x, $get->aciklama);
+                $sheet->setCellValue('J'.$x, $get->sonuc);
+            $x++;
+            }
+        //Create file excel.xlsx
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('Girdi_Kontrol.xlsx');
+        //End Function index
+    }
+
+    public function proses_kontrol()
+    {
+        $viewData = new stdClass();
+
+        // Create new Spreadsheet object
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        // Set document properties
+            $spreadsheet->getProperties()->setCreator('Tempar ')
+            ->setLastModifiedBy('Ali Durmus')
+            ->setTitle('Proses Kontrol Verileri')
+            ->setSubject('Proses Kontrol')
+            ->setDescription('Proses Kontrol Dosyasının Oluşturulması');
+        // add style to the header
+            $styleArray = array(
+            'font' => array(
+                'bold' => true,
+            ),
+            'alignment' => array(
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ),
+            'borders' => array(
+                'bottom' => array(
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => array('rgb' => '333333'),
+                ),
+            ),
+            'fill' => array(
+                'type'       => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
+                'rotation'   => 90,
+                'startcolor' => array('rgb' => '0d0d0d'),
+                'endColor'   => array('rgb' => 'f2f2f2'),
+            ),
+            );
+            $spreadsheet->getActiveSheet()->getStyle('A1:L1')->applyFromArray($styleArray);
+            // auto fit column to content
+        foreach(range('A', 'L') as $columnID) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+            }
+        // set the names of header cells
+            $sheet->setCellValue('A1', 'ID');
+            $sheet->setCellValue('B1', 'parti_no');
+            $sheet->setCellValue('C1', 'tedarikci');
+            $sheet->setCellValue('D1', 'malzeme');
+            $sheet->setCellValue('E1', 'irsaliye');
+            $sheet->setCellValue('F1', 'tarih');
+            $sheet->setCellValue('G1', 'kullanici');  
+            $sheet->setCellValue('H1', 'urun');  
+            $sheet->setCellValue('I1', 'lot');  
+            $sheet->setCellValue('J1', 'kontrol_no');  
+            $sheet->setCellValue('K1', 'aciklama');  
+            $sheet->setCellValue('L1', 'sonuc');  
+
+            
+
+            /** Tablodan Verilerin Getirilmesi.. */
+            $items = $this->proses_kontrol_model->listele();
+
+            // Add some data
+            $x = 2;
+            foreach($items as $get){
+                $sheet->setCellValue('A'.$x, $get->id);
+                $sheet->setCellValue('B'.$x, $get->parti_no);
+                $sheet->setCellValue('C'.$x, $get->tedarikci);
+                $sheet->setCellValue('D'.$x, $get->malzeme);
+                $sheet->setCellValue('E'.$x, $get->irsaliye);
+                $sheet->setCellValue('F'.$x, $get->tarih);
+                $sheet->setCellValue('G'.$x, $get->kullanici);
+                $sheet->setCellValue('H'.$x, $get->urun);
+                $sheet->setCellValue('I'.$x, $get->lot);
+                $sheet->setCellValue('J'.$x, $get->kontrol_no);
+                $sheet->setCellValue('K'.$x, $get->aciklama);
+                $sheet->setCellValue('L'.$x, $get->sonuc);              
+            $x++;
+            }
+        //Create file excel.xlsx
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('Proses_Kontrol.xlsx');
+        //End Function index
+    }
+
+    public function final_kontrol()
+    {
+        $viewData = new stdClass();
+
+        // Create new Spreadsheet object
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        // Set document properties
+            $spreadsheet->getProperties()->setCreator('Tempar ')
+            ->setLastModifiedBy('Ali Durmus')
+            ->setTitle('Final Kontrol Verileri')
+            ->setSubject('Final Kontrol')
+            ->setDescription('Final Kontrol Dosyasının Oluşturulması');
+        // add style to the header
+            $styleArray = array(
+            'font' => array(
+                'bold' => true,
+            ),
+            'alignment' => array(
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ),
+            'borders' => array(
+                'bottom' => array(
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => array('rgb' => '333333'),
+                ),
+            ),
+            'fill' => array(
+                'type'       => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
+                'rotation'   => 90,
+                'startcolor' => array('rgb' => '0d0d0d'),
+                'endColor'   => array('rgb' => 'f2f2f2'),
+            ),
+            );
+            $spreadsheet->getActiveSheet()->getStyle('A1:M1')->applyFromArray($styleArray);
+            // auto fit column to content
+        foreach(range('A', 'M') as $columnID) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+            }
+        // set the names of header cells
+            $sheet->setCellValue('A1', 'ID');
+            $sheet->setCellValue('B1', 'parti_no');
+            $sheet->setCellValue('C1', 'tedarikci');
+            $sheet->setCellValue('D1', 'malzeme');
+            $sheet->setCellValue('E1', 'irsaliye');
+            $sheet->setCellValue('F1', 'tarih');
+            $sheet->setCellValue('G1', 'kullanici');  
+            $sheet->setCellValue('H1', 'urun');  
+            $sheet->setCellValue('I1', 'lot');  
+            $sheet->setCellValue('J1', 'kontrol_no');  
+            $sheet->setCellValue('K1', 'kutu_no');  
+            $sheet->setCellValue('L1', 'aciklama');  
+            $sheet->setCellValue('M1', 'sonuc');  
+            
+
+            /** Tablodan Verilerin Getirilmesi.. */
+            $items = $this->final_kontrol_model->listele();
+
+            // Add some data
+            $x = 2;
+            foreach($items as $get){
+                $sheet->setCellValue('A'.$x, $get->id);
+                $sheet->setCellValue('B'.$x, $get->parti_no);
+                $sheet->setCellValue('C'.$x, $get->tedarikci);
+                $sheet->setCellValue('D'.$x, $get->malzeme);
+                $sheet->setCellValue('E'.$x, $get->irsaliye);
+                $sheet->setCellValue('F'.$x, $get->tarih);
+                $sheet->setCellValue('G'.$x, $get->kullanici);
+                $sheet->setCellValue('H'.$x, $get->urun);
+                $sheet->setCellValue('I'.$x, $get->lot);
+                $sheet->setCellValue('J'.$x, $get->kontrol_no);
+                $sheet->setCellValue('K'.$x, $get->kutu_no);
+                $sheet->setCellValue('L'.$x, $get->aciklama);
+                $sheet->setCellValue('M'.$x, $get->sonuc);
+            $x++;
+            }
+        //Create file excel.xlsx
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('Final_Kontrol.xlsx');
+        //End Function index
+    }
+
+    public function kontrol_no()
+    {
+        $viewData = new stdClass();
+
+        // Create new Spreadsheet object
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        // Set document properties
+            $spreadsheet->getProperties()->setCreator('Tempar ')
+            ->setLastModifiedBy('Ali Durmus')
+            ->setTitle('Final Kontrol Verileri')
+            ->setSubject('Kontrol No')
+            ->setDescription(' Kontrol No Dosyasının Oluşturulması');
+        // add style to the header
+            $styleArray = array(
+            'font' => array(
+                'bold' => true,
+            ),
+            'alignment' => array(
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ),
+            'borders' => array(
+                'bottom' => array(
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => array('rgb' => '333333'),
+                ),
+            ),
+            'fill' => array(
+                'type'       => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
+                'rotation'   => 90,
+                'startcolor' => array('rgb' => '0d0d0d'),
+                'endColor'   => array('rgb' => 'f2f2f2'),
+            ),
+            );
+            $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($styleArray);
+            // auto fit column to content
+        foreach(range('A', 'F') as $columnID) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+            }
+        // set the names of header cells
+            $sheet->setCellValue('A1', 'kontrol_no');
+            $sheet->setCellValue('B1', 'process_isim');
+            $sheet->setCellValue('C1', 'parti_no');
+            $sheet->setCellValue('D1', 'lot_no');
+            $sheet->setCellValue('E1', 'kutu_no');
+            $sheet->setCellValue('F1', 'tarih');
+          
+            /** Tablodan Verilerin Getirilmesi.. */
+            $items = $this->kontrol_no_model->get_all(
+                array(), "id ASC"
+            );
+            
+            // Add some data
+            $x = 2;
+            foreach($items as $get){
+                $sheet->setCellValue('A'.$x, $get->id);
+                $sheet->setCellValue('B'.$x, $get->process_isim);
+                $sheet->setCellValue('C'.$x, $get->parti_no);
+                $sheet->setCellValue('D'.$x, $get->lot_no);
+                $sheet->setCellValue('E'.$x, $get->kutu_no);
+                $sheet->setCellValue('F'.$x, $get->tarih);
+            $x++;
+            }
+        //Create file excel.xlsx
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('Kontrol_No.xlsx');
+        //End Function index
+    }
+//End Class Welcome
+}

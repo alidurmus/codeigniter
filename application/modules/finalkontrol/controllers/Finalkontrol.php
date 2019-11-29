@@ -364,36 +364,8 @@ class Finalkontrol extends MY_Controller
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     } 
     
-    public function gorsel_save(){
-    } 
+   
+  
     
-    public function gorsel_update_form($id){
-    } 
-    
-    public function gorsel_update($id){
-    } 
-    
-    public function gorsel_delete($id){
-    } 
-
-    public function olcum_new_form(){
-        
-        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
-        $viewData->viewFolder = $this->viewFolder;
-        $viewData->subViewFolder = "add";
-
-        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
-    } 
-    
-    public function olcum_save(){
-    } 
-    
-    public function olcum_update_form($id){
-    } 
-    
-    public function olcum_update($id){
-    } 
-
-    public function olcum_delete($id){
-    }
+  
 }

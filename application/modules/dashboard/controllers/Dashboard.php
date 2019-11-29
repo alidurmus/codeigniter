@@ -16,7 +16,7 @@ $this->load->model("kontrol_no/kontrol_no_model");
 $this->load->model("girdikontrol/girdi_kontrol_model");
 $this->load->model("tedarikciler/tedarikciler_model");
 $this->load->model("malzemeler/malzemeler_model");
-$this->load->model("kontrol_no/kontrol_no_model");
+
 $this->load->model("kullanicilar/kullanicilar_model");
 
 
