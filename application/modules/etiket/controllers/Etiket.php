@@ -54,6 +54,49 @@ class Etiket extends MY_Controller
         //End Function index
     }
 
+    public function kutu_no()
+    {
+        $this->load->library("form_validation");
+
+        // Kurallar yazilir..
+
+        $lot_no = $this->input->post("lot_no");
+        $adet = $this->input->post("adet");       
+
+        for ($i=0; $i <$adet ; $i++) { 
+            $qrname = "kutu_no-".$i;
+            $this->load->library('ciqrcode');
+            $params['data'] = $lot_no."-".$adet;
+            $params['level'] = 'H';
+            $params['size'] = 3;
+            $params['savename'] = FCPATH. $qrname .'.png';
+            $this->ciqrcode->generate($params); 
+        }
+               
+
+        //echo '<img src="'.base_url().'tes.png" />';
+
+
+        // header("Content-Type: image/png");
+        // $params['data'] = 'This is a text to encode become QR Code';
+        // $this->ciqrcode->generate($params);
+        // var_dump($params);
+        // die();
+
+        $viewData = new stdClass();
+
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "kutu_no";
+        $viewData->items = $params;
+        
+        $viewData->qrname = $qrname;
+        $viewData->adet = $adet;
+        $viewData->lot_no = $lot_no;
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+        //End Function index
+    }
+
+
     public function final_kontrol()
     {
         $qrname = "final_kontrol";

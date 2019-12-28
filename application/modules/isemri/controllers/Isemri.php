@@ -122,6 +122,7 @@ class Isemri extends MY_Controller
                 "musteri"           => $this->input->post("musteri"), 
                 "siparis_no"        => $this->input->post("siparis_no"), 
                 "uretim_tarihi"     => $this->input->post("uretim_tarihi"), 
+                "sevk_tarihi"     => $this->input->post("sevk_tarihi"), 
                 "tarih"             => $this->input->post("tarih"),              
                 "json"              => $urun,                  
                 "aciklama"          => $this->input->post("aciklama")
@@ -165,6 +166,7 @@ class Isemri extends MY_Controller
             $viewData->musteri = $musteri;
             $viewData->siparis_no = $siparis_no;
             $viewData->uretim_tarihi = $uretim_tarihi;
+            $viewData->sevk_tarihi = $sevk_tarihi;
             $viewData->tarih = $tarih;            
             $viewData->json = json_decode($urun); 
             $viewData->aciklama = $aciklama;      
@@ -230,6 +232,7 @@ class Isemri extends MY_Controller
                 "musteri"           => $this->input->post("musteri"), 
                 "siparis_no"        => $this->input->post("siparis_no"), 
                 "uretim_tarihi"     => $this->input->post("uretim_tarihi"), 
+                "sevk_tarihi"     => $this->input->post("sevk_tarihi"), 
                 "tarih"             => $this->input->post("tarih"),              
                 "json"              => $urun,                  
                 "aciklama"          => $this->input->post("aciklama")
@@ -272,6 +275,7 @@ class Isemri extends MY_Controller
             $viewData->musteri = $musteri;
             $viewData->siparis_no = $siparis_no;
             $viewData->uretim_tarihi = $uretim_tarihi;
+            $viewData->sevk_tarihi = $sevk_tarihi;
             $viewData->tarih = $tarih;            
             $viewData->json = json_decode($urun); 
             $viewData->aciklama = $aciklama;

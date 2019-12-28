@@ -17,6 +17,12 @@
                         <input class="form-control" placeholder="kodu" name="kodu">                        
                     </div>
                     <div class="form-group">
+                        <label>pdf</label>
+                      
+                        <input class="form-control" type="file"  placeholder="kodu" name="pdf">                        
+                    </div>
+                     
+                    <div class="form-group">
                         <table class="table table-striped table-sm"> 
                             <tbody>                          
                                 <tr>

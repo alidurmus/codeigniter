@@ -8,7 +8,25 @@
 </head>
 <body>
     <div>
-    merhaba
+    <div class="widget">
+            <div class="widget-body">
+                <form action="<?php echo base_url("etiket/kutu_no/"); ?>" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Lot No</label>
+                        <input class="form-control" placeholder="adi" name="lot_no">                        
+                    </div>
+                    <div class="form-group">
+                        <label>Adet</label>
+                        <input class="form-control" placeholder="kodu" name="adet">                        
+                    </div>
+                    
+                    </div>
+                   
+                    <button type="submit" class="btn btn-primary btn-md btn-outline">Gönder</button>
+                  
+                </form>
+            </div><!-- .widget-body -->
+        </div><!-- .widget -->
     </div>
 </body>
 </html>

@@ -11,6 +11,14 @@ function convertToSEO($text)
 }
 
 
+
+function tarih_ayarla($tarih,$format)
+{
+    $date=date_create($tarih);
+    return date_format($date,$format);
+    
+}
+
 function get_readable_date($date)
 {
     return strftime('%e %B %Y', strtotime($date));
@@ -176,6 +184,29 @@ function get_category_title($category_id = 0){
         return "<b style='color:red'>Tanımlı Değil</b>";
 
 }
+
+function fn_upload_file($file_name, $path, $types = 'gif|jpg|jpeg|png|pdf') {
+    $t = &get_instance();
+    $config = array();
+    $config['upload_path'] = $path;
+    $config['allowed_types'] = $types;
+    $config['max_size']    = '15000000';
+
+    $t->load->library('upload');
+
+    $t->upload->initialize($config);
+
+    if(!is_dir($path)){
+        @mkdir($path, 0777, true);
+    }
+
+    if ( ! $t->upload->do_upload($file_name)) {
+        throw new Exception($t->upload->display_errors());
+    } else {
+        return $t->upload->data();
+    }
+}
+
 
 function upload_picture($file, $uploadPath, $width, $height, $name){
 

@@ -82,6 +82,8 @@
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Güncelle</button>
                     <a href="<?php echo base_url("isemri"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
                 </form>
+
+                
             </div><!-- .widget-body -->
         </div><!-- .widget -->
     </div><!-- END column -->

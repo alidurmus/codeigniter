@@ -3,24 +3,24 @@
         <h4 class="m-b-lg">
             Girdi Kontrol Formu Ekle
         </h4>
-        <?php  //var_dump($json);  ?>
+        
     </div><!-- END column -->
     <div class="col-md-12">
-        <form action="<?php echo base_url("anasayfa/girdikontrol_kaydet"); ?>" method="post" enctype="multipart/form-data">
+        <form id="kontrolForm" action="<?php echo base_url("anasayfa/girdikontrol_kaydet"); ?>" method="post" enctype="multipart/form-data">
             <table class="table table-striped table-sm"> 
                 <tbody>                    
                     <tr>
                         <td colspan="2">Malzeme  Adı:</td>
                         <td colspan="2">
                             <div class="input-group">
-                                <input readonly type="text" name="malzeme_adi" class="form-control input-sm" value="<?php echo "$malzeme->adi " ?>" placeholder="malzeme"> 
+                                <input readonly type="text"  name="malzeme_adi" required class="form-control input-sm required" value="<?php echo $malzeme->adi; ?>" placeholder="malzeme"> 
                             </div>                            
                         </td>
                         <td></td>
                         <td colspan="2">Parti Nr:</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                            <input  type="text" class="form-control input-sm"  name="parti_no"  placeholder="0000">                             </div>
+                            <input  type="text" class="form-control input-sm required"  required  name="parti_no"  placeholder="0000">                             </div>
                         </td>
                         <td> </td>
                         <td> </td>
@@ -55,6 +55,52 @@
             <input   type="hidden" name="kullanici" class="form-control input-sm"  value="<?php echo $user->id ?>" />
             <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
             <a href="<?php echo base_url("anasayfa/girdikontrol"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
-        </form>            
+            <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Teknik Resim</button>
+        </form>  
+
+       
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    
+                    <div class="modal-body">
+
+                        <embed src="<?php echo base_url("uploads/pdf"); ?>/<?php echo "$malzeme->pdf " ?>" type="application/pdf"  frameborder="0" width="100%" height="800px">
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
     </div><!-- END column -->
 </div>
+<script>
+   function check_required_inputs() {
+        var valid =  Array.prototype.every.call($('.required'), function(input) {
+            return input.value;
+        });
+
+        if (valid) {
+            return true;
+        } else {
+            alert('Lütfen eksik alanları doldurunuz.');
+
+            return false;
+        }
+    } 
+    $("#kontrolForm").on('submit', function(e){
+        e.preventDefault();
+        if(check_required_inputs()){
+            $('form#kontrolForm')[0].submit();
+        }
+
+    });
+</script>

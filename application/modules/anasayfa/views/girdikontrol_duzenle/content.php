@@ -20,14 +20,14 @@
                         <td colspan="2">Malzeme  Adı:</td>
                         <td colspan="2">
                             <div class="input-group">
-                                <input readonly type="text" name="malzeme_adi" class="form-control input-sm" value="<?php echo "$malzeme->adi " ?>" placeholder="malzeme"> 
+                                <input readonly type="text" name="malzeme_adi"  class="form-control input-sm" value="<?php echo "$malzeme->adi " ?>" placeholder="malzeme"> 
                             </div>                            
                         </td>
                         <td></td>
                         <td colspan="2">Parti Nr:</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                            <input  type="text" class="form-control input-sm"  name="parti_no"  value="<?php echo "$item->parti_no " ?>" placeholder="0000">                             </div>
+                            <input  type="text" class="form-control input-sm" required name="parti_no"  value="<?php echo "$item->parti_no " ?>" placeholder="0000">                             </div>
                         </td>
                         <td> </td>
                         <td> </td>
@@ -47,7 +47,7 @@
                         <td colspan="2">İrsaliye No</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                                <input  type="text" class="form-control input-sm"  name="irsaliye" value="<?php echo "$item->irsaliye " ?>" placeholder="0000"> 
+                                <input  type="text" class="form-control input-sm" required name="irsaliye" value="<?php echo "$item->irsaliye " ?>" placeholder="0000"> 
                             </div>
                         </td>
                         <td></td>
@@ -62,6 +62,30 @@
             <input   type="hidden" name="kullanici" class="form-control input-sm"  value="<?php echo $user->id ?>" />
             <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
             <a href="<?php echo base_url("anasayfa/girdikontrol"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
-        </form>            
+            <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Teknik Resim</button>
+        </form> 
+
+        
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    
+                    <div class="modal-body">
+
+                        <embed src="<?php echo base_url("uploads/pdf"); ?>/<?php echo "$malzeme->pdf " ?>" type="application/pdf"  frameborder="0" width="100%" height="800px">
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
     </div><!-- END column -->
 </div>

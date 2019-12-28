@@ -26,7 +26,6 @@
                         <th>lot</th>
                         <th>Kontrol No</th>
                         <th>Parti_no</th>
-                        <th>İrsaliye</th>
                         <th>Tarih</th>
                         <th>İşlem</th>
                     </thead>
@@ -37,15 +36,16 @@
                             <td><?php echo $item->lot; ?></td>
                             <td><?php echo $item->kontrol_no; ?></td>
                             <td><?php echo $item->parti_no; ?></td>
-                            <td><?php echo $item->irsaliye; ?></td>
-                            <td><?php echo $item->tarih; ?></td>
+                            <td><?php  echo tarih_ayarla($item->tarih,"Y/m/d H:i");  ?></td>
                             <td>
                                 <a href="<?php echo base_url("anasayfa/proseskontrol_duzenle"); ?>/<?php echo $item->id;?>" class="btn btn-info">Düzenle</a>
                                 <button
                                     data-url="<?php echo base_url("anasayfa/proseskontrol_sil/$item->id"); ?>"
                                     class="btn btn-sm btn-danger btn-outline remove-btn">
                                     <i class="fa fa-trash"></i> Sil
-                                </button>                               
+                                </button>   
+                                <a href="<?php echo base_url("etiket/final_kontrol"); ?>/<?php echo $item->id;?>" class="btn btn-warning">Etiket</a>
+                            
                             </td>
                         </tr>
                         <?php } ?>

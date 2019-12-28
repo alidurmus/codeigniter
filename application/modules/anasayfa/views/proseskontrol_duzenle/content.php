@@ -28,7 +28,7 @@
                         <td colspan="2">lot Nr:</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                            <input  type="text" class="form-control input-sm"  name="lot"  value="<?php echo "$item->lot " ?>" placeholder="0000">                             </div>
+                            <input  type="text" class="form-control input-sm" required  name="lot"  value="<?php echo "$item->lot " ?>" placeholder="0000">                             </div>
                         </td>
                         <td> </td>
                         <td> </td>
@@ -45,7 +45,7 @@
                         <td colspan="2">Parti No</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                                <input  type="text" class="form-control input-sm"  name="parti_no" value="<?php echo "$item->parti_no " ?>" placeholder="0000"> 
+                                <input  type="text" class="form-control input-sm" required  name="parti_no" value="<?php echo "$item->parti_no " ?>" placeholder="0000"> 
                             </div>
                         </td>
                         <td></td>

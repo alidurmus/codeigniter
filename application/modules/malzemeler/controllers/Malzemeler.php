@@ -99,8 +99,15 @@ class Malzemeler extends MY_Controller
         $kodu = $this->input->post("kodu");
         $olcum = json_encode($this->input->post("form"));  
         $aciklama = $this->input->post("aciklama");   
-               
+        
+        
+        $file_name ='pdf';
+        $path = './uploads/pdf/';
+        
+        $upload = fn_upload_file($file_name, $path, $types = 'gif|jpg|jpeg|png|pdf'); 
 
+       // var_dump ($upload["file_name"]);
+        //die();
         $this->form_validation->set_rules("adi", "adi ", "required|trim");
        // $this->form_validation->set_rules("kodu", "kodu", "required|trim");
         //$this->form_validation->set_rules("malzeme", "malzeme ", "required|trim");
@@ -124,7 +131,8 @@ class Malzemeler extends MY_Controller
                 "adi"      => $this->input->post("adi"),
                 "kodu"     => $this->input->post("kodu"), 
                 "olcum"         => $olcum,                  
-                "aciklama"      => $this->input->post("aciklama")
+                "aciklama"      => $this->input->post("aciklama"),
+                "pdf"      => $upload["file_name"]
             );
 
 
@@ -201,7 +209,11 @@ class Malzemeler extends MY_Controller
         $kodu = $this->input->post("kodu");    
         $olcum = json_encode($this->input->post("form"));     
         $aciklama = $this->input->post("aciklama");     
-                
+        
+        $file_name ='pdf';
+        $path = './uploads/pdf/';
+        
+        $upload = fn_upload_file($file_name, $path, $types = 'gif|jpg|jpeg|png|pdf'); 
 
         $this->form_validation->set_rules("adi", "Adı", "required|trim");
         $this->form_validation->set_rules("kodu", "kodu", "required|trim");
@@ -223,7 +235,8 @@ class Malzemeler extends MY_Controller
                 "adi"      => $this->input->post("adi"),
                 "kodu"     => $this->input->post("kodu"),
                 "olcum"         => $olcum,
-                "aciklama"      => $this->input->post("aciklama")
+                "aciklama"      => $this->input->post("aciklama"),
+                "pdf"      => $upload["file_name"]
             );
 
         

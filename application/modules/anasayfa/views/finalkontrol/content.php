@@ -36,7 +36,7 @@
                             <td><?php echo $item->kontrol_no; ?></td>
                             <td><?php echo $item->kutu_no; ?></td>
                             <td><?php echo $item->lot; ?></td>
-                            <td><?php echo $item->tarih; ?></td>
+                            <td><?php echo tarih_ayarla($item->tarih,"Y/m/d H:i");  ?></td>
                             <td>
                                 <a href="<?php echo base_url("anasayfa/finalkontrol_duzenle"); ?>/<?php echo $item->id;?>" class="btn btn-info">Düzenle</a>
                                 <button
