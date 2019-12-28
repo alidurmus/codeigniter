@@ -11,7 +11,6 @@ class Userop extends MY_Controller {
         $this->viewFolder = "users";
 
         $this->load->model("users/user_model");
-
     }
 
     public function login(){
@@ -30,7 +29,6 @@ class Userop extends MY_Controller {
         $viewData->subViewFolder = "login";
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
-
     }
 
     public function do_login(){ 
@@ -50,13 +48,13 @@ class Userop extends MY_Controller {
                 redirect(base_url("anasayfa/kalite"));
             }
             if(get_active_user()->user_role_id == 3){// yonetim
-                redirect(base_url("anasayfa/yonetim"));
+                redirect(base_url("dashboard"));
             }
             if(get_active_user()->user_role_id == 4){// planlama
-                redirect(base_url("anasayfa/planlama"));
+                redirect(base_url("dashboard"));
             }
             if(get_active_user()->user_role_id == 5){// arge
-                redirect(base_url("anasayfa/arge"));
+                redirect(base_url("dashboard"));
             }          
         }
 
@@ -281,15 +279,7 @@ class Userop extends MY_Controller {
                 $this->session->set_flashdata("alert", $alert);
 
                 redirect(base_url("sifremi-unuttum"));
-
-
             }
-
-
         }
-
     }
-
-
-
 }

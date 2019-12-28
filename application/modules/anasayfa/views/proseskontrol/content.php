@@ -2,19 +2,21 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-right">
+            <div class="col-md-12">
                 <hr>
-                <div class="row">
-                        <div class="col-md-4 text-left">
-                                <a href="<?php echo base_url("anasayfa/kalite"); ?>" class="btn btn-primary"><-- Kalite</a>
-                            </div>
-                            <div class="col-md-4 ">
-                            <a href="<?php echo base_url("dashboard"); ?>" class="btn btn-warning"><-- Yönetim</a>
-                            </div>
-                            <div class="col-md-4 text-right">
-                                <a href="<?php echo base_url("anasayfa/urun"); ?>" class="btn btn-success">Yeni Ekle --></a>
+                    <div class="row">
+                        <div class="col-md-7">                        
+                            <a href="<?php echo base_url("anasayfa/kalite"); ?>" class="btn btn-primary  btn-lg"><-- Kalite</a>              
+
+                            <a href="<?php echo base_url("dashboard"); ?>" class="btn btn-warning  btn-lg"><-- Yönetim</a>
+                            <a href="<?php echo base_url("excel/proses_kontrol"); ?>" class="btn btn-danger  btn-lg">Excel</a>
+
+                            <a href="<?php echo base_url("anasayfa/urun"); ?>" class="btn btn-success  btn-lg">Yeni Ekle --></a>                       
                         </div>
-                    </div>
+                        <div class="col-md-5 ">  
+                        <a href="#" class="btn btn-success  btn-lg  btn-block" ><STRong>PROSES KONTROL</STRong></a>                     
+                        </div>    
+                </div> 
                 <hr>
             </div>
             <div class="col-md-12">

@@ -63,7 +63,7 @@ class Excel extends MY_Controller
         $sheet = $spreadsheet->getActiveSheet();
         // Set document properties
             $spreadsheet->getProperties()->setCreator('Tempar ')
-            ->setLastModifiedBy('Ali Durmus')
+            ->setLastModifiedBy('Kalite Kontrol')
             ->setTitle('Girdi Kontrol Verileri')
             ->setSubject('Girdi Kontrol')
             ->setDescription('Girdi Kontrol Dosyasının Oluşturulması');
@@ -124,8 +124,13 @@ class Excel extends MY_Controller
             }
         //Create file excel.xlsx
         $writer = new Xlsx($spreadsheet);
-        $writer->save('Girdi_Kontrol.xlsx');
+       
+
+        $name="uploads/excel/Girdi_Kontrol_". date("Y-m-d H-i-s") .".xlsx";
+        $writer->save($name);
         //End Function index
+        echo "<a href='".base_url($name) ."' class='btn btn-primary'>İndir</a>";
+
     }
 
     public function proses_kontrol()
@@ -137,7 +142,7 @@ class Excel extends MY_Controller
         $sheet = $spreadsheet->getActiveSheet();
         // Set document properties
             $spreadsheet->getProperties()->setCreator('Tempar ')
-            ->setLastModifiedBy('Ali Durmus')
+            ->setLastModifiedBy('Kalite Kontrol')
             ->setTitle('Proses Kontrol Verileri')
             ->setSubject('Proses Kontrol')
             ->setDescription('Proses Kontrol Dosyasının Oluşturulması');
@@ -206,8 +211,11 @@ class Excel extends MY_Controller
             }
         //Create file excel.xlsx
         $writer = new Xlsx($spreadsheet);
-        $writer->save('Proses_Kontrol.xlsx');
+        $name="uploads/excel/Proses_Kontrol_". date("Y-m-d H-i-s") .".xlsx";
+        $writer->save($name);
         //End Function index
+        echo "<a href='".base_url($name) ."' class='btn btn-primary'>İndir</a>";
+      
     }
 
     public function final_kontrol()
@@ -219,7 +227,7 @@ class Excel extends MY_Controller
         $sheet = $spreadsheet->getActiveSheet();
         // Set document properties
             $spreadsheet->getProperties()->setCreator('Tempar ')
-            ->setLastModifiedBy('Ali Durmus')
+            ->setLastModifiedBy('Kalite Kontrol')
             ->setTitle('Final Kontrol Verileri')
             ->setSubject('Final Kontrol')
             ->setDescription('Final Kontrol Dosyasının Oluşturulması');
@@ -289,8 +297,12 @@ class Excel extends MY_Controller
             }
         //Create file excel.xlsx
         $writer = new Xlsx($spreadsheet);
-        $writer->save('Final_Kontrol.xlsx');
+
+      
+        $name="uploads/excel/Final_Kontrol_".date("Y-m-d H-i-s") .".xlsx";
+        $writer->save($name);
         //End Function index
+        echo "<a href='".base_url($name) ."' class='btn btn-primary'>İndir</a>";
     }
 
     public function kontrol_no()
@@ -302,7 +314,7 @@ class Excel extends MY_Controller
         $sheet = $spreadsheet->getActiveSheet();
         // Set document properties
             $spreadsheet->getProperties()->setCreator('Tempar ')
-            ->setLastModifiedBy('Ali Durmus')
+            ->setLastModifiedBy('Kalite Kontrol')
             ->setTitle('Final Kontrol Verileri')
             ->setSubject('Kontrol No')
             ->setDescription(' Kontrol No Dosyasının Oluşturulması');
@@ -359,8 +371,12 @@ class Excel extends MY_Controller
             }
         //Create file excel.xlsx
         $writer = new Xlsx($spreadsheet);
-        $writer->save('Kontrol_No.xlsx');
+     
+        $name="uploads/excel/Kontrol_No". date("Y-m-d H-i-s") .".xlsx";
+        $writer->save($name);
         //End Function index
+        echo "<a href='".base_url($name) ."' class='btn btn-primary'>İndir</a>";
+
     }
 //End Class Welcome
 }

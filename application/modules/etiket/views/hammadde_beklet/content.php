@@ -97,8 +97,4 @@
         </table>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <a id="basic" href="#nada" class="button button-primary">Print container</a>
-    </div>
-</div>
+<?php $this->load->view("includes/yazdir_buton"); ?>

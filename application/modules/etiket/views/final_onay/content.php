@@ -16,6 +16,7 @@
     .cerceve {
         flex-direction: row;
         flex-wrap: wrap;
+        font-size:2vw;
     }
 
     .cerceve > div {
@@ -164,8 +165,4 @@
         </div><!-- END column -->  
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <a id="basic" href="#nada" class="button button-primary">Print container</a>
-    </div>
-</div>
+<?php $this->load->view("includes/yazdir_buton"); ?>

@@ -112,16 +112,24 @@ function olcumKontrol(index) {
     kalite.altLimit = Number(document.getElementById("altLimit." + index).value);
     kalite.ustLimit = Number(document.getElementById("ustLimit." + index).value);
     kalite.sonuc = "";    
-   
+    
+    inputIndex=document.getElementById("sonuc." + index);
+
     if (kalite.olcum < kalite.altLimit) {    
-        document.getElementById("sonuc." + index).value="Kaldı";
+        inputIndex.value="Kaldı";
+        inputIndex.style.backgroundColor = "red";
+        inputIndex.style.color = "white";
     }
     else if(kalite.olcum > kalite.ustLimit) {
-        document.getElementById("sonuc." + index).value="Kaldı";
+        inputIndex.value="Kaldı";
+        inputIndex.style.backgroundColor = "red";
+        inputIndex.style.color = "white";
     }
     else{
-        document.getElementById("sonuc." + index).value="Geçti";
-    }   
+        inputIndex.value="Geçti";
+        inputIndex.style.backgroundColor = "green";
+        inputIndex.style.color = "white";
+    }  
 }
 
 </script>

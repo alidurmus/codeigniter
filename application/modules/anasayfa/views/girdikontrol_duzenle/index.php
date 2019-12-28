@@ -19,7 +19,7 @@
     <title>Girdi Kontrol Formları</title>
 </head>
 
-<body class="menubar-left menubar-unfold menubar-light theme-primary">
+<body onload="sonucKontrol()" class="menubar-left menubar-unfold menubar-light theme-primary">
 
     <main id="app-main" class="app-main">
         <div class="wrap">

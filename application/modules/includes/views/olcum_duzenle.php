@@ -64,7 +64,7 @@
                     </div>    
                 <?php }elseif( $key == "sonuc" ){ ?>
                     <div > 
-                        <input readonly id="sonuc.<?php echo $row; ?>" type="text" class="form-control input-sm" value="<?php echo $val; ?>" name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" > 
+                        <input readonly id="sonuc.<?php echo $row; ?>" type="text" class="form-control input-sm" value="<?php echo $val; ?>" name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]"  > 
                     </div>
                 <?php }else { ?>
                     <input readonly type="text" class="form-control input-sm" value="<?php echo $val; ?>" name="form[olcum][<?php echo $row; ?>][<?php echo $key; ?>]" > 
@@ -119,16 +119,41 @@ function olcumKontrol(index) {
     kalite.altLimit = Number(document.getElementById("altLimit." + index).value);
     kalite.ustLimit = Number(document.getElementById("ustLimit." + index).value);
     kalite.sonuc = ""; 
-   
+    inputIndex=document.getElementById("sonuc." + index);
+
     if (kalite.olcum < kalite.altLimit) {    
-        document.getElementById("sonuc." + index).value="Kaldı";
+        inputIndex.value="Kaldı";
+        inputIndex.style.backgroundColor = "red";
+        inputIndex.style.color = "white";
     }
     else if(kalite.olcum > kalite.ustLimit) {
-        document.getElementById("sonuc." + index).value="Kaldı";
+        inputIndex.value="Kaldı";
+        inputIndex.style.backgroundColor = "red";
+        inputIndex.style.color = "white";
     }
     else{
-        document.getElementById("sonuc." + index).value="Geçti";
+        inputIndex.value="Geçti";
+        inputIndex.style.backgroundColor = "green";
+        inputIndex.style.color = "white";
     }   
+}
+
+function sonucKontrol() {
+<?php foreach($json->{'olcum'} as $row => $d) {?>
+    
+    <?php echo $row; ?>=document.getElementById("sonuc.<?php echo $row; ?>" );
+
+        if (<?php echo $row; ?>.value == "Geçti") {
+            <?php echo $row; ?>.style.backgroundColor = "green";
+            <?php echo $row; ?>.style.color = "white";
+        }
+        else if(<?php echo $row; ?>.value == "Kaldı") { 
+           
+            <?php echo $row; ?>.style.backgroundColor = "red";
+            <?php echo $row; ?>.style.color = "white";
+        }     
+    <?php } ?>
+
 }
 
 </script>

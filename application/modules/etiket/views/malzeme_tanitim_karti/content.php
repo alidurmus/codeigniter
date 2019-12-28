@@ -3,19 +3,47 @@
 
     <style type="text/css" media="print">
         @page {
-           /* size: auto;   /* auto is the initial value */
-            size: 210mm 297mm;
-            margin: 0;  /* this affects the margin in the printer settings */
+        /* size: auto;   /* auto is the initial value */
+        size: 210mm 297mm;
+        margin: 0;  /* this affects the margin in the printer settings */
         }
     </style>
 
-      <style>
-    .etiket-table {
+    <style>
+        .etiket-table {
         display: table;
         border: 2 solid;
-    }
-  
-    #tanitim-karti { font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; border-collapse: collapse; width: 100%; } #tanitim-karti td, #tanitim-karti th { border: 1px solid #000000; padding: 8px; } #tanitim-karti tr:nth-child(even) { background-color: #f2f2f2; } #tanitim-karti tr:hover { background-color: #ddd; } #tanitim-karti th { padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #4CAF50; color: white; }</style>
+        font-size:2.5vw;
+        }
+    
+        #tanitim-karti {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
+
+        #tanitim-karti td,
+        #tanitim-karti th {
+            border: 1px solid #000000;
+            padding: 8px;
+        }
+
+        #tanitim-karti tr:nth-child(even) {
+        
+        }
+
+        #tanitim-karti tr:hover {
+            background-color: #ddd;
+        }
+
+        #tanitim-karti th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
         <table id="tanitim-karti" class="table etiket-table">
             <tbody>
                 <tr>
@@ -60,9 +88,6 @@
                 </tr>
             </tbody>
         </table>
-
-
     </div><!-- END column -->
-    <a id="basic" href="#nada" class="button button-primary">Print container</a>
-
 </div>
+<?php $this->load->view("includes/yazdir_buton"); ?>
