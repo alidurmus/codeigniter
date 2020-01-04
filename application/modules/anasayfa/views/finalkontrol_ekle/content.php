@@ -19,7 +19,7 @@
                         <td colspan="2">Kutu Nr:</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                                <input id="kutu_no"  type="text" required class="form-control input-sm"  name="kutu_no"  placeholder="0000"> 
+                                <input id="kutu_no"  type="text" required class="form-control input-sm required" required name="kutu_no"  value="0"  placeholder="0000"> 
                             </div>
                         </td>
                         <td> </td>
@@ -36,7 +36,7 @@
                         <td colspan="2">Lot No</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                                <input  type="text" class="form-control input-sm" required  name="lot" value="<?php echo ""; ?>" placeholder="0000"> 
+                                <input  type="text" class="form-control input-sm required" required  name="lot"  value="0"  placeholder="0000"> 
                             </div>
                         </td>
                         <td></td>

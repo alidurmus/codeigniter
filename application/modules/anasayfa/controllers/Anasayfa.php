@@ -218,7 +218,7 @@ class Anasayfa extends MY_Controller
             );
 
             // kontrol numarası alma işlemi
-            $insert2 = $this->kontrol_no_model->add($data2);
+           // $insert2 = $this->kontrol_no_model->add($data2);
             $get_kontrol_id = get_kontrol_id($data2);
 
 
@@ -297,7 +297,6 @@ class Anasayfa extends MY_Controller
             )
         );
 
-
         $viewData->tedarikciler = $this->tedarikciler_model->get_all(
             array(
                 "isActive"  => 1
@@ -368,7 +367,7 @@ class Anasayfa extends MY_Controller
         $tedarikci = $this->input->post("tedarikci");
         $malzeme = $this->input->post("malzeme");
         $irsaliye = $this->input->post("irsaliye");
-        $tarih = $this->input->post("tarih");
+        //$tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
         $sonuc = $this->input->post("sonuc");            
@@ -400,7 +399,7 @@ class Anasayfa extends MY_Controller
             "aciklama"      => $this->input->post("aciklama"),  
             "sonuc"      => $this->input->post("sonuc"),  
             "kullanici"      => $user->id,  
-            "tarih"         => $this->input->post("tarih"),
+           //"tarih"         => $this->input->post("tarih"),
             "olcum"         => $olcum
         );
         $update = $this->girdi_kontrol_model->update(array("id" => $id), $data);
@@ -540,7 +539,7 @@ class Anasayfa extends MY_Controller
             );
 
             // kontrol numarası alma işlemi
-            $insert2 = $this->kontrol_no_model->add($data2);
+           // $insert2 = $this->kontrol_no_model->add($data2);
             $get_kontrol_id = get_kontrol_id($data2);
 
 
@@ -680,7 +679,7 @@ class Anasayfa extends MY_Controller
         $parti_no = $this->input->post("parti_no");
         $lot = $this->input->post("lot");
         $urun = $this->input->post("urun");
-        $tarih = $this->input->post("tarih");
+        //$tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
         $sonuc = $this->input->post("sonuc");            
@@ -711,7 +710,7 @@ class Anasayfa extends MY_Controller
             "aciklama"      => $this->input->post("aciklama"),  
             "sonuc"      => $this->input->post("sonuc"),  
             "kullanici"      => $user->id,  
-            "tarih"         => $this->input->post("tarih"),
+            //"tarih"         => $this->input->post("tarih"),
             "olcum"         => $olcum
         );
         $update = $this->proses_kontrol_model->update(array("id" => $id), $data);
@@ -847,11 +846,15 @@ class Anasayfa extends MY_Controller
                 "tarih"         => date("Y-m-d H:i:s")
             );
 
+           
+           
+
             // kontrol numarası alma işlemi
-            $insert2 = $this->kontrol_no_model->add($data2);
+          //  $insert2 = $this->kontrol_no_model->add($data2);
             $get_kontrol_id = get_kontrol_id($data2);
 
-
+            var_dump($data2);
+            die();
     
         
         // aktif kullanıcı bilgilerini al
@@ -987,7 +990,7 @@ class Anasayfa extends MY_Controller
         $kutu_no = $this->input->post("kutu_no");
         $lot = $this->input->post("lot");
         $urun = $this->input->post("urun");
-        $tarih = $this->input->post("tarih");
+       // $tarih = $this->input->post("tarih");
         $aciklama = $this->input->post("aciklama");   
         $kullanici = $this->input->post("kullanici");            
         $sonuc = $this->input->post("sonuc");            
@@ -1018,7 +1021,7 @@ class Anasayfa extends MY_Controller
             "aciklama"      => $this->input->post("aciklama"),  
             "sonuc"         => $this->input->post("sonuc"),  
             "kullanici"     => $user->id,  
-            "tarih"         => $this->input->post("tarih"),
+           // "tarih"         => $this->input->post("tarih"),
             "olcum"         => $olcum
         );
         $update = $this->final_kontrol_model->update(array("id" => $id), $data);
@@ -1129,7 +1132,7 @@ class Anasayfa extends MY_Controller
             );
 
             // kontrol numarası alma işlemi
-            $insert2 = $this->kontrol_no_model->add($data2);
+           // $insert2 = $this->kontrol_no_model->add($data2);
             $get_kontrol_id = get_kontrol_id($data2);
 
 

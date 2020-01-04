@@ -10,7 +10,7 @@
     </div>
 
     <?php } else { ?>
-        <table  id="dataTable" class = 'table display table-hover table-striped table-bordered content-container '>
+        <table  id="example" class = 'table display table-hover table-striped table-bordered content-container '>
             <thead>
                 <tr>               
                     <th class = 'w50'>Kontrol No</th>

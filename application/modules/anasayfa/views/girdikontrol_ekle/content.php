@@ -20,7 +20,7 @@
                         <td colspan="2">Parti Nr:</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                            <input  type="text" class="form-control input-sm required"  required  name="parti_no"  placeholder="0000">                             </div>
+                            <input  type="text" class="form-control input-sm required"  required  name="parti_no" value="0"   placeholder="0000">                             </div>
                         </td>
                         <td> </td>
                         <td> </td>
@@ -40,7 +40,7 @@
                         <td colspan="2">İrsaliye No</td>
                         <td colspan="2">
                             <div class="input-group"> 
-                                    <input  type="text" class="form-control input-sm"  name="irsaliye" value="<?php echo ""; ?>" placeholder="0000"> 
+                                    <input  type="text" class="form-control input-sm  required"   required  name="irsaliye" value="0" placeholder="0000"> 
                             </div>
                         </td>
                         <td></td>
@@ -55,6 +55,8 @@
             <input   type="hidden" name="kullanici" class="form-control input-sm"  value="<?php echo $user->id ?>" />
             <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
             <a href="<?php echo base_url("anasayfa/girdikontrol"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
+            <a href="<?php echo base_url("uploads/pdf"); ?>/<?php echo "$malzeme->pdf " ?>" class="btn btn-md btn-danger btn-outline">pdf</a>
+            
             <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Teknik Resim</button>
         </form>  
 

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <h4 class="m-b-lg">
-            Müşteriler Listesi
+            Tedarikçi Listesi
             <?php   if(isAllowedWriteModule()){ ?>
                 <a href="<?php echo base_url("tedarikciler/new_form"); ?>" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i> Yeni Ekle</a>
             <?php } ?>
