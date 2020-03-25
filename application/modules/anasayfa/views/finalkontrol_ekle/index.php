@@ -17,6 +17,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <title>Final Kontrol Formları</title>
+    <style>
+        .modal-dialog {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        }
+
+        .modal-content {
+        height: auto;
+        min-height: 100%;
+        border-radius: 0;
+        }
+    </style>
 </head>
 
 <body class="menubar-left menubar-unfold menubar-light theme-primary">

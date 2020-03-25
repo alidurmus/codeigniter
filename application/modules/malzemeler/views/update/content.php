@@ -25,6 +25,12 @@
                         <?php } ?>
                     </div>  
                     <div class="form-group">
+                        <label>Teknik Resim</label>
+                      
+                        <input class="form-control" type="file"  placeholder="kodu" name="pdf">   
+                        <input  type="hidden" name="pdf_eski" value="<?php echo "$item->pdf " ?>" >                      
+                    </div>
+                    <div class="form-group">
                         <table class="table table-striped table-sm"> 
                             <tbody>                          
                                 <tr>

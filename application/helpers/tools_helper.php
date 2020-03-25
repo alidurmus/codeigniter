@@ -185,7 +185,7 @@ function get_category_title($category_id = 0){
 
 }
 
-function fn_upload_file($file_name, $path, $types = 'gif|jpg|jpeg|png|pdf') {
+function fn_upload_file($input_name, $path, $types = 'gif|jpg|jpeg|png|pdf') {
     $t = &get_instance();
     $config = array();
     $config['upload_path'] = $path;
@@ -200,8 +200,8 @@ function fn_upload_file($file_name, $path, $types = 'gif|jpg|jpeg|png|pdf') {
         @mkdir($path, 0777, true);
     }
 
-    if ( ! $t->upload->do_upload($file_name)) {
-        throw new Exception($t->upload->display_errors());
+    if ( ! $t->upload->do_upload($input_name)) {
+        return false;
     } else {
         return $t->upload->data();
     }

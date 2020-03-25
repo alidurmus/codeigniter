@@ -55,8 +55,7 @@
             <input   type="hidden" name="kullanici" class="form-control input-sm"  value="<?php echo $user->id ?>" />
             <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
             <a href="<?php echo base_url("anasayfa/girdikontrol"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
-            <a href="<?php echo base_url("uploads/pdf"); ?>/<?php echo "$malzeme->pdf " ?>" class="btn btn-md btn-danger btn-outline">pdf</a>
-            
+           
             <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Teknik Resim</button>
         </form>  
 
@@ -69,8 +68,7 @@
                 <div class="modal-content">
                     
                     <div class="modal-body">
-
-                        <embed src="<?php echo base_url("uploads/pdf"); ?>/<?php echo "$malzeme->pdf " ?>" type="application/pdf"  frameborder="0" width="100%" height="800px">
+                              <embed src="<?php echo base_url("uploads/pdf"); ?>/<?php echo "$malzeme->pdf " ?>" type="application/pdf"  frameborder="0" width="100%" height="800px">
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
@@ -80,8 +78,12 @@
                 </div>
             </div>
         </div>
+ 
+<?php
 
+phpinfo();
 
+?>
     </div><!-- END column -->
 </div>
 <script>

@@ -101,10 +101,10 @@ class Malzemeler extends MY_Controller
         $aciklama = $this->input->post("aciklama");   
         
         
-        $file_name ='pdf';
+        $input_name ='pdf';
         $path = './uploads/pdf/';
         
-        $upload = fn_upload_file($file_name, $path, $types = 'gif|jpg|jpeg|png|pdf'); 
+        $upload = fn_upload_file($input_name, $path, $types = 'gif|jpg|jpeg|png|pdf'); 
 
        // var_dump ($upload["file_name"]);
         //die();
@@ -209,11 +209,20 @@ class Malzemeler extends MY_Controller
         $kodu = $this->input->post("kodu");    
         $olcum = json_encode($this->input->post("form"));     
         $aciklama = $this->input->post("aciklama");     
-        
-        $file_name ='pdf';
+        $pdf_eski = $this->input->post("pdf_eski"); 
+
+
+        $input_name ='pdf';
         $path = './uploads/pdf/';
         
-        $upload = fn_upload_file($file_name, $path, $types = 'gif|jpg|jpeg|png|pdf'); 
+
+        $upload = fn_upload_file($input_name, $path, $types = 'gif|jpg|jpeg|png|pdf'); 
+
+        if($upload == false){
+            $upload["file_name"] = $pdf_eski;
+        }
+
+        
 
         $this->form_validation->set_rules("adi", "Adı", "required|trim");
         $this->form_validation->set_rules("kodu", "kodu", "required|trim");

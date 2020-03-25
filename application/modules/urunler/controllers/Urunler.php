@@ -102,6 +102,11 @@ class Urunler extends MY_Controller
         $olcum = json_encode($this->input->post("form"));  
         $aciklama = $this->input->post("aciklama");   
                
+        $input_name ='pdf';
+        $path = './uploads/pdf/';
+        
+        $upload = fn_upload_file($input_name, $path, $types = 'gif|jpg|jpeg|png|pdf'); 
+
 
         $this->form_validation->set_rules("adi", "adi ", "required|trim");
        // $this->form_validation->set_rules("kodu", "kodu", "required|trim");
@@ -126,7 +131,8 @@ class Urunler extends MY_Controller
                 "adi"      => $this->input->post("adi"),
                 "kodu"     => $this->input->post("kodu"), 
                 "olcum"         => $olcum,               
-                "aciklama"      => $this->input->post("aciklama")
+                "aciklama"      => $this->input->post("aciklama"),
+                "pdf"      => $upload["file_name"]
             );
 
 
@@ -203,6 +209,21 @@ class Urunler extends MY_Controller
         $kodu = $this->input->post("kodu");        
         $aciklama = $this->input->post("aciklama");     
         $olcum = json_encode($this->input->post("form"));        
+        $pdf_eski = $this->input->post("pdf_eski"); 
+
+
+        $input_name ='pdf';
+        $path = './uploads/pdf/';
+        
+
+        $upload = fn_upload_file($input_name, $path, $types = 'gif|jpg|jpeg|png|pdf'); 
+
+        if($upload == false){
+            $upload["file_name"] = $pdf_eski;
+        }
+
+
+
 
         $this->form_validation->set_rules("adi", "Adı", "required|trim");
         $this->form_validation->set_rules("kodu", "kodu", "required|trim");
@@ -224,7 +245,8 @@ class Urunler extends MY_Controller
                 "adi"           => $this->input->post("adi"),
                 "kodu"          => $this->input->post("kodu"),
                 "olcum"         => $olcum,
-                "aciklama"      => $this->input->post("aciklama")
+                "aciklama"      => $this->input->post("aciklama"),
+                "pdf"      => $upload["file_name"]
             );
 
         

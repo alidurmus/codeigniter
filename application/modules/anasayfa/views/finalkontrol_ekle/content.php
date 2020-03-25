@@ -51,6 +51,7 @@
             <input   type="hidden" name="kullanici" class="form-control input-sm"  value="<?php echo $user->id ?>" />
             <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
             <a href="<?php echo base_url("anasayfa/finalkontrol"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
+            
         </form>            
     </div><!-- END column -->
 </div>

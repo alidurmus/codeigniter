@@ -17,7 +17,7 @@
                         <input class="form-control" placeholder="kodu" name="kodu">                        
                     </div>
                     <div class="form-group">
-                        <label>pdf</label>
+                        <label>Teknik Resim</label>
                       
                         <input class="form-control" type="file"  placeholder="kodu" name="pdf">                        
                     </div>
