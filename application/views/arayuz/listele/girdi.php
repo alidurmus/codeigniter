@@ -43,7 +43,7 @@
                     <?php foreach($formlar as $form) { ?>
                         <tr>
                             <td><?php echo $form->malzeme_adi; ?></td>
-                            <td><?php echo $form->td_adi; ?></td>
+                            <td><?php echo $form->tedarikci_adi; ?></td>
                             <td><?php echo $form->kontrol_no; ?></td>
                             <td><?php echo $form->parti_no; ?></td>
                             <td><?php echo $form->irsaliye; ?></td>

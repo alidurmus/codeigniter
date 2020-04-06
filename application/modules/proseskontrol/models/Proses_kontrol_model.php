@@ -11,7 +11,16 @@ class Proses_kontrol_model extends MY_Model
 
 
     public function listele(){
-        $query = $this->db->query('SELECT pk.*, ml.adi as urun_adi FROM proses_kontrol pk INNER JOIN urunler ml ON ml.id = pk.urun');
+        $query = $this->db->query(
+        'SELECT pk.*, 
+        ur.adi as urun_adi, 
+        kul.adi as kullanici_adi, 
+        son.adi as sonuc_adi  
+        FROM proses_kontrol pk   
+        INNER JOIN urunler ur ON ur.id = pk.urun 
+        INNER JOIN Kullanicilar kul ON kul.id = pk.kullanici 
+        INNER JOIN sonuc_secim son ON son.id = pk.sonuc 
+        ');
         return $query->result();
     }
 }

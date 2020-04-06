@@ -43,7 +43,8 @@
                                             data-url="<?php echo base_url("anasayfa/finalkontrol_sil/$item->id"); ?>"
                                             class="btn btn-sm btn-danger btn-outline remove-btn">
                                             <i class="fa fa-trash"></i> Sil
-                                        </button>                               
+                                        </button>   
+                                        <!--<a href="<?php echo base_url("etiket/final_kontrol"); ?>/<?php echo $item->id;?>" class="btn btn-warning">Etiket</a> -->                           
                             </td>
                         </tr>
                         <?php } ?>

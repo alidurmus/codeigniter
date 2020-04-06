@@ -298,9 +298,7 @@ class Anasayfa extends MY_Controller
         );
 
         $viewData->tedarikciler = $this->tedarikciler_model->get_all(
-            array(
-                "isActive"  => 1
-            )
+         
         );
           
        // ölçüm tablosu json açılarak veri olarak al
@@ -853,8 +851,7 @@ class Anasayfa extends MY_Controller
           //  $insert2 = $this->kontrol_no_model->add($data2);
             $get_kontrol_id = get_kontrol_id($data2);
 
-            var_dump($data2);
-            die();
+          
     
         
         // aktif kullanıcı bilgilerini al
@@ -1210,21 +1207,15 @@ class Anasayfa extends MY_Controller
         );
              
         $viewData->tedarikciler = $this->tedarikciler_model->get_all(
-            array(
-                "isActive"  => 1
-            )
+            
         );
 
         $viewData->malzemeler = $this->malzemeler_model->get_all(
-            array(
-                "isActive"  => 1
-            )
+           
         );
 
         $viewData->kullanicilar = $this->kullanicilar_model->get_all(
-            array(
-                "isActive"  => 1
-            )
+          
         );
 
 

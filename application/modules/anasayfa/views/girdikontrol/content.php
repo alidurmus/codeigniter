@@ -37,7 +37,7 @@
                     <?php foreach($items as $item) { ?>
                         <tr>
                             <td><?php echo $item->malzeme_adi; ?></td>
-                            <td><?php echo $item->td_adi; ?></td>
+                            <td><?php echo $item->tedarikci_adi; ?></td>
                             <td><?php echo $item->kontrol_no; ?></td>
                             <td><?php echo $item->parti_no; ?></td>
                             <td><?php echo $item->irsaliye; ?></td>

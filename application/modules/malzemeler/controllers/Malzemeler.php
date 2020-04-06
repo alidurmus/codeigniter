@@ -132,6 +132,7 @@ class Malzemeler extends MY_Controller
                 "kodu"     => $this->input->post("kodu"), 
                 "olcum"         => $olcum,                  
                 "aciklama"      => $this->input->post("aciklama"),
+                "isActive"     => 1,   
                 "pdf"      => $upload["file_name"]
             );
 

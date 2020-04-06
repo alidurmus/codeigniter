@@ -81,7 +81,7 @@
  
 <?php
 
-phpinfo();
+
 
 ?>
     </div><!-- END column -->

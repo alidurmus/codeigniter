@@ -99,7 +99,8 @@ class Tedarikciler extends MY_Controller
           
             $data = array(
                 "adi"      => $this->input->post("adi"),
-                "kodu"     => $this->input->post("kodu"),                
+                "kodu"     => $this->input->post("kodu"),
+                "isActive"     => 1,                
                 "aciklama"      => $this->input->post("aciklama")
             );
 
