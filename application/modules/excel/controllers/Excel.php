@@ -21,7 +21,7 @@ class Excel extends MY_Controller
         $this->load->model("malzemeler/malzemeler_model");
         $this->load->model("urunler/urunler_model");
         $this->load->model("kontrol_no/kontrol_no_model");
-        $this->load->model("kullanicilar/kullanicilar_model");
+        
        // $this->load->model("excel/excel_model"); 
 
         if(!get_active_user()){
@@ -177,15 +177,13 @@ class Excel extends MY_Controller
             $sheet->setCellValue('A1', 'ID');
             $sheet->setCellValue('B1', 'parti_no');
            // $sheet->setCellValue('C1', 'Muşteri');
-            $sheet->setCellValue('D1', 'tarih');
-            $sheet->setCellValue('E1', 'kullanici');
-            $sheet->setCellValue('F1', 'urun');
-            $sheet->setCellValue('G1', 'lot');  
-            $sheet->setCellValue('H1', 'kontrol_no');  
-            $sheet->setCellValue('I1', 'aciklama');  
-            $sheet->setCellValue('J1', 'sonuc');  
-
-            
+            $sheet->setCellValue('C1', 'tarih');
+            $sheet->setCellValue('D1', 'kullanici');
+            $sheet->setCellValue('E1', 'urun');
+            $sheet->setCellValue('F1', 'lot');  
+            $sheet->setCellValue('G1', 'kontrol_no');  
+            $sheet->setCellValue('H1', 'aciklama');  
+            $sheet->setCellValue('I1', 'sonuc');  
 
             /** Tablodan Verilerin Getirilmesi.. */
             $items = $this->proses_kontrol_model->listele();
@@ -196,13 +194,13 @@ class Excel extends MY_Controller
                 $sheet->setCellValue('A'.$x, $get->id);
                 $sheet->setCellValue('B'.$x, $get->parti_no);
                // $sheet->setCellValue('C'.$x, $get->musteri_adi);
-                $sheet->setCellValue('D'.$x, $get->tarih);
-                $sheet->setCellValue('E'.$x, $get->kullanici_adi);
-                $sheet->setCellValue('F'.$x, $get->urun_adi);
-                $sheet->setCellValue('G'.$x, $get->lot);
-                $sheet->setCellValue('H'.$x, $get->kontrol_no);
-                $sheet->setCellValue('I'.$x, $get->aciklama);
-                $sheet->setCellValue('J'.$x, $get->sonuc_adi);
+                $sheet->setCellValue('C'.$x, $get->tarih);
+                $sheet->setCellValue('D'.$x, $get->kullanici_adi);
+                $sheet->setCellValue('E'.$x, $get->urun_adi);
+                $sheet->setCellValue('F'.$x, $get->lot);
+                $sheet->setCellValue('G'.$x, $get->kontrol_no);
+                $sheet->setCellValue('H'.$x, $get->aciklama);
+                $sheet->setCellValue('I'.$x, $get->sonuc_adi);
                            
             $x++;
             }
@@ -261,14 +259,14 @@ class Excel extends MY_Controller
            // $sheet->setCellValue('C1', 'tedarikci');
            // $sheet->setCellValue('D1', 'malzeme');
            // $sheet->setCellValue('E1', 'irsaliye');
-            $sheet->setCellValue('F1', 'tarih');
-            $sheet->setCellValue('G1', 'kullanici');  
-            $sheet->setCellValue('H1', 'urun');  
-            $sheet->setCellValue('I1', 'lot');  
-            $sheet->setCellValue('J1', 'kontrol_no');  
-            $sheet->setCellValue('K1', 'kutu_no');  
-            $sheet->setCellValue('L1', 'aciklama');  
-            $sheet->setCellValue('M1', 'sonuc');  
+            $sheet->setCellValue('C1', 'tarih');
+            $sheet->setCellValue('D1', 'kullanici');  
+            $sheet->setCellValue('E1', 'urun');  
+            $sheet->setCellValue('F1', 'lot');  
+            $sheet->setCellValue('G1', 'kontrol_no');  
+            $sheet->setCellValue('H1', 'kutu_no');  
+            $sheet->setCellValue('I1', 'aciklama');  
+            $sheet->setCellValue('J1', 'sonuc');  
             
 
             /** Tablodan Verilerin Getirilmesi.. */
@@ -282,14 +280,14 @@ class Excel extends MY_Controller
                // $sheet->setCellValue('C'.$x, $get->tedarikci_adi);
                // $sheet->setCellValue('D'.$x, $get->malzeme_adi);
                // $sheet->setCellValue('E'.$x, $get->irsaliye);
-                $sheet->setCellValue('F'.$x, $get->tarih);
-                $sheet->setCellValue('G'.$x, $get->kullanici_adi);
-                $sheet->setCellValue('H'.$x, $get->urun_adi);
-                $sheet->setCellValue('I'.$x, $get->lot);
-                $sheet->setCellValue('J'.$x, $get->kontrol_no);
-                $sheet->setCellValue('K'.$x, $get->kutu_no);
-                $sheet->setCellValue('L'.$x, $get->aciklama);
-                $sheet->setCellValue('M'.$x, $get->sonuc_adi);
+                $sheet->setCellValue('C'.$x, $get->tarih);
+                $sheet->setCellValue('D'.$x, $get->kullanici_adi);
+                $sheet->setCellValue('E'.$x, $get->urun_adi);
+                $sheet->setCellValue('F'.$x, $get->lot);
+                $sheet->setCellValue('G'.$x, $get->kontrol_no);
+                $sheet->setCellValue('H'.$x, $get->kutu_no);
+                $sheet->setCellValue('I'.$x, $get->aciklama);
+                $sheet->setCellValue('J'.$x, $get->sonuc_adi);
             $x++;
             }
         //Create file excel.xlsx

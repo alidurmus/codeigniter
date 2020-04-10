@@ -23,8 +23,8 @@ class Anasayfa extends MY_Controller
         $this->load->model("urunler/urunler_model");
         
         $this->load->model("kontrol_no/kontrol_no_model");
-        $this->load->model("kullanicilar/kullanicilar_model");   
-        
+         
+        $this->load->model("users/user_model");
         $this->load->model("sonuc_secim/sonuc_secim_model");
         
     }
@@ -151,7 +151,8 @@ class Anasayfa extends MY_Controller
         $viewData = new stdClass();
 
         $viewData->tedarikciler = $this->tedarikciler_model->get_all();      
-        $viewData->kullanicilar = $this->kullanicilar_model->get_all();
+      
+        $viewData->users = $this->user_model->get_all();
         $viewData->sonuc_secim = $this->sonuc_secim_model->get_all();
 
         // formdan gelen bilgilere göre olcum tablosunu getir
@@ -283,7 +284,6 @@ class Anasayfa extends MY_Controller
     
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
-
     }
 
     public function girdikontrol_duzenle($id){
@@ -297,9 +297,7 @@ class Anasayfa extends MY_Controller
             )
         );
 
-        $viewData->tedarikciler = $this->tedarikciler_model->get_all(
-         
-        );
+        $viewData->tedarikciler = $this->tedarikciler_model->get_all();
           
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($item->olcum);
@@ -1079,7 +1077,7 @@ class Anasayfa extends MY_Controller
 
         $viewData->tedarikciler = $this->tedarikciler_model->get_all();
         $viewData->malzemeler = $this->malzemeler_model->get_all();
-        $viewData->kullanicilar = $this->kullanicilar_model->get_all();
+        
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
@@ -1214,9 +1212,7 @@ class Anasayfa extends MY_Controller
            
         );
 
-        $viewData->kullanicilar = $this->kullanicilar_model->get_all(
-          
-        );
+       
 
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */

@@ -16,12 +16,12 @@ class Girdi_kontrol_model extends MY_Model
         'SELECT gk.*, 
          ml.adi as malzeme_adi,
          td.adi as tedarikci_adi, 
-         kul.adi as kullanici_adi, 
+         us.user_name as kullanici_adi, 
          son.adi as sonuc_adi 
          FROM girdi_kontrol gk 
          INNER JOIN malzemeler ml ON ml.id = gk.malzeme 
          INNER JOIN tedarikciler td ON td.id = gk.tedarikci 
-         INNER JOIN Kullanicilar kul ON kul.id = gk.kullanici 
+         INNER JOIN users us ON us.id = gk.kullanici 
          INNER JOIN sonuc_secim son ON son.id = gk.sonuc 
          ');
 

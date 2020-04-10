@@ -13,11 +13,11 @@ class Final_kontrol_model extends MY_Model
         $query = $this->db->query(
         'SELECT fk.*,  
         ur.adi as urun_adi, 
-        kul.adi as kullanici_adi , 
+        us.user_name as kullanici_adi , 
         son.adi as sonuc_adi 
         FROM final_kontrol fk 
         INNER JOIN urunler ur ON ur.id = fk.urun 
-        INNER JOIN Kullanicilar kul ON kul.id = fk.kullanici 
+        INNER JOIN users us ON us.id = fk.kullanici 
         INNER JOIN sonuc_secim son ON son.id = fk.sonuc 
         ');
 

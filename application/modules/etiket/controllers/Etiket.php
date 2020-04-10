@@ -18,7 +18,7 @@ class Etiket extends MY_Controller
         $this->load->model("malzemeler/malzemeler_model");
         $this->load->model("urunler/urunler_model");
         $this->load->model("kontrol_no/kontrol_no_model");
-        $this->load->model("kullanicilar/kullanicilar_model");
+        
        // $this->load->model("excel/excel_model"); 
 
         if(!get_active_user()){

@@ -2,12 +2,8 @@
 <html lang="tr">
 <head>
     <?php $this->load->view("includes/head"); ?>
-
-      <!-- Optional theme -->
-      
+      <!-- Optional theme -->      
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
- 
-
 </head>
 
 <body class="menubar-left menubar-unfold menubar-light theme-primary">
@@ -67,8 +63,5 @@
     } );
 } );
    </script>
-
-
-
 </body>
 </html>

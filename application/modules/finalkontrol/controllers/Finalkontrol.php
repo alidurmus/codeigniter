@@ -15,7 +15,7 @@ class Finalkontrol extends MY_Controller
         $this->load->model("malzemeler/malzemeler_model");
         $this->load->model("urunler/urunler_model");
         $this->load->model("kontrol_no/kontrol_no_model");
-        $this->load->model("kullanicilar/kullanicilar_model");
+        
 
    
 
@@ -66,7 +66,7 @@ class Finalkontrol extends MY_Controller
 
         $viewData->tedarikciler = $this->tedarikciler_model->get_all();
         $viewData->malzemeler = $this->malzemeler_model->get_all();
-        $viewData->kullanicilar = $this->kullanicilar_model->get_all();
+        
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
@@ -201,11 +201,7 @@ class Finalkontrol extends MY_Controller
             )
         );
 
-        $viewData->kullanicilar = $this->kullanicilar_model->get_all(
-            array(
-                "isActive"  => 1
-            )
-        );
+       
 
         
 

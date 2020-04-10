@@ -14,7 +14,7 @@ class Proseskontrol extends MY_Controller
         $this->load->model("tedarikciler/tedarikciler_model");
         $this->load->model("malzemeler/malzemeler_model");
         $this->load->model("kontrol_no/kontrol_no_model");
-        $this->load->model("kullanicilar/kullanicilar_model");
+       
 
 
         if(!get_active_user()){
@@ -64,8 +64,7 @@ class Proseskontrol extends MY_Controller
 
         $viewData->tedarikciler = $this->tedarikciler_model->get_all();
         $viewData->malzemeler = $this->malzemeler_model->get_all();
-        $viewData->kullanicilar = $this->kullanicilar_model->get_all();
-
+       
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "add";
@@ -188,22 +187,14 @@ class Proseskontrol extends MY_Controller
         );
              
         $viewData->tedarikciler = $this->tedarikciler_model->get_all(
-            array(
-                "isActive"  => 1
-            )
+          
         );
 
         $viewData->malzemeler = $this->malzemeler_model->get_all(
-            array(
-                "isActive"  => 1
-            )
+          
         );
 
-        $viewData->kullanicilar = $this->kullanicilar_model->get_all(
-            array(
-                "isActive"  => 1
-            )
-        );
+       
 
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
