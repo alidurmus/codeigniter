@@ -18,7 +18,7 @@
             <span class="zmdi zmdi-hc-lg zmdi-search"></span>
         </button>
 
-        <a href="<?php echo base_url(); ?>" class="navbar-brand">
+        <a href="<?php echo base_url("dashboard"); ?>" class="navbar-brand">
             <span class="brand-icon">
 
                 <?php if($settings->logo != "default"){ ?>

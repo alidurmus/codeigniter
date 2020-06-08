@@ -42,6 +42,7 @@
 
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Güncelle</button>
                     <a href="<?php echo base_url("users"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
+                    <a href="<?php echo base_url("users/update_password_form/$item->user_role_id"); ?>" class="btn btn-sm btn-purple btn-outline"><i class="fa fa-key"></i> Şifre Değiştir</a>
                 </form>
             </div><!-- .widget-body -->
         </div><!-- .widget -->

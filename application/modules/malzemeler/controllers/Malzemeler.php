@@ -321,7 +321,7 @@ class Malzemeler extends MY_Controller
         } else {
 
             $alert = array(
-                "title" => "İşlem Başarılı",
+                "title" => "İşlem Başarısız",
                 "text" => "Kayıt silme sırasında bir problem oluştu",
                 "type"  => "error"
             );
