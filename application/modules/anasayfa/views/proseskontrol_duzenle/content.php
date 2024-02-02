@@ -53,6 +53,25 @@
                     </tr>                                 
                     <!-- olcum alanı ekleme işlemi -->
                     <?php $this->load->view("includes/olcum_duzenle"); ?>
+
+                    <tr>
+                        <td colspan="">Proses Kontrol No:	</td>
+                         <td colspan="">  <button type="submit" class="btn btn-primary btn-md btn-outline">Ekle</button>   	</td>
+                        <td colspan="2">
+                            <!-- hammadde parti kodu duzeleme işlemi -->
+                            <?php $this->load->view("includes/p_lot"); ?> 
+
+                        </td>
+                        <td>-</td>
+                        <td colspan="">Hammadde Parti Kodu:	</td>
+                         <td colspan="">  <button type="submit" class="btn btn-primary btn-md btn-outline">Ekle</button>   	</td>
+                        <td colspan="2">
+                            <!-- hammadde parti kodu duzeleme işlemi -->
+                            <?php $this->load->view("includes/hpk"); ?> 
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr> 
                 </tbody>
             </table>
             <input  type="hidden" name="urun" class="form-control input-sm" value="<?php echo "$urun->id " ?>" > 

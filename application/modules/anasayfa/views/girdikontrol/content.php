@@ -23,12 +23,13 @@
                 <hr>
             </div>
             <div class="col-md-12">
-                <table id="dataTable" class="table table-hover table-striped table-bordered content-container">
+                <table id="" class="table table-hover table-striped table-bordered content-container">
                     <thead>
                         <th>Malzeme</th>
                         <th>Tedarikçi</th>
                         <th>Kontrol No</th>
                         <th>Parti_no</th>
+                        <th>HPK Kod</th>
                         <th>İrsaliye</th>
                         <th>Tarih</th>
                         <th>İşlem</th>
@@ -40,6 +41,7 @@
                             <td><?php echo $item->tedarikci_adi; ?></td>
                             <td><?php echo $item->kontrol_no; ?></td>
                             <td><?php echo $item->parti_no; ?></td>
+                            <td><?php echo $item->hpk; ?></td>
                             <td><?php echo $item->irsaliye; ?></td>
                             <td><?php echo tarih_ayarla($item->tarih,"Y/m/d H:i");  ?></td>
                             <td>
@@ -56,6 +58,7 @@
                     </tbody>
 
                 </table>
+                <p><?php echo $links; ?></p>
             </div>
         </div>
     </div>

@@ -16,6 +16,9 @@
                     <p>Burada herhangi bir veri bulunmamaktadır. Eklemek için lütfen <a href="<?php echo base_url("isemri/new_form"); ?>">tıklayınız</a></p>
                 </div>
 
+
+
+                
             <?php } else { ?>
 
                 <table class="table table-hover table-striped table-bordered content-container">

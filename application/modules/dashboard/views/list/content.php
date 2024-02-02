@@ -1,6 +1,6 @@
 <div class = 'col-md-12'>
     <div class = 'widget p-lg'>
-
+  
     <?php if ( empty( $items ) ) {
         ?>
 
@@ -9,7 +9,13 @@
         </div>
 
         <?php } else { ?>
-            <table  id="example" class = 'table display table-hover table-striped table-bordered content-container '>
+           
+          <!-- Search form (start) -->
+          <form method="post" action="<?= base_url() ?>dashboard/" >
+                    <input type="text" name="search" value="<?= $search_text ?>"><input type="submit" name="submit" value="Submit">
+                </form>
+                <br/>
+            <table   class = 'table display table-hover table-striped table-bordered content-container '>
                 <thead>
                     <tr>               
                         <th class = 'w50'>Kontrol No</th>
@@ -20,7 +26,7 @@
                         <th>Tarih</th>              
                     </tr>
                 </thead>
-                <tbody class = 'sortable' data-url = '<?php echo base_url('kontrol_no/rankSetter'); ?>'>
+                <tbody class = '' data-url = '<?php echo base_url('kontrol_no/rankSetter'); ?>'>
                 <?php foreach ( $items as $item ) { ?>
                     <tr id = "ord-<?php echo $item->id; ?>">                   
                         <td class = 'w50 text-center'><?php echo $item->id;
@@ -39,10 +45,10 @@
                     <?php } ?>
                 </tbody>
             </table>
-
+            
                     <?php }
                     ?>
-
+<p><?php echo $links; ?></p>
     </div><!-- .widget -->
 </div><!-- END column -->
           

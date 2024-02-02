@@ -52,7 +52,22 @@
                         </td>
                         <td></td>
                         <td></td>
-                    </tr>                                 
+                    </tr>     
+                    <tr>
+                        <td colspan="2">	</td>
+                        <td colspan="2">
+                                                  
+                        </td>
+                        <td></td>
+                        <td colspan="2">Hammadde Parti Kodu</td>
+                        <td colspan="2">
+                            <div class="input-group"> 
+                                <input  type="text" class="form-control input-sm" required name="hpk" value="<?php echo "$item->hpk " ?>" placeholder="0000"> 
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>                                
                     <!-- olcum alanı ekleme işlemi -->
                     <?php $this->load->view("includes/olcum_duzenle"); ?>
                 </tbody>

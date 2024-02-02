@@ -97,14 +97,15 @@ class Excel extends MY_Controller
         // set the names of header cells
             $sheet->setCellValue('A1', 'ID');
             $sheet->setCellValue('B1', 'parti_no');
-            $sheet->setCellValue('C1', 'tedarikci');
-            $sheet->setCellValue('D1', 'malzeme');
-            $sheet->setCellValue('E1', 'irsaliye');
-            $sheet->setCellValue('F1', 'tarih');
-            $sheet->setCellValue('G1', 'kullanici');  
-            $sheet->setCellValue('H1', 'kontrol_no');  
-            $sheet->setCellValue('I1', 'aciklama');  
-            $sheet->setCellValue('J1', 'sonuc');   
+            $sheet->setCellValue('C1', 'hpk');
+            $sheet->setCellValue('D1', 'tedarikci');
+            $sheet->setCellValue('E1', 'malzeme');
+            $sheet->setCellValue('F1', 'irsaliye');
+            $sheet->setCellValue('G1', 'tarih');
+            $sheet->setCellValue('H1', 'kullanici');  
+            $sheet->setCellValue('I1', 'kontrol_no');  
+            $sheet->setCellValue('J1', 'aciklama');  
+            $sheet->setCellValue('K1', 'sonuc');   
             /** Tablodan Verilerin Getirilmesi.. */
             $items = $this->girdi_kontrol_model->listele();
             // Add some data
@@ -112,14 +113,15 @@ class Excel extends MY_Controller
             foreach($items as $get){
                 $sheet->setCellValue('A'.$x, $get->id);
                 $sheet->setCellValue('B'.$x, $get->parti_no);
-                $sheet->setCellValue('C'.$x, $get->tedarikci_adi);
-                $sheet->setCellValue('D'.$x, $get->malzeme_adi);
-                $sheet->setCellValue('E'.$x, $get->irsaliye);
-                $sheet->setCellValue('F'.$x, $get->tarih);
-                $sheet->setCellValue('G'.$x, $get->kullanici_adi);
-                $sheet->setCellValue('H'.$x, $get->kontrol_no);
-                $sheet->setCellValue('I'.$x, $get->aciklama);
-                $sheet->setCellValue('J'.$x, $get->sonuc_adi);
+                $sheet->setCellValue('C'.$x, $get->hpk);
+                $sheet->setCellValue('D'.$x, $get->tedarikci_adi);
+                $sheet->setCellValue('E'.$x, $get->malzeme_adi);
+                $sheet->setCellValue('F'.$x, $get->irsaliye);
+                $sheet->setCellValue('G'.$x, $get->tarih);
+                $sheet->setCellValue('H'.$x, $get->kullanici_adi);
+                $sheet->setCellValue('I'.$x, $get->kontrol_no);
+                $sheet->setCellValue('J'.$x, $get->aciklama);
+                $sheet->setCellValue('K'.$x, $get->sonuc_adi);
             $x++;
             }
         //Create file excel.xlsx

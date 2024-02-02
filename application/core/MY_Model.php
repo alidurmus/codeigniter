@@ -22,6 +22,34 @@ class MY_Model extends CI_Model {
         return $this->db->where($where)->order_by($order)->get($this->tableName)->result();
     }
 
+    public function get_limit($where = array(), $limit, $start,$search="") {
+        $this->db->limit($limit, $start);
+        $query = $this->db->where($where)->get($this->tableName);
+
+        return $query->result();
+    }
+
+    public function search($where = array(), $limit, $start) {
+        $this->db->limit($limit, $start);
+        $query = $this->db->where($where)->get($this->tableName);
+
+        // if($s_data['sepcli'] !="")
+        //     $this->db->like('ts.spec_specialise',$s_data['sepcli'],'both');
+        // if($s_data['distct'] !="")
+        //     $this->db->like('td.district',$s_data['distct'],'both');
+        // if($s_data['locat'] !="")
+        //     $this->db->like('td.place', $s_data['locat'], 'both');
+
+
+        return $query->result();
+
+    }
+
+
+    public function get_count() {
+        return $this->db->count_all($this->tableName);
+    }
+
     public function add($data = array())
     {     
         /// TODO: yetkiler kontrol edilecek
@@ -44,5 +72,6 @@ class MY_Model extends CI_Model {
         }
     }
 
+    
   
 }

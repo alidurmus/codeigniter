@@ -1,73 +1,75 @@
-<div class="row">
-    <div class="col-md-12">
-        <h4 class="m-b-lg">
-            Girdi Kontrol Listesi
-            <?php   if(isAllowedWriteModule()){ ?>
-                <a href="<?php echo base_url("anasayfa/malzeme"); ?>" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i> Yeni Ekle</a>
-            <?php } ?>
-        </h4>
-    </div><!-- END column -->
-    <div class="col-md-12">
-        <div class="widget p-lg">
 
-            <?php if(empty($items)) { ?>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+                <div class="row">
+                    <div class="col-md-7">                        
+                        <a href="<?php echo base_url("anasayfa/kalite"); ?>" class="btn btn-primary  btn-lg"><-- Kalite</a>              
 
-                <div class="alert alert-info text-center">
-                    <p>Burada herhangi bir veri bulunmamaktadır. Eklemek için lütfen <a href="<?php echo base_url("girdikontrol/new_form"); ?>">tıklayınız</a></p>
+                        <a href="<?php echo base_url("dashboard"); ?>" class="btn btn-warning  btn-lg"><-- Yönetim</a>
+
+                        <a href="<?php echo base_url("excel/girdi_kontrol"); ?>" class="btn btn-danger  btn-lg">Excel</a>
+
+                        <a href="<?php echo base_url("anasayfa/malzeme"); ?>" class="btn btn-success  btn-lg">Yeni Ekle --></a>                        
+                    </div> 
+                    
+                    <div class="col-md-5"> 
+                    <a href="#" class="btn btn-primary  btn-lg  btn-block" ><STRong>GİRDİ KONTROL</STRong></a>                
+                    </div> 
+
                 </div>
-
-            <?php } else { ?>
-
-                <table class="table table-hover table-striped table-bordered content-container">
+                <hr>
+            </div>
+            <div class="col-md-12">
+                  <!-- Search form (start) -->
+                <form method="post" action="<?= base_url() ?>girdikontrol/" >
+                    <input type="text" name="search" value="<?= $search_text ?>"><input type="submit" name="submit" value="Submit">
+                </form>
+                <br/>
+                <table id="dataTablex" class="table table-hover table-striped table-bordered content-container">
                     <thead>
-                        <th class="order"><i class="fa fa-reorder"></i></th>
-                        <th class="w50">#id</th>
-                        <th>Tedarikçi</th>
                         <th>Malzeme</th>
-                        <th>İrsaliye</th>
-                        <th>Kontrol_no</th>
+                        <th>Tedarikçi</th>
+                        <th>Kontrol No</th>
                         <th>Parti_no</th>
+                        <th>İrsaliye</th>
                         <th>Tarih</th>
                         <th>İşlem</th>
                     </thead>
                     <tbody class="sortable" data-url="<?php echo base_url("girdikontrol/rankSetter"); ?>">
-
-                        <?php foreach($items as $item) { ?>
-
-                            <tr id="ord-<?php echo $item->id; ?>">
-                                <td class="order"><i class="fa fa-reorder"></i></td>
-                                <td class="w50 text-center">#<?php echo $item->id; ?></td>
-                                <td><?php echo $item->tedarikci; ?></td>
-                                <td><?php echo $item->malzeme; ?></td>
-                                <td><?php echo $item->irsaliye; ?></td>
-                                <td><?php echo $item->kontrol_no; ?></td>
-                                <td><?php echo $item->parti_no; ?></td>
-                                <td><?php echo $item->tarih; ?></td>
-                                <td class="text-center w200">
-                                    <?php   if(isAllowedDeleteModule()){ ?>
-                                        <button
-                                            data-url="<?php echo base_url("girdikontrol/delete/$item->id"); ?>"
+                    <?php foreach($items as $item) { ?>
+                        <tr>
+                            <td><?php echo $item->malzeme_adi; ?></td>
+                            <td><?php echo $item->tedarikci_adi; ?></td>
+                            <td><?php echo $item->kontrol_no; ?></td>
+                            <td><?php echo $item->parti_no; ?></td>
+                            <td><?php echo $item->irsaliye; ?></td>
+                            <td><?php echo tarih_ayarla($item->tarih,"Y/m/d H:i");  ?></td>
+                            <td>
+                                <a href="<?php echo base_url("anasayfa/girdikontrol_duzenle"); ?>/<?php echo $item->id;?>" class="btn btn-info">Düzenle</a>
+                                <button
+                                            data-url="<?php echo base_url("anasayfa/girdikontrol_sil/$item->id"); ?>"
                                             class="btn btn-sm btn-danger btn-outline remove-btn">
                                             <i class="fa fa-trash"></i> Sil
                                         </button>
-                                    <?php } ?> 
-                                    <?php   if(isAllowedUpdateModule()){ ?>
-                                        <a href="<?php echo base_url("anasayfa/girdikontrol_duzenle/$item->id"); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Düzenle</a>
-                                    <?php } ?>
-
-                                   
-
-                                </td>
-                            </tr>
-
+                               
+                            </td>
+                        </tr>
                         <?php } ?>
-
                     </tbody>
 
                 </table>
+                <p><?php echo $links; ?></p>
+            </div>
+        </div>
+    </div>
 
-            <?php } ?>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
 
-        </div><!-- .widget -->
-    </div><!-- END column -->
-</div>
+

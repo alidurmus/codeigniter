@@ -17,13 +17,14 @@
                         <td> </td>
                     </tr>                     
                     <tr>
-                        <td colspan="2">urun  Adı:</td>
-                        <td colspan="2">
+                        <td colspan="1">Ürün  Adı:</td>
+                        <td colspan="4">
                             <div class="input-group">
-                                <input readonly type="text" name="urun_adi" class="form-control input-sm" value="<?php echo "$urun->adi " ?>" placeholder="urun"> 
+                                <input readonly type="text" name="urun_adi" class="form-control input-sm" value="<?php echo "$urun->adi " ?>" placeholder="urun" style="
+    width: 25em;"> 
                             </div>                            
                         </td>
-                        <td></td>
+                      
                         <td colspan="2">Kutu Nr:</td>
                         <td colspan="2">
                             <div class="input-group"> 

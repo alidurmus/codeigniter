@@ -88,8 +88,8 @@
                         <table class="table table-striped table-sm"> 
                             <tbody>                    
                                 <tr>
-                                    <td colspan="2">urun  Adı:</td>
-                                    <td colspan="2">
+                                    <td colspan="1">Ürün  Adı:</td>
+                                    <td colspan="3">
                                         <div class="input-group">
                                             <input readonly type="text" name="urun_adi" class="form-control input-sm" value="<?php echo "$urun->adi " ?>" placeholder="urun"> 
                                         </div>                            

@@ -26,7 +26,7 @@ class Anasayfa extends MY_Controller
          
         $this->load->model("users/user_model");
         $this->load->model("sonuc_secim/sonuc_secim_model");
-        
+        $this->load->library("pagination");
     }
 
     public function index(){
@@ -134,14 +134,62 @@ class Anasayfa extends MY_Controller
     public function girdikontrol(){
 
         $viewData = new stdClass();
+
+        $config = array();
+        $config["base_url"] = base_url() . "anasayfa/girdikontrol";
+        $config["total_rows"] = $this->girdi_kontrol_model->get_count();
+        $config["per_page"] = 100;
+      
+        $config["uri_segment"] = 2;
+        $config["num_links"] = 5;
+
+        //$config["use_page_numbers"] = TRUE;
+        //$config["page_query_string"] = TRUE;
+        //$config["reuse_query_string"] = FALSE;
+        $config["prefix"] = "";
+        $config["suffix"] = "";
+       $config["use_global_url_suffix"] = TRUE;
+
+        $config["full_tag_open"] = "<nav> <ul class='pagination'>";
+        $config["full_tag_close"] = "</ul></nav>";
+        $config["first_link"] = "İlk";
+        $config["first_tag_open"] = "<li class='page-item'>";
+        $config["first_tag_close"] = "</li>";
+        $config["first_url"] = "";
+        $config["last_link"] = "Son";
+        $config["last_tag_open"] = "<li class='page-item'>";
+        $config["last_tag_close"] = "</li>";
+        $config["next_link"] = "&gt;";
+        $config["next_tag_open"] = "<li class='page-item'>";
+        $config["next_tag_close"] = "</li>";
+        $config["prev_link"] = "&lt;";
+
+        $config["prev_tag_open"] = "<li class='page-item'>";
+        $config["prev_tag_close"] = "</li>";
+        $config["cur_tag_open"] = "<li class='page-item active'><a href='#'>";
+        $config["cur_tag_close"] = "</a></li>";
+        $config["num_tag_open"] = "<li class='page-item'>";
+        $config["num_tag_close"] = "</li>";
+
+        $this->pagination->initialize($config);
+       
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        echo  $config["total_rows"];
+
+        $links = $this->pagination->create_links();
+
+        $items = $this->girdi_kontrol_model->get_limit(array(), $config["per_page"], $page);
+
         /** Tablodan Verilerin Getirilmesi.. */
-        $items = $this->girdi_kontrol_model->listele();
+        //$items = $this->girdi_kontrol_model->listele();
        
 
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "girdikontrol";
         $viewData->items = $items;
+        $viewData->links = $links;
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
@@ -187,6 +235,7 @@ class Anasayfa extends MY_Controller
 
         $parti_no = $this->input->post("parti_no");
         $tedarikci = $this->input->post("tedarikci");
+        $hpk = $this->input->post("hpk");
         $malzeme = $this->input->post("malzeme");
         $irsaliye = $this->input->post("irsaliye");
         $tarih = $this->input->post("tarih");
@@ -197,6 +246,7 @@ class Anasayfa extends MY_Controller
          
 
         $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
+        //$this->form_validation->set_rules("hpk", "hpk ", "required|trim"); 
         $this->form_validation->set_rules("irsaliye", "irsaliye ", "required|trim");   
        
         $this->form_validation->set_message(
@@ -230,6 +280,7 @@ class Anasayfa extends MY_Controller
             
         $data = array(
             "parti_no"      => $this->input->post("parti_no"),
+            "hpk"           => $this->input->post("hpk"),
             "tedarikci"     => $this->input->post("tedarikci"),
             "malzeme"       => $this->input->post("malzeme"),
             "irsaliye"      => $this->input->post("irsaliye"),
@@ -264,7 +315,7 @@ class Anasayfa extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
             
-            redirect(base_url("anasayfa/girdikontrol"));
+            redirect(base_url("girdikontrol"));
 
             } else {
 
@@ -275,6 +326,7 @@ class Anasayfa extends MY_Controller
             $viewData->subViewFolder = "anasayfa/girdikontrol_ekle";
             $viewData->form_error = true;
             $viewData->parti_no = $parti_no;
+            $viewData->hpk = $hpk;
             $viewData->tedarikci = $tedarikci;
             $viewData->malzeme = $malzeme;
             $viewData->irsaliye = $irsaliye;
@@ -351,7 +403,7 @@ class Anasayfa extends MY_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("anasayfa/girdikontrol"));
+        redirect(base_url("girdikontrol"));
     }
 
     public function girdikontrol_guncelle($id){
@@ -360,6 +412,7 @@ class Anasayfa extends MY_Controller
         // Kurallar yazilir..
 
         $parti_no = $this->input->post("parti_no");
+        $hpk = $this->input->post("hpk");
         $tedarikci = $this->input->post("tedarikci");
         $malzeme = $this->input->post("malzeme");
         $irsaliye = $this->input->post("irsaliye");
@@ -389,6 +442,7 @@ class Anasayfa extends MY_Controller
             
         $data = array(
             "parti_no"      => $this->input->post("parti_no"),
+            "hpk"      => $this->input->post("hpk"),
             "tedarikci"     => $this->input->post("tedarikci"),
             "malzeme"       => $this->input->post("malzeme"),
             "irsaliye"      => $this->input->post("irsaliye"),
@@ -420,7 +474,7 @@ class Anasayfa extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
             
-            redirect(base_url("anasayfa/girdikontrol"));
+            redirect(base_url("girdikontrol"));
 
             } else {
 
@@ -431,6 +485,7 @@ class Anasayfa extends MY_Controller
             $viewData->subViewFolder = "anasayfa/girdikontrol_duzenle";
             $viewData->form_error = true;
             $viewData->parti_no = $parti_no;
+            $viewData->hpk = $hpk;
             $viewData->tedarikci = $tedarikci;
             $viewData->malzeme = $malzeme;
             $viewData->irsaliye = $irsaliye;
@@ -579,7 +634,7 @@ class Anasayfa extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
             
-            redirect(base_url("anasayfa/proseskontrol"));
+            redirect(base_url("proseskontrol"));
 
             } else {
 
@@ -615,6 +670,12 @@ class Anasayfa extends MY_Controller
        // ölçüm tablosu json açılarak veri olarak al
        $viewData->json = json_decode($item->olcum);
 
+       $viewData->hpk = json_decode($item->hpk);
+       //var_dump(json_decode($item->hpk, true));
+
+       $viewData->p_lot = json_decode($item->p_lot_no);
+       //var_dump(json_decode($item->p_lot_no, true));
+       
        // seçilen urunnin bilgilerini getir
        $urun = $this->urunler_model->get(
         array(
@@ -664,7 +725,7 @@ class Anasayfa extends MY_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("anasayfa/proseskontrol"));
+        redirect(base_url("proseskontrol"));
     }
 
     public function proseskontrol_guncelle($id){
@@ -731,7 +792,7 @@ class Anasayfa extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
             
-            redirect(base_url("anasayfa/proseskontrol"));
+            redirect(base_url("proseskontrol"));
 
             } else {
 
@@ -890,7 +951,7 @@ class Anasayfa extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
             
-            redirect(base_url("anasayfa/finalkontrol"));
+            redirect(base_url("finalkontrol"));
 
             } else {
 
@@ -974,7 +1035,7 @@ class Anasayfa extends MY_Controller
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("anasayfa/finalkontrol"));
+        redirect(base_url("finalkontrol"));
     }
 
     public function finalkontrol_guncelle($id){
@@ -1041,7 +1102,7 @@ class Anasayfa extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
             
-            redirect(base_url("anasayfa/finalkontrol"));
+            redirect(base_url("finalkontrol"));
 
             } else {
 
@@ -1172,7 +1233,7 @@ class Anasayfa extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("anasayfa/girdikontrol"));
+            redirect(base_url("girdikontrol"));
 
         } else {
 

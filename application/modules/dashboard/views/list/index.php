@@ -3,7 +3,7 @@
 <head>
     <?php $this->load->view("includes/head"); ?>
       <!-- Optional theme -->      
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="<?php echo base_url("assets"); ?>/assets/css/jquery.dataTables.min.css">
 </head>
 
 <body class="menubar-left menubar-unfold menubar-light theme-primary">

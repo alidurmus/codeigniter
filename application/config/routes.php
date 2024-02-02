@@ -57,3 +57,7 @@ $route["login"]           = "userop/login";
 $route["logout"]          = "userop/logout";
 $route["sifremi-unuttum"] = "userop/forget_password";
 $route["reset-password"]  = "userop/reset_password";
+$route['dashboard/(:num)'] = 'dashboard';
+$route['girdikontrol/(:num)'] = 'girdikontrol';
+$route['proseskontrol/(:num)'] = 'proseskontrol';
+$route['finalkontrol/(:num)'] = 'finalkontrol';
