@@ -1,8 +1,10 @@
+<?php  if ($hpk != NULL) {?>
 <table  class="table table-hover table-striped table-bordered content-container">
     <tr>
         <th>Firstname</th>
         <th>Lastname</th>
     </tr>
+   
     <?php foreach($hpk->{'hpk'} as $row => $d) {?>
         <tr>
         <?php foreach($d as $key => $val) {?>
@@ -28,4 +30,4 @@
 </table>
 
 
-
+<?php } ?>

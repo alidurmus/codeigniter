@@ -565,7 +565,6 @@ class Anasayfa extends MY_Controller
         $sonuc = $this->input->post("sonuc");            
         $olcum = json_encode($this->input->post("form"));       
          
-
         $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
        
         $this->form_validation->set_rules("lot", "lot ", "required|trim");   
@@ -742,7 +741,6 @@ class Anasayfa extends MY_Controller
         $sonuc = $this->input->post("sonuc");            
         $olcum = json_encode($this->input->post("form"));       
          
-
         $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");   
         $this->form_validation->set_rules("lot", "lot ", "required|trim");   
        

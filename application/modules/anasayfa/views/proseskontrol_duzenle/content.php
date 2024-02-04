@@ -58,7 +58,7 @@
                         <td colspan="">Proses Kontrol No:	</td>
                          <td colspan="">  <button type="submit" class="btn btn-primary btn-md btn-outline">Ekle</button>   	</td>
                         <td colspan="2">
-                            <!-- hammadde parti kodu duzeleme işlemi -->
+                            <!-- proses lpt no duzeleme işlemi -->
                             <?php $this->load->view("includes/p_lot"); ?> 
 
                         </td>
@@ -81,6 +81,10 @@
             <a href="<?php echo base_url("anasayfa/proseskontrol"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
             <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Teknik Resim</button>
         </form>   
+
+        </br>
+        </br>
+        </br>
 
          <!-- Modal -->
          <div id="myModal" class="modal fade" role="dialog">

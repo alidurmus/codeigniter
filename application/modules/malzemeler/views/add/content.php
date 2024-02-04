@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <h4 class="m-b-lg">
-            Müşteriler Ekle
+            Malzeme Ekle
         </h4>
     </div><!-- END column -->
     <div class="col-md-12">

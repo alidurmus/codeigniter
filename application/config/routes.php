@@ -61,3 +61,5 @@ $route['dashboard/(:num)'] = 'dashboard';
 $route['girdikontrol/(:num)'] = 'girdikontrol';
 $route['proseskontrol/(:num)'] = 'proseskontrol';
 $route['finalkontrol/(:num)'] = 'finalkontrol';
+$route['ajax/(:num)'] = 'ajax';
+$route['hpk/(:num)'] = 'hpk';
