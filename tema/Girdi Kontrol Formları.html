@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"
+    />
+    <meta name="description" content="Admin, Dashboard, Bootstrap" />
+
+    <link
+      rel="shortcut icon"
+      sizes="196x196"
+      href="../assets/assets/images/default_image.png"
+    />
+
+    <title>Tempar | CMS</title>
+
+    <link
+      rel="stylesheet"
+      href="../assets/libs/bower/font-awesome/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../assets/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css"
+    />
+    <!-- build:css /assets/css/app.min.css -->
+    <link
+      rel="stylesheet"
+      href="../assets/libs/bower/animate.css/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../assets/libs/bower/fullcalendar/dist/fullcalendar.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../assets/libs/bower/perfect-scrollbar/css/perfect-scrollbar.css"
+    />
+    <link rel="stylesheet" href="../assets/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../assets/assets/css/core.css" />
+    <link rel="stylesheet" href="../assets/assets/css/app.css" />
+    <!-- endbuild -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300"
+    />
+
+    <link rel="stylesheet" href="../assets/assets/css/iziToast.min.css" />
+
+    <link rel="stylesheet" href="../assets/assets/css/custom.css" />
+    <script
+      type="text/javascript"
+      src="http://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=rHMspROaiH7QoDoLWxf9_qdKpcDXjVi0tfCoy2KQ4zSlG1vcj1AEOSC4-MsowO0qgYQZLH7qY8P27Jima7hC0Q"
+      charset="UTF-8"
+    ></script>
+    <link
+      rel="stylesheet"
+      crossorigin="anonymous"
+      href="http://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cDovL2xvY2FsaG9zdC9jbXMvcGFuZWwvbG9naW4"
+    />
+    <script src="../assets/libs/bower/breakpoints.js/dist/breakpoints.min.js"></script>
+    <script>
+      Breakpoints();
+    </script>
+    <link rel="stylesheet" href="../assets/assets/css/misc-pages.css" />
+  </head>
+
+  <body class="simple-page">
+    <!--============= start main area -->
+
+    <!-- APP MAIN ==========-->
+    <div class="simple-page-wrap">
+      <div class="simple-page-logo animated swing">
+        <a href="index.html">
+          <span><i class="fa fa-gg"></i></span>
+          <span>TEMPAR</span>
+        </a>
+      </div>
+      <!-- logo -->
+      <div class="simple-page-form animated flipInY" id="login-form">
+        <h4 class="form-title m-b-xl text-center">Kullanıcı Giriş Ekranı</h4>
+        <form action="../userop/do_login" method="post">
+          <div class="form-group">
+            <select id="sign-in-email" name="user_name" class="form-control">
+              <option value="admin">admin</option>
+
+              <option value="kalite">kalite</option>
+
+              <option value="yonetim">yonetim</option>
+
+              <option value="planlama">planlama</option>
+
+              <option value="arge">arge</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input
+              id="sign-in-password"
+              type="password"
+              class="form-control"
+              placeholder="Şifre"
+              name="user_password"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Giriş Yap</button>
+        </form>
+      </div>
+      <!-- #login-form -->
+      <div class="simple-page-footer">
+        <p><a href="../sifremi-unuttum">Şifremi Unuttum ?</a></p>
+      </div>
+      <!-- .simple-page-footer -->
+    </div>
+    <!-- .simple-page-wrap -->
+    <!--========== END app main -->
+
+    <script src="../assets/assets/js/iziToast.min.js"></script>
+  </body>
+</html>

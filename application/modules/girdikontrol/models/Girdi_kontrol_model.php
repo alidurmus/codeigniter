@@ -55,7 +55,7 @@ class Girdi_kontrol_model extends MY_Model
 
     public function listele(){
         $query = $this->db->query(
-        'SELECT gk.*, 
+        'SELECT gk.id,gk.kontrol_no,gk.hpk,gk.parti_no,gk.irsaliye,gk.tarih,  
          ml.adi as malzeme_adi,
          td.adi as tedarikci_adi, 
          us.user_name as kullanici_adi, 
@@ -73,7 +73,7 @@ class Girdi_kontrol_model extends MY_Model
 
       // Select total records
   public function getrecordCount($search = '') {
-    $this->db->select('count(*) as allcount, gk.*, 
+    $this->db->select('count(*) as allcount, gk.id, 
     ml.adi as malzeme_adi,
     td.adi as tedarikci_adi, 
     us.user_name as kullanici_adi, 

@@ -11,28 +11,14 @@
                     <div class="form-group">
                         <label>Hammadde Parti Kodu</label>
                         <input class="form-control" placeholder="Hpk" name="hpk">
-                        <?php if(isset($form_error)){ ?>
+                        <?php if (isset($form_error)) { ?>
                             <small class="pull-right input-form-error"> <?php echo form_error("hpk"); ?></small>
                         <?php } ?>
                     </div>
 
-                    <div class="form-group">
-                        <label>Ana işlem</label>
-                        <input class="form-control" placeholder="main_id" name="main_id">
-                        <?php if(isset($form_error)){ ?>
-                            <small class="pull-right input-form-error"> <?php echo form_error("main_id"); ?></small>
-                        <?php } ?>
-                    </div>
 
-                    <div class="form-group">
-                        <label>Proses</label>
-                        <input class="form-control" placeholder="proses" name="proses">
-                        <?php if(isset($form_error)){ ?>
-                            <small class="pull-right input-form-error"> <?php echo form_error("proses"); ?></small>
-                        <?php } ?>
-                    </div>
-                   
-
+                    <input type="hidden" name="main_id" value="<?php echo $main_id ?>">
+                    <input type="hidden" name="proses" value="<?php echo $proses ?>">
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
                     <a href="<?php echo base_url("hpk"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
                 </form>

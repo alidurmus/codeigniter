@@ -51,7 +51,7 @@ class Final_kontrol_model extends MY_Model
 
     public function listele(){
         $query = $this->db->query(
-        'SELECT fk.*,  
+        'SELECT fk.id,fk.urun,fk.lot,fk.kontrol_no,fk.kutu_no,fk.tarih,    
         ur.adi as urun_adi, 
         us.user_name as kullanici_adi , 
         son.adi as sonuc_adi 
@@ -71,7 +71,7 @@ class Final_kontrol_model extends MY_Model
 
          // Select total records
   public function getrecordCount($search = '') {
-    $this->db->select('count(*) as allcount, fk.*, 
+    $this->db->select('count(*) as allcount, fk.id, 
     ur.adi as urun_adi, 
     us.user_name as kullanici_adi , 
     son.adi as sonuc_adi');

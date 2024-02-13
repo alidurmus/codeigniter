@@ -47,9 +47,18 @@ class Proses_kontrol_model extends MY_Model
      }
  
 
+     /*
+<td><?php echo $item->urun_adi; ?></td>
+<td><?php echo $item->lot; ?></td>
+<td><?php echo $item->kontrol_no; ?></td>
+<td><?php echo $item->parti_no; ?></td>
+<td><?php  echo tarih_ayarla($item->tarih,"Y/m/d H:i");  ?></td>
+
+     */
+
     public function listele(){
         $query = $this->db->query(
-        'SELECT pk.*, 
+        'SELECT pk.id, pk.urun,pk.lot,pk.hpk,pk.p_lot_no,pk.kontrol_no,pk.tarih,pk.parti_no,  
         ur.adi as urun_adi, 
         us.user_name as kullanici_adi, 
         son.adi as sonuc_adi  
@@ -65,7 +74,7 @@ class Proses_kontrol_model extends MY_Model
 
        // Select total records
     public function getrecordCount($search = '') {
-        $this->db->select('count(*) as allcount, pk.*, 
+        $this->db->select('count(*) as allcount, pk.id, 
         ur.adi as urun_adi, 
         us.user_name as kullanici_adi , 
         son.adi as sonuc_adi');

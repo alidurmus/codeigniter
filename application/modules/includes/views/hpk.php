@@ -1,7 +1,7 @@
 <?php  if ($hpk != NULL) {?>
 <table  class="table table-hover table-striped table-bordered content-container">
     <tr>
-        <th>Firstname</th>
+        <th>hpk</th>
         <th>Lastname</th>
     </tr>
    
@@ -25,7 +25,7 @@
                             </td>
                     <?php } ?>
         <?php } ?>
-        </tr>
+        </tr>""
     <?php } ?>
 </table>
 

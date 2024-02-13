@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -63,3 +63,4 @@ $route['proseskontrol/(:num)'] = 'proseskontrol';
 $route['finalkontrol/(:num)'] = 'finalkontrol';
 $route['ajax/(:num)'] = 'ajax';
 $route['hpk/(:num)'] = 'hpk';
+$route['proses_categories/(:num)'] = 'proses_categories';
