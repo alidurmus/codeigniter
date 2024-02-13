@@ -249,6 +249,11 @@ class Hpk extends MY_Controller
 
     public function delete($id)
     {
+        $hpk = $this->hpk_model->get(
+            array(
+                "id"    => $id
+            )
+        );
 
         $delete = $this->hpk_model->delete(
             array(
@@ -273,6 +278,7 @@ class Hpk extends MY_Controller
             );
         }
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("hpk"));
+
+        redirect(base_url("anasayfa/proseskontrol_duzenle/$hpk->main_id"));
     }
 }

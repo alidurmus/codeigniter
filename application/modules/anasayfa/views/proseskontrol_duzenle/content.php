@@ -69,7 +69,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="panel-heading">
-            <h2> Proses Kontrol No: </h2>
+            <h2> Alt Proses Kontrol No: </h2>
         </div>
         <form action="<?php echo base_url("proses_categories/new_form"); ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="main_id" value="<?php echo "$item->id" ?>">
