@@ -677,10 +677,10 @@ class Anasayfa extends MY_Controller
         // ölçüm tablosu json açılarak veri olarak al
         $viewData->json = json_decode($item->olcum);
 
-        $viewData->hpk = json_decode($item->hpk);
+        // $viewData->hpk = json_decode($item->hpk);
         //var_dump(json_decode($item->hpk, true));
 
-        $viewData->p_lot = json_decode($item->p_lot_no);
+        //  $viewData->p_lot = json_decode($item->p_lot_no);
         //var_dump(json_decode($item->p_lot_no, true));
 
         // seçilen urunnin bilgilerini getir

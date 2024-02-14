@@ -1,14 +1,14 @@
 <?php
 //defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MY_Model extends CI_Model {
+class MY_Model extends CI_Model
+{
 
-    public $tableName ;
+    public $tableName;
 
     public function __construct()
     {
         parent::__construct();
-
     }
 
     public function get($where = array())
@@ -19,17 +19,21 @@ class MY_Model extends CI_Model {
     /** Tüm Kayıtları bana getirecek olan metot.. */
     public function get_all($where = array(), $order = "id ASC")
     {
-        return $this->db->where($where)->order_by($order)->get($this->tableName)->result();
+        $this->db->limit(10000, 0);
+        $query = $this->db->where($where)->order_by($order)->get($this->tableName);
+        return $query->result();
     }
 
-    public function get_limit($where = array(), $limit, $start,$search="") {
+    public function get_limit($where = array(), $limit, $start, $search = "")
+    {
         $this->db->limit($limit, $start);
         $query = $this->db->where($where)->get($this->tableName);
 
         return $query->result();
     }
 
-    public function search($where = array(), $limit, $start) {
+    public function search($where = array(), $limit, $start)
+    {
         $this->db->limit($limit, $start);
         $query = $this->db->where($where)->get($this->tableName);
 
@@ -42,36 +46,33 @@ class MY_Model extends CI_Model {
 
 
         return $query->result();
-
     }
 
 
-    public function get_count() {
+    public function get_count()
+    {
         return $this->db->count_all($this->tableName);
     }
 
     public function add($data = array())
-    {     
+    {
         /// TODO: yetkiler kontrol edilecek
-        if(isAllowedWriteModule()){
-           return $this->db->insert($this->tableName, $data);
+        if (isAllowedWriteModule()) {
+            return $this->db->insert($this->tableName, $data);
         }
     }
 
     public function update($where = array(), $data = array())
     {
-        if(isAllowedUpdateModule()){
+        if (isAllowedUpdateModule()) {
             return $this->db->where($where)->update($this->tableName, $data);
         }
     }
 
     public function delete($where = array())
     {
-        if(isAllowedDeleteModule()){
+        if (isAllowedDeleteModule()) {
             return $this->db->where($where)->delete($this->tableName);
         }
     }
-
-    
-  
 }

@@ -62,6 +62,8 @@
     <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
     <a href="<?php echo base_url("anasayfa/proseskontrol"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
     <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Teknik Resim</button>
+    <a href="<?php echo base_url("anasayfa/kalite"); ?>" class="btn btn-md btn-danger btn-outline">Kalite Ana Sayfa</a>
+
     </form>
     </br>
 </div>
@@ -87,7 +89,8 @@
 
             <?php foreach ($proses_categories as $proses_category) { ?>
                 <li class="list-group-item custom-class">
-                    <?php echo ($proses_category->proses_id) ?>
+
+                    <a href="<?php echo base_url("anasayfa/proseskontrol_duzenle/$proses_category->proses_id"); ?>" class=""> <?php echo ($proses_category->proses_id) ?></a>
                     <span class="pull-right button-group">
                         <?php if (isAllowedDeleteModule()) { ?>
                             <a href="<?php echo base_url("proses_categories/delete/$proses_category->id"); ?>" class="btn btn-sm btn-danger btn-outline remove-btn"><i class="fa fa-trash"></i> Sil</a>
