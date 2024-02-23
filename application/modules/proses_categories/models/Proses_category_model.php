@@ -25,4 +25,22 @@ class Proses_category_model extends MY_Model
         );
         return $query->result();
     }
+
+
+
+    public function get_id($where = array())
+    {
+
+        $this->db->select('pk.id, pk.urun,pk.lot,pk.kontrol_no,pk.tarih,pk.parti_no,  
+        pc.proses_id as proses_id, 
+        pc.id as pid, 
+        pc.main_id as main_id ');
+        $this->db->from('proses_categories pc');
+        $this->db->join('proses_kontrol pk', 'pk.id = pc.proses_id', 'inner');
+        $this->db->order_by("pc.id ", "DESC");
+        $this->db->where($where);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
