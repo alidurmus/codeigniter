@@ -60,7 +60,7 @@ class Proses_kontrol_model extends MY_Model
     public function listele()
     {
         $query = $this->db->query(
-            'SELECT pk.id, pk.urun,pk.lot,pk.kontrol_no,pk.tarih,pk.parti_no,  
+            'SELECT pk.id, pk.urun,pk.lot,pk.kontrol_no,pk.tarih,pk.parti_no,pk.aciklama,pk.hpk,    
         ur.adi as urun_adi, 
         us.user_name as kullanici_adi, 
         son.adi as sonuc_adi  
