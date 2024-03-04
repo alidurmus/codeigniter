@@ -113,6 +113,29 @@ class Finalkontrol extends MY_Controller
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
+    public function search($search_text = "")
+    {
+
+        echo $search_text;
+        $viewData = new stdClass();
+        $config = array();
+        $config["base_url"] = base_url() . "finalkontrol";
+        // Search text
+        // $search_text = "";
+
+        $items = $this->final_kontrol_model->getSearch(array(),  $search_text);
+
+        /** Tablodan Verilerin Getirilmesi.. */
+        // $items = $this->final_kontrol_model->get_all(
+        //     array(), "id ASC"
+        // );
+        /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
+        $viewData->viewFolder = $this->viewFolder;
+        $viewData->subViewFolder = "ara";
+        $viewData->items = $items;
+        $viewData->search_text = $search_text;
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+    }
 
     public function new_form()
     {

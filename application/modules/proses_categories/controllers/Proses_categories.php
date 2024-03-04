@@ -132,7 +132,7 @@ class Proses_categories extends MY_Controller
     {
 
         $viewData = new stdClass();
-
+        $viewData->categories = $this->proses_kontrol_model->listele();
         /** Tablodan Verilerin Getirilmesi.. */
         $item = $this->proses_category_model->get(
             array(

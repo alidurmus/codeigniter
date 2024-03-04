@@ -52,7 +52,7 @@ class Final_kontrol_model extends MY_Model
   public function listele()
   {
     $query = $this->db->query(
-      'SELECT fk.id,fk.urun,fk.lot,fk.kontrol_no,fk.kutu_no,fk.tarih,fk.aciklama,fk.klips_hpk,fk.buji_braket_lot,fk.brulor_lot,  
+      'SELECT fk.id,fk.urun,fk.lot,fk.kontrol_no,fk.kutu_no,fk.tarih,fk.aciklama,fk.buji_braket_lot,fk.brulor_lot,  
         ur.adi as urun_adi, 
         us.user_name as kullanici_adi , 
         son.adi as sonuc_adi 
@@ -89,5 +89,25 @@ class Final_kontrol_model extends MY_Model
     $result = $query->result_array();
 
     return $result[0]['allcount'];
+  }
+
+  public function getSearch($where = array(),  $search = "")
+  {
+
+    $this->db->select('fk.id,fk.urun,fk.lot,fk.kontrol_no,fk.kutu_no,fk.tarih,   
+        ur.adi as urun_adi, 
+        us.user_name as kullanici_adi , 
+        son.adi as sonuc_adi');
+    $this->db->from('final_kontrol fk');
+    $this->db->join('urunler ur', 'ur.id = fk.urun', 'inner');
+    $this->db->join('users us', 'us.id = fk.kullanici', 'inner');
+    $this->db->join('sonuc_secim son', 'son.id = fk.sonuc', 'inner');
+    $this->db->order_by("fk.id ", "DESC");
+    $this->db->limit(1000);
+    if ($search != '') {
+      $this->db->like('fk.lot', $search, 'none');
+    }
+    $query = $this->db->get();
+    return $query->result();
   }
 }

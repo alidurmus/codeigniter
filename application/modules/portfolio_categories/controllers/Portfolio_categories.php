@@ -13,15 +13,16 @@ class Portfolio_categories extends MY_Controller
 
         $this->load->model("portfolio_category_model");
 
-        if(!get_active_user()){
+        if (!get_active_user()) {
             redirect(base_url("login"));
         }
-        if(!isAllowedViewModule()){
+        if (!isAllowedViewModule()) {
             redirect(base_url());
         }
     }
 
-    public function index(){
+    public function index()
+    {
 
         $viewData = new stdClass();
 
@@ -38,7 +39,8 @@ class Portfolio_categories extends MY_Controller
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
-    public function new_form(){
+    public function new_form()
+    {
 
         $viewData = new stdClass();
 
@@ -47,10 +49,10 @@ class Portfolio_categories extends MY_Controller
         $viewData->subViewFolder = "add";
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
-
     }
 
-    public function save(){
+    public function save()
+    {
 
         $this->load->library("form_validation");
 
@@ -67,7 +69,7 @@ class Portfolio_categories extends MY_Controller
         // Form Validation Calistirilir..
         $validate = $this->form_validation->run();
 
-        if($validate){
+        if ($validate) {
 
             // Upload Süreci...
             $insert = $this->portfolio_category_model->add(
@@ -79,14 +81,13 @@ class Portfolio_categories extends MY_Controller
             );
 
             // TODO Alert sistemi eklenecek...
-            if($insert){
+            if ($insert) {
 
                 $alert = array(
                     "title" => "İşlem Başarılı",
                     "text" => "Kayıt başarılı bir şekilde eklendi",
                     "type"  => "success"
                 );
-
             } else {
 
                 $alert = array(
@@ -100,7 +101,6 @@ class Portfolio_categories extends MY_Controller
             $this->session->set_flashdata("alert", $alert);
 
             redirect(base_url("portfolio_categories"));
-
         } else {
 
             $viewData = new stdClass();
@@ -112,10 +112,10 @@ class Portfolio_categories extends MY_Controller
 
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
-
     }
 
-    public function update_form($id){
+    public function update_form($id)
+    {
 
         $viewData = new stdClass();
 
@@ -125,19 +125,18 @@ class Portfolio_categories extends MY_Controller
                 "id"    => $id,
             )
         );
-        
+
         /** View'e gönderilecek Değişkenlerin Set Edilmesi.. */
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "update";
         $viewData->item = $item;
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
-
-
     }
 
 
-    public function update($id){
+    public function update($id)
+    {
 
         $this->load->library("form_validation");
 
@@ -154,11 +153,11 @@ class Portfolio_categories extends MY_Controller
         // Form Validation Calistirilir..
         $validate = $this->form_validation->run();
 
-        if($validate){
+        if ($validate) {
 
             $update = $this->portfolio_category_model->update(
                 array(
-                        "id" => $id
+                    "id" => $id
                 ),
                 array(
                     "title" => $this->input->post("title"),
@@ -166,14 +165,13 @@ class Portfolio_categories extends MY_Controller
             );
 
             // TODO Alert sistemi eklenecek...
-            if($update){
+            if ($update) {
 
                 $alert = array(
                     "title" => "İşlem Başarılı",
                     "text" => "Kayıt başarılı bir şekilde güncellendi",
                     "type"  => "success"
                 );
-
             } else {
 
                 $alert = array(
@@ -187,7 +185,6 @@ class Portfolio_categories extends MY_Controller
             $this->session->set_flashdata("alert", $alert);
 
             redirect(base_url("portfolio_categories"));
-
         } else {
 
             $viewData = new stdClass();
@@ -203,13 +200,12 @@ class Portfolio_categories extends MY_Controller
                     "id"    => $id,
                 )
             );
-
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
-
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
 
         $delete = $this->portfolio_category_model->delete(
             array(
@@ -218,14 +214,13 @@ class Portfolio_categories extends MY_Controller
         );
 
         // TODO Alert Sistemi Eklenecek...
-        if($delete){
+        if ($delete) {
 
             $alert = array(
                 "title" => "İşlem Başarılı",
                 "text" => "Kayıt başarılı bir şekilde silindi",
                 "type"  => "success"
             );
-
         } else {
 
             $alert = array(
@@ -233,19 +228,16 @@ class Portfolio_categories extends MY_Controller
                 "text" => "Kayıt silme sırasında bir problem oluştu",
                 "type"  => "error"
             );
-
-
         }
 
         $this->session->set_flashdata("alert", $alert);
         redirect(base_url("portfolio_categories"));
-
-
     }
 
-    public function isActiveSetter($id){
+    public function isActiveSetter($id)
+    {
 
-        if($id){
+        if ($id) {
 
             $isActive = ($this->input->post("data") === "true") ? 1 : 0;
 
@@ -259,5 +251,4 @@ class Portfolio_categories extends MY_Controller
             );
         }
     }
-
 }

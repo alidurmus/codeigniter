@@ -44,10 +44,10 @@
                     </tr>
 
                     <tr>
-                        <td colspan="2"> Klips Hammadde Parti kodu: </td>
+                        <td colspan="2"> </td>
                         <td colspan="2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm required" required name="klips_hpk" value="0" placeholder="0000">
+
                             </div>
                         </td>
                         <td>-</td>

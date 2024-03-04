@@ -46,6 +46,7 @@
                         <td colspan="2">
                             <div class="input-group">
                                 <input type="text" class="form-control input-sm" required name="lot" value="<?php echo "$item->lot " ?>" placeholder="0000">
+                                <a href="<?php echo base_url("finalkontrol/search/$item->lot"); ?>">lot</a>
                             </div>
                         </td>
                         <td></td>
@@ -53,10 +54,10 @@
                     </tr>
 
                     <tr>
-                        <td colspan="2"> Klips Hammadde Parti kodu: </td>
+                        <td colspan="2"> </td>
                         <td colspan="2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" required name="klips_hpk" value="<?php echo "$item->klips_hpk " ?>" placeholder="0000">
+
                             </div>
                         </td>
                         <td>-</td>
@@ -64,6 +65,7 @@
                         <td colspan="2">
                             <div class="input-group">
                                 <input type="text" class="form-control input-sm" required name="buji_braket_lot" value="<?php echo "$item->buji_braket_lot " ?>" placeholder="0000">
+                                <a href="<?php echo base_url("finalkontrol/search/$item->buji_braket_lot"); ?>">buji_braket_lot</a>
                             </div>
                         </td>
                         <td></td>
@@ -75,6 +77,7 @@
                         <td colspan="2">
                             <div class="input-group">
                                 <input type="text" class="form-control input-sm" required name="brulor_lot" value="<?php echo "$item->brulor_lot " ?>" placeholder="0000">
+                                <a href="<?php echo base_url("finalkontrol/search/$item->brulor_lot"); ?>">brulor_lot</a>
                             </div>
                         </td>
                         <td>-</td>

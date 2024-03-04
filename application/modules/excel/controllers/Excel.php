@@ -133,7 +133,7 @@ class Excel extends MY_Controller
         $name = "uploads/excel/Girdi_Kontrol_" . date("Y-m-d H-i-s") . ".xlsx";
         $writer->save($name);
         //End Function index
-        echo "<a href='" . base_url($name) . "' class='btn btn-primary'>İndir</a>";
+        echo "<a href='" . base_url($name) . "' class='btn btn-primary'>Excel İndir</a>";
     }
 
     public function proses_kontrol()
@@ -188,6 +188,7 @@ class Excel extends MY_Controller
         $sheet->setCellValue('H1', 'aciklama');
         $sheet->setCellValue('I1', 'sonuc');
         $sheet->setCellValue('J1', 'HPK');
+        $sheet->setCellValue('K1', 'Klips Hammadde Parti kodu');
         /** Tablodan Verilerin Getirilmesi.. */
         $items = $this->proses_kontrol_model->listele();
 
@@ -205,6 +206,7 @@ class Excel extends MY_Controller
             $sheet->setCellValue('H' . $x, $get->aciklama);
             $sheet->setCellValue('I' . $x, $get->sonuc_adi);
             $sheet->setCellValue('J' . $x, $get->hpk);
+            $sheet->setCellValue('K' . $x, $get->klips_hpk);
             $x++;
         }
         //Create file excel.xlsx
@@ -269,9 +271,8 @@ class Excel extends MY_Controller
         $sheet->setCellValue('H1', 'kutu_no');
         $sheet->setCellValue('I1', 'aciklama');
         $sheet->setCellValue('J1', 'sonuc');
-        $sheet->setCellValue('K1', 'Klips Hammadde Parti kodu');
-        $sheet->setCellValue('L1', 'Buji Braket Lot No');
-        $sheet->setCellValue('M1', 'Brülör Lot No');
+        $sheet->setCellValue('K1', 'Buji Braket Lot No');
+        $sheet->setCellValue('L1', 'Brülör Lot No');
 
         /** Tablodan Verilerin Getirilmesi.. */
         $items = $this->final_kontrol_model->listele();
@@ -292,9 +293,8 @@ class Excel extends MY_Controller
             $sheet->setCellValue('H' . $x, $get->kutu_no);
             $sheet->setCellValue('I' . $x, $get->aciklama);
             $sheet->setCellValue('J' . $x, $get->sonuc_adi);
-            $sheet->setCellValue('K' . $x, $get->klips_hpk);
-            $sheet->setCellValue('L' . $x, $get->buji_braket_lot);
-            $sheet->setCellValue('M' . $x, $get->brulor_lot);
+            $sheet->setCellValue('K' . $x, $get->buji_braket_lot);
+            $sheet->setCellValue('L' . $x, $get->brulor_lot);
             $x++;
         }
         //Create file excel.xlsx
@@ -304,7 +304,7 @@ class Excel extends MY_Controller
         $name = "uploads/excel/Final_Kontrol_" . date("Y-m-d H-i-s") . ".xlsx";
         $writer->save($name);
         //End Function index
-        echo "<a href='" . base_url($name) . "' class='btn btn-primary'>İndir</a>";
+        echo "<a href='" . base_url($name) . "' class='btn btn-primary'>Excel İndir</a>";
     }
 
     public function kontrol_no()
@@ -378,7 +378,7 @@ class Excel extends MY_Controller
         $name = "uploads/excel/Kontrol_No" . date("Y-m-d H-i-s") . ".xlsx";
         $writer->save($name);
         //End Function index
-        echo "<a href='" . base_url($name) . "' class='btn btn-primary'>İndir</a>";
+        echo "<a href='" . base_url($name) . "' class='btn btn-primary'>Excel İndir</a>";
     }
     //End Class Welcome
 }

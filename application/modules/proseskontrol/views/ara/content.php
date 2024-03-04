@@ -19,8 +19,8 @@
         </div>
         <div class="col-md-12">
             <!-- Search form (start) -->
-            <form method="post" action="<?= base_url() ?>proseskontrol/">
-                <input type="text" name="search" value="<?= $search_text ?>"><input type="submit" name="submit" value="Ara">
+            <form method="post" action="<?= base_url() ?>proseskontrol/search/">
+                <input type="text" name="search" value="<?= $search_text ?>"><input type="submit" name="submit">
             </form>
             <br />
             <table id="dataTablex" class="table table-hover table-striped table-bordered content-container">
@@ -54,7 +54,7 @@
                     <?php } ?>
                 </tbody>
             </table>
-            <p><?php echo $links; ?></p>
+
         </div>
     </div>
 </div>

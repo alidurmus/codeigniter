@@ -23,7 +23,7 @@
         <div class="col-md-12">
             <!-- Search form (start) -->
             <form method="post" action="<?= base_url() ?>girdikontrol/">
-                <input type="text" name="search" value="<?= $search_text ?>"><input type="submit" name="submit" value="Submit">
+                <input type="text" name="search" value="<?= $search_text ?>"><input type="submit" name="submit" value="Ara">
             </form>
             <br />
             <table id="dataTablex" class="table table-hover table-striped table-bordered content-container">

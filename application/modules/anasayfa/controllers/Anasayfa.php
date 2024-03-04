@@ -575,7 +575,7 @@ class Anasayfa extends MY_Controller
         $sonuc = $this->input->post("sonuc");
         $olcum = json_encode($this->input->post("form"));
         $hpk = $this->input->post("hpk");
-
+        $klips_hpk = $this->input->post("klips_hpk");
         $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
         $this->form_validation->set_rules("lot", "lot ", "required|trim");
         $this->form_validation->set_message(
@@ -615,6 +615,7 @@ class Anasayfa extends MY_Controller
                 "kullanici"     => $this->input->post("kullanici"),
                 "sonuc"     => $this->input->post("sonuc"),
                 "hpk"     => $this->input->post("hpk"),
+                "klips_hpk"     => $this->input->post("klips_hpk"),
                 "kontrol_no"    => $get_kontrol_id,
                 "tarih"         => $this->input->post("tarih"),
                 "olcum"         => $olcum
@@ -769,6 +770,9 @@ class Anasayfa extends MY_Controller
         $sonuc = $this->input->post("sonuc");
         $olcum = json_encode($this->input->post("form"));
         $hpk = $this->input->post("hpk");
+        $klips_hpk = $this->input->post("klips_hpk");
+
+
         $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
         $this->form_validation->set_rules("lot", "lot ", "required|trim");
 
@@ -796,6 +800,7 @@ class Anasayfa extends MY_Controller
                 //"tarih"         => $thi,s->input->post("tarih"),
                 "olcum"         => $olcum,
                 "hpk"           => $this->input->post("hpk"),
+                "klips_hpk"           => $this->input->post("klips_hpk")
             );
             $update = $this->proses_kontrol_model->update(array("id" => $id), $data);
             // TODO: Alert sistemi eklenecek...
@@ -833,7 +838,8 @@ class Anasayfa extends MY_Controller
             $viewData->json = json_decode($olcum);
             $viewData->kullanici = $kullanici;
             $viewData->sonuc = $sonuc;
-
+            $viewData->klips_hpk = $klips_hpk;
+            $viewData->hpk = $hpk;
             /** Tablodan Verilerin Getirilmesi.. */
             $viewData->item = $this->proses_kontrol_model->get(
                 array(
@@ -906,7 +912,7 @@ class Anasayfa extends MY_Controller
         $kullanici = $this->input->post("kullanici");
         $sonuc = $this->input->post("sonuc");
         $olcum = json_encode($this->input->post("form"));
-        $klips_hpk = $this->input->post("klips_hpk");
+
         $buji_braket_lot = $this->input->post("buji_braket_lot");
         $brulor_lot = $this->input->post("brulor_lot");
 
@@ -954,7 +960,6 @@ class Anasayfa extends MY_Controller
                 "sonuc"      => $this->input->post("sonuc"),
                 "kontrol_no"    => $get_kontrol_id,
                 "tarih"         => $this->input->post("tarih"),
-                "klips_hpk"          => $this->input->post("klips_hpk"),
                 "buji_braket_lot"      => $this->input->post("buji_braket_lot"),
                 "brulor_lot"         => $this->input->post("brulor_lot"),
                 "olcum"         => $olcum
@@ -1079,7 +1084,7 @@ class Anasayfa extends MY_Controller
         $kullanici = $this->input->post("kullanici");
         $sonuc = $this->input->post("sonuc");
         $olcum = json_encode($this->input->post("form"));
-        $klips_hpk = $this->input->post("klips_hpk");
+
         $buji_braket_lot = $this->input->post("buji_braket_lot");
         $brulor_lot = $this->input->post("brulor_lot");
 
@@ -1109,7 +1114,7 @@ class Anasayfa extends MY_Controller
                 "aciklama"      => $this->input->post("aciklama"),
                 "sonuc"         => $this->input->post("sonuc"),
                 "kullanici"     => $user->id,
-                "klips_hpk"          => $this->input->post("klips_hpk"),
+
                 "buji_braket_lot"      => $this->input->post("buji_braket_lot"),
                 "brulor_lot"         => $this->input->post("brulor_lot"),
 

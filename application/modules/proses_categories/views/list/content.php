@@ -19,7 +19,6 @@
                         <th class="w50">#id</th>
                         <th>Ana Proses</th>
                         <th>Alt Proses</th>
-                        <th>Durumu</th>
                         <th>İşlem</th>
                     </thead>
                     <tbody>
@@ -30,7 +29,7 @@
                                 <td><?php echo $item->proses_id; ?></td>
 
                                 <td class="text-center w100">
-                                    <input data-url="<?php echo base_url("proses_categories/isActiveSetter/$item->id"); ?>" class="isActive" type="checkbox" data-switchery data-color="#10c469" <?php echo ($item->isActive) ? "checked" : ""; ?> />
+
                                 </td>
                                 <td class="text-center w200">
                                     <?php if (isAllowedDeleteModule()) { ?>
