@@ -67,6 +67,23 @@
                     <td></td>
                     <td></td>
                 </tr>
+                <tr>
+                    <td colspan="2"> Buji Braket Lot No:</td>
+                    <td colspan="2">
+                        <input type="text" class="form-control input-sm" required name="buji_braket_lot" value="<?php echo "$item->buji_braket_lot " ?>" placeholder="0000">
+                    </td>
+                    <td>-</td>
+                    <td colspan="2"></td>
+                    <td colspan="2">
+                        <div class="input-group">
+
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+
                 <!-- olcum alanı ekleme işlemi -->
                 <?php $this->load->view("includes/olcum_duzenle"); ?>
 

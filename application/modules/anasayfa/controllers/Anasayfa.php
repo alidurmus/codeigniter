@@ -576,6 +576,7 @@ class Anasayfa extends MY_Controller
         $olcum = json_encode($this->input->post("form"));
         $hpk = $this->input->post("hpk");
         $klips_hpk = $this->input->post("klips_hpk");
+        $buji_braket_lot = $this->input->post("buji_braket_lot");
         $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
         $this->form_validation->set_rules("lot", "lot ", "required|trim");
         $this->form_validation->set_message(
@@ -608,17 +609,18 @@ class Anasayfa extends MY_Controller
             $user = get_active_user();
 
             $data = array(
-                "parti_no"      => $this->input->post("parti_no"),
-                "lot"           => $this->input->post("lot"),
-                "urun"          => $this->input->post("urun"),
-                "aciklama"      => $this->input->post("aciklama"),
-                "kullanici"     => $this->input->post("kullanici"),
-                "sonuc"     => $this->input->post("sonuc"),
-                "hpk"     => $this->input->post("hpk"),
-                "klips_hpk"     => $this->input->post("klips_hpk"),
-                "kontrol_no"    => $get_kontrol_id,
-                "tarih"         => $this->input->post("tarih"),
-                "olcum"         => $olcum
+                "parti_no"          => $this->input->post("parti_no"),
+                "lot"               => $this->input->post("lot"),
+                "urun"              => $this->input->post("urun"),
+                "aciklama"          => $this->input->post("aciklama"),
+                "kullanici"         => $this->input->post("kullanici"),
+                "sonuc"             => $this->input->post("sonuc"),
+                "hpk"               => $this->input->post("hpk"),
+                "klips_hpk"         => $this->input->post("klips_hpk"),
+                "buji_braket_lot"   => $this->input->post("buji_braket_lot"),
+                "kontrol_no"        => $get_kontrol_id,
+                "tarih"             => $this->input->post("tarih"),
+                "olcum"             => $olcum
             );
 
             $insert3 = $this->proses_kontrol_model->add($data);
@@ -771,7 +773,7 @@ class Anasayfa extends MY_Controller
         $olcum = json_encode($this->input->post("form"));
         $hpk = $this->input->post("hpk");
         $klips_hpk = $this->input->post("klips_hpk");
-
+        $buji_braket_lot = $this->input->post("buji_braket_lot");
 
         $this->form_validation->set_rules("parti_no", "Parti No", "required|trim");
         $this->form_validation->set_rules("lot", "lot ", "required|trim");
@@ -791,16 +793,17 @@ class Anasayfa extends MY_Controller
             $user = get_active_user();
 
             $data = array(
-                "parti_no"      => $this->input->post("parti_no"),
-                "lot"     => $this->input->post("lot"),
-                "urun"       => $this->input->post("urun"),
-                "aciklama"      => $this->input->post("aciklama"),
-                "sonuc"      => $this->input->post("sonuc"),
-                "kullanici"      => $user->id,
-                //"tarih"         => $thi,s->input->post("tarih"),
-                "olcum"         => $olcum,
-                "hpk"           => $this->input->post("hpk"),
-                "klips_hpk"           => $this->input->post("klips_hpk")
+                "parti_no"          => $this->input->post("parti_no"),
+                "lot"               => $this->input->post("lot"),
+                "urun"              => $this->input->post("urun"),
+                "aciklama"          => $this->input->post("aciklama"),
+                "sonuc"             => $this->input->post("sonuc"),
+                "kullanici"         => $user->id,
+                //"tarih"           => $thi,s->input->post("tarih"),
+                "olcum"             => $olcum,
+                "hpk"               => $this->input->post("hpk"),
+                "klips_hpk"         => $this->input->post("klips_hpk"),
+                "buji_braket_lot"   => $this->input->post("buji_braket_lot")
             );
             $update = $this->proses_kontrol_model->update(array("id" => $id), $data);
             // TODO: Alert sistemi eklenecek...

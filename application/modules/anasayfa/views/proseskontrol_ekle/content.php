@@ -43,6 +43,7 @@
                         <td></td>
                         <td></td>
                     </tr>
+
                     <tr>
                         <td colspan="2">Klips Hammadde Parti kodu: </td>
                         <td colspan="2">
@@ -58,6 +59,23 @@
                         <td></td>
                         <td></td>
                     </tr>
+                    <tr>
+                        <td colspan="2">Buji Braket Lot no: </td>
+                        <td colspan="2">
+                            <input type="text" class="form-control input-sm required" required name="buji_braket_lot" value="0" placeholder="0000">
+                        </td>
+                        <td>-</td>
+                        <td colspan="2"></td>
+                        <td colspan="2">
+                            <div class="input-group">
+
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+
                     <!-- olcum alanı ekleme işlemi -->
                     <?php $this->load->view("includes/olcum"); ?>
                 </tbody>
