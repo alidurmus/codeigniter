@@ -25,7 +25,7 @@
             <br />
             <table id="dataTablex" class="table table-hover table-striped table-bordered content-container">
                 <thead>
-                    <th>id</th>
+                    <th>HPK</th>
                     <th>urun</th>
                     <th>lot</th>
                     <th>Kontrol No</th>
@@ -36,7 +36,7 @@
                 <tbody class="sortable" data-url="<?php echo base_url("proseskontrol/rankSetter"); ?>">
                     <?php foreach ($items as $item) { ?>
                         <tr>
-                            <td><?php echo $item->id; ?></td>
+                            <td><?php echo $item->hpk; ?></td>
                             <td><?php echo $item->urun_adi; ?></td>
                             <td><?php echo $item->lot; ?></td>
                             <td><?php echo $item->kontrol_no; ?></td>

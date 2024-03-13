@@ -916,7 +916,7 @@ class Anasayfa extends MY_Controller
         $sonuc = $this->input->post("sonuc");
         $olcum = json_encode($this->input->post("form"));
 
-        $buji_braket_lot = $this->input->post("buji_braket_lot");
+        $klips_montaj_lot = $this->input->post("klips_montaj_lot");
         $brulor_lot = $this->input->post("brulor_lot");
 
         $this->form_validation->set_rules("kutu_no", "Kutu No", "required|trim");
@@ -963,7 +963,7 @@ class Anasayfa extends MY_Controller
                 "sonuc"      => $this->input->post("sonuc"),
                 "kontrol_no"    => $get_kontrol_id,
                 "tarih"         => $this->input->post("tarih"),
-                "buji_braket_lot"      => $this->input->post("buji_braket_lot"),
+                "klips_montaj_lot"      => $this->input->post("klips_montaj_lot"),
                 "brulor_lot"         => $this->input->post("brulor_lot"),
                 "olcum"         => $olcum
             );
@@ -1088,10 +1088,8 @@ class Anasayfa extends MY_Controller
         $sonuc = $this->input->post("sonuc");
         $olcum = json_encode($this->input->post("form"));
 
-        $buji_braket_lot = $this->input->post("buji_braket_lot");
+        $klips_montaj_lot = $this->input->post("klips_montaj_lot");
         $brulor_lot = $this->input->post("brulor_lot");
-
-
 
         $this->form_validation->set_rules("kutu_no", "Kutu No", "required|trim");
         $this->form_validation->set_rules("lot", "lot ", "required|trim");
@@ -1118,7 +1116,7 @@ class Anasayfa extends MY_Controller
                 "sonuc"         => $this->input->post("sonuc"),
                 "kullanici"     => $user->id,
 
-                "buji_braket_lot"      => $this->input->post("buji_braket_lot"),
+                "klips_montaj_lot"      => $this->input->post("klips_montaj_lot"),
                 "brulor_lot"         => $this->input->post("brulor_lot"),
 
 

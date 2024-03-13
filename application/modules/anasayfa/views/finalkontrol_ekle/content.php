@@ -51,10 +51,10 @@
                             </div>
                         </td>
                         <td>-</td>
-                        <td colspan="2">Buji Braket Lot No</td>
+                        <td colspan="2">Klips Montaj Lot No</td>
                         <td colspan="2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm required" required name="buji_braket_lot" value="0" placeholder="0000">
+                                <input type="text" class="form-control input-sm required" required name="klips_montaj_lot" value="0" placeholder="0000">
                             </div>
                         </td>
                         <td></td>

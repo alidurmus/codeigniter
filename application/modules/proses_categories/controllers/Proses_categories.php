@@ -12,7 +12,9 @@ class Proses_categories extends MY_Controller
         $this->viewFolder = "proses_categories";
 
         $this->load->model("proses_category_model");
-        $this->load->model("proseskontrol/proses_kontrol_model");
+
+
+
         if (!get_active_user()) {
             redirect(base_url("login"));
         }
@@ -42,7 +44,8 @@ class Proses_categories extends MY_Controller
     public function new_form()
     {
         $viewData = new stdClass();
-        $viewData->categories = $this->proses_kontrol_model->listele();
+
+
         $main_id = $this->input->post("main_id");
         $proses = $this->input->post("proses");
         $viewData->main_id = $main_id;
@@ -72,20 +75,27 @@ class Proses_categories extends MY_Controller
         $main_id = $this->input->post("main_id");
         $proses_id = $this->input->post("proses_id");
         $proses = $this->input->post("proses");
-        // var_dump($main_id);
-        if ($main_id == $proses_id) {
-            $alert = array(
-                "title" => "İşlem Başarısız",
-                "text" => "Aynı proses alt kategori olarak eklenemez",
+        $adi = $this->input->post("adi");
+        $kisaltma = $this->input->post("kisaltma");
+
+        if ($validate) {
+
+            $insert = $this->portfolio_category_model->add(
+                array(
+                    "title"         => $this->input->post("title"),
+                    "isActive"      => 1,
+                    "createdAt"     => date("Y-m-d H:i:s")
+                )
             );
-        } elseif ($validate) {
 
             // Upload Süreci...
-            $insert = $this->proses_category_model->add(
+            echo     $insert = $this->proses_category_model->add(
                 array(
                     "proses_id"         => $this->input->post("proses_id"),
                     "main_id"         => $this->input->post("main_id"),
-                    "proses"         => $this->input->post("proses")
+                    "proses"         => $this->input->post("proses"),
+                    "adi"         => $this->input->post("adi"),
+                    "kisaltma"         => $this->input->post("kisaltma")
                 )
             );
 
@@ -110,12 +120,12 @@ class Proses_categories extends MY_Controller
             // İşlemin Sonucunu Session'a yazma işlemi...
             $this->session->set_flashdata("alert", $alert);
 
-            redirect(base_url("anasayfa/proseskontrol_duzenle/$main_id"));
+            redirect(base_url("proses_categories"));
         } else {
 
             $viewData = new stdClass();
 
-            $viewData->categories = $this->proses_kontrol_model->listele();
+
             $viewData->main_id = $main_id;
             //$viewData->proses_id = $proses_id;
             $viewData->proses = $proses;

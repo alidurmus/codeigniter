@@ -61,11 +61,11 @@
                             </div>
                         </td>
                         <td>-</td>
-                        <td colspan="2">Buji Braket Lot No</td>
+                        <td colspan="2">Klips Montaj Lot No</td>
                         <td colspan="2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" required name="buji_braket_lot" value="<?php echo "$item->buji_braket_lot " ?>" placeholder="0000">
-                                <a href="<?php echo base_url("finalkontrol/search/$item->buji_braket_lot"); ?>">buji_braket_lot</a>
+                                <input type="text" class="form-control input-sm" required name="klips_montaj_lot" value="<?php echo "$item->klips_montaj_lot " ?>" placeholder="0000">
+                                <a href="<?php echo base_url("finalkontrol/search/$item->klips_montaj_lot"); ?>">klips_montaj_lot</a>
                             </div>
                         </td>
                         <td></td>

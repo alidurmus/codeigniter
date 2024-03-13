@@ -100,74 +100,7 @@
         </br>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="panel-heading">
-            <h2> Alt Proses Kontrol No: </h2>
-        </div>
-        <form action="<?php echo base_url("proses_categories/new_form"); ?>" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="main_id" value="<?php echo "$item->id" ?>">
-            <input type="hidden" name="proses" value="2">
-            <button type="submit" class="btn btn-primary btn-md btn-outline">Ekle</button>
-        </form>
-        <!-- hammadde parti kodu duzeleme işlemi -->
-        <?php //echo "$hpk->hpk " 
-        ?>
-        <?php //var_dump($hpk->hpk ); 
-        ?>
-        <ul class="list-group">
-            <?php //var_dump($proses_categories)
-            ?>
 
-            <?php foreach ($proses_categories as $proses_category) { ?>
-                <li class="list-group-item custom-class">
-
-                    <a href="<?php echo base_url("anasayfa/proseskontrol_duzenle/$proses_category->proses_id"); ?>" class=""> <?php echo ($proses_category->lot) ?></a>
-                    <span class="pull-right button-group">
-                        <?php if (isAllowedDeleteModule()) { ?>
-                            <a href="<?php echo base_url("proses_categories/delete/$proses_category->id"); ?>" class="btn btn-sm btn-danger btn-outline remove-btn"><i class="fa fa-trash"></i> Sil</a>
-                        <?php } ?>
-
-                    </span>
-                </li>
-                <?php //var_dump($hpks ); 
-                ?>
-            <?php } ?>
-        </ul>
-
-    </div>
-    <div class="col-md-6">
-        <div class="panel-heading">
-            <h2> Hammadde Parti Kodu: </h2>
-        </div>
-
-        <form action="<?php echo base_url("hpk/new_form"); ?>" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="main_id" value="<?php echo "$item->id" ?>">
-            <input type="hidden" name="proses" value="2">
-            <button type="submit" class="btn btn-primary btn-md btn-outline">Ekle</button>
-        </form>
-        <!-- hammadde parti kodu duzeleme işlemi -->
-        <?php //echo "$hpk->hpk " 
-        ?>
-        <?php //var_dump($hpk->hpk ); 
-        ?>
-        <ul class="list-group">
-            <?php foreach ($hpk as $hpks) { ?>
-                <li class="list-group-item custom-class">
-                    <?php echo "$hpks->hpk" ?>
-                    <span class="pull-right button-group">
-                        <?php if (isAllowedDeleteModule()) { ?>
-                            <a href="<?php echo base_url("hpk/delete/$hpks->id"); ?>" class="btn btn-sm btn-danger btn-outline remove-btn"><i class="fa fa-trash"></i> Sil</a>
-                        <?php } ?>
-
-                    </span>
-                </li>
-                <?php //var_dump($hpks ); 
-                ?>
-            <?php } ?>
-        </ul>
-    </div>
-</div><!-- END column -->
 </br>
 </br>
 <!-- Modal -->

@@ -189,6 +189,7 @@ class Excel extends MY_Controller
         $sheet->setCellValue('I1', 'sonuc');
         $sheet->setCellValue('J1', 'HPK');
         $sheet->setCellValue('K1', 'Klips Hammadde Parti kodu');
+        $sheet->setCellValue('L1', 'Buji Braket Lot No:');
         /** Tablodan Verilerin Getirilmesi.. */
         $items = $this->proses_kontrol_model->listele();
 
@@ -207,6 +208,7 @@ class Excel extends MY_Controller
             $sheet->setCellValue('I' . $x, $get->sonuc_adi);
             $sheet->setCellValue('J' . $x, $get->hpk);
             $sheet->setCellValue('K' . $x, $get->klips_hpk);
+            $sheet->setCellValue('L' . $x, $get->buji_braket_lot);
             $x++;
         }
         //Create file excel.xlsx
@@ -271,7 +273,7 @@ class Excel extends MY_Controller
         $sheet->setCellValue('H1', 'kutu_no');
         $sheet->setCellValue('I1', 'aciklama');
         $sheet->setCellValue('J1', 'sonuc');
-        $sheet->setCellValue('K1', 'Buji Braket Lot No');
+        $sheet->setCellValue('K1', 'Klips Montaj Lot No');
         $sheet->setCellValue('L1', 'Brülör Lot No');
 
         /** Tablodan Verilerin Getirilmesi.. */
@@ -293,7 +295,7 @@ class Excel extends MY_Controller
             $sheet->setCellValue('H' . $x, $get->kutu_no);
             $sheet->setCellValue('I' . $x, $get->aciklama);
             $sheet->setCellValue('J' . $x, $get->sonuc_adi);
-            $sheet->setCellValue('K' . $x, $get->buji_braket_lot);
+            $sheet->setCellValue('K' . $x, $get->klips_montaj_lot);
             $sheet->setCellValue('L' . $x, $get->brulor_lot);
             $x++;
         }
